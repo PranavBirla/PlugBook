@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema({
-    user:{
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
         required: true
@@ -11,23 +11,20 @@ const bookingSchema = new mongoose.Schema({
         ref: "station",
         required: true
     },
-    date:{
-        type: String,
-        required: true
-    },
-    timeSlot: {
-        type: String,
-        required: true
-    },
     status: {
         type: String,
         enum: ["booked", "cancelled"],
         default: "booked"
-    }
+    },
+    chargerType: String, // "AC" or "DC"
+    startTime: Date,
+    endTime: Date,
 }, {
     timestamps: true
 }
 );
+
+bookingSchema.index({ station: 1, chargerType: 1, endTime: 1, status: 1 });
 
 const bookingModel = mongoose.model("booking", bookingSchema);
 
