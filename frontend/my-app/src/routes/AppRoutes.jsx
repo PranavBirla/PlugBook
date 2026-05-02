@@ -3,6 +3,7 @@ import { Route, Router, Routes } from 'react-router-dom'
 import Homepage from '../Pages/Homepage'
 import Navbar from '../Components/Navbar'
 import LoginPage from '../Pages/LoginPage'
+import SlotsBooking from '../Pages/SlotsBooking'
 
 const AppRoutes = () => {
   return (
@@ -10,6 +11,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path='/home' element={<Homepage/>}  />
         <Route path='/login' element={<LoginPage/>}  />
+        <Route path='/slots' element={<SlotsBooking/>}  />
       </Routes>
       
     

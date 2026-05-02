@@ -7,15 +7,18 @@ import { User } from 'lucide-react';
 
 const Navbar = () => {
   return (
-    <div className='mt-5 mx-4 '>
-    <div className='flex justify-between items-center bg-gray-100 p-4 border-gray-300 border-[1px] rounded-3xl'>
-      <Link><House /></Link>
-      <Link><MapPin /></Link>
-      <Link><Bookmark /></Link>
-      <Link><User /></Link>
+    <>
+  <div className="fixed bottom-0 left-0 w-full bg-gray-100 border-t border-gray-300 shadow-[0_-4px_10px_rgba(0,0,0,0.1)] sm:hidden">
+      <div className="flex justify-around items-center py-3">
+        <Link ><House strokeWidth={1}/></Link>
+        <Link><MapPin strokeWidth={1}/></Link>
+        <Link><Bookmark strokeWidth={1}/></Link>
+        <Link><User strokeWidth={1}/></Link>
+      </div>
     </div>
-    </div>
+    </>
   )
 }
 
 export default Navbar
+
