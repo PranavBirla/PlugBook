@@ -1,18 +1,27 @@
 const mongoose = require("mongoose");
 
 const stationSchema = new mongoose.Schema({
-    staionName: {
-        type: String
+    stationName: {
+        type: String,
+        required: true
     },
     location: {
         lat: Number,
         lng: Number
     },
     address: String,
-    availableSlots: Number,
-    totalSlots: Number
+    chargers:{
+        AC:{
+            total: Number,
+            available: Number
+        },
+        DC:{
+            total: Number,
+            available: Number
+        }
+    }
 });
 
-const stationModel = mongoose.model("Station", stationSchema);
+const stationModel = mongoose.model("station", stationSchema);
 
 module.exports = stationModel;

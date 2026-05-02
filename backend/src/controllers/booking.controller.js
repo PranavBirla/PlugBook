@@ -4,57 +4,47 @@ const bookingModel = require("../models/booking.model");
 async function createBooking(req, res) {
 
     try {
-        const { stationId, date, timeSlot } = req.body;
+        const { stationId, chargerType, duration } = req.body;
 
-        const alreadyBooked = await bookingModel.findOne({
-            user: "69f3e6380951517446ada582",
+        if (!stationId || !["AC", "DC"].includes(chargerType) || !duration || duration <= 0) {
+            return res.status(400).json({ message: "Invalid input" });
+        }
+
+        const startTime = new Date();
+        const endTime = new Date(startTime.getTime() + duration * 60000);
+
+        const station = await stationModel.findById(stationId);
+
+        if (!station) {
+            return res.status(404).json({ message: "Station not found" });
+        }
+
+        const activeBookings = await bookingModel.find({
             station: stationId,
-            date,
-            timeSlot
+            chargerType,
+            endTime: { $gt: new Date() }
         });
 
-        if (alreadyBooked) {
-            return res.status(400).json({
-                message: "You already booked this slot"
-            });
-        };
+        const available =
+            station.chargers.AC.total - activeBookings.length;
 
-        const slotTaken = await bookingModel.findOne({
-            station: stationId,
-            date,
-            timeSlot
-        });
-
-        if (slotTaken) {
-            return res.status(400).json({
-                message: "Slot already booked"
-            });
-        };
-
-        const station = await stationModel.findOneAndUpdate(
-            { _id: stationId, availableSlots: { $gt: 0 } },
-            { $inc: { availableSlots: -1 } },
-            { new: true }
-        )
-
-        if(!station){
-            return res.status(400).json({
-                message:"No slots available"
-            });
-        };
+        if (activeBookings.length >= station.chargers[chargerType].total) {
+            return res.status(400).json({ message: "No slots available" });
+        }
 
         const booking = await bookingModel.create({
-            user: "69f3e6380951517446ada582",
+            user: req.user.id,
             station: stationId,
-            date,
-            timeSlot
+            chargerType,
+            startTime,
+            endTime
         });
 
         res.status(201).json({
             message: "Booking successful",
             booking
         })
-    } catch(err) {
+    } catch (err) {
         console.log(err)
         res.status(500).json({
             message: err.message
@@ -63,6 +53,54 @@ async function createBooking(req, res) {
 
 };
 
+async function getMyBookings(req, res) {
+    try {
+        const bookings = await bookingModel.find({
+            user: req.user.id,
+            endTime: { $lt: new Date() }
+        }).populate("station");
+
+        const format = d => new Date(d).toLocaleString("en-IN");
+
+        const formattedBookings = bookings.map(b => ({
+            ...b.toObject(),
+            startTimeFormatted: format(b.startTime),
+            endTimeFormatted: format(b.endTime)
+        }));
+
+        res.json(formattedBookings);
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: err.message })
+    }
+}
+
+async function getActiveBookings(req, res) {
+    try {
+        const bookings = await bookingModel.find({
+            user: req.user.id,
+            endTime: { $gt: new Date() },
+            status: "booked"
+        }).populate("station").sort({ startTime: 1 })
+
+        const format = d => new Date(d).toLocaleString("en-IN");
+
+        const formattedBookings = bookings.map(b => ({
+            ...b.toObject(),
+            startTimeFormatted: format(b.startTime),
+            endTimeFormatted: format(b.endTime)
+        }));
+
+        return res.json(formattedBookings);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: err.message });
+    }
+}
+
 module.exports = {
-    createBooking
+    createBooking,
+    getMyBookings,
+    getActiveBookings
 }

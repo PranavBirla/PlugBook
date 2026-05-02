@@ -1,9 +1,9 @@
 import React from "react";
-import "../css/signup.css"; // SAME CSS (important)
+import "../css/signup.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function LoginPage() {
+export default function SignUpPage() {
 
     const navigate = useNavigate();
 
@@ -11,26 +11,20 @@ export default function LoginPage() {
         e.preventDefault();
 
         try {
+            const fullName = e.target.fullName.value;
             const email = e.target.email.value;
             const password = e.target.password.value;
 
-            const response = await axios.post(
-                "http://localhost:3000/api/auth/user/login",
-                {
-                    email,
-                    password
-                },
-                {
-                    withCredentials: true
-                }
-            );
+            const response = await axios.post("http://localhost:3000/api/auth/user/register", {
+                fullName,
+                email,
+                password
+
+            }, {
+                withCredentials: true
+            });
 
             console.log(response.data);
-
-            // Optional: store token if backend sends it
-            if (response.data.token) {
-                localStorage.setItem("token", response.data.token);
-            }
 
             navigate("/home");
 
@@ -43,7 +37,7 @@ export default function LoginPage() {
     return (
         <div className="auth-container">
 
-            {/* LEFT SECTION (EXACT SAME) */}
+            {/* LEFT SECTION (DESKTOP ONLY) */}
             <div className="left-section">
                 <div className="left-content">
                     <div className="logo">
@@ -52,18 +46,18 @@ export default function LoginPage() {
                     </div>
 
                     <h1>
-                        Welcome <span>Back</span>.
+                        Powering a <span>Cleaner</span> Tomorrow.
                     </h1>
 
                     <p>
-                        Log in to continue your EV charging journey with ChargeSlot.
+                        Join ChargeSlot and be a part of the smarter EV charging revolution.
                     </p>
 
                     <div className="badge">
                         <span className="badge-icon">🌿</span>
                         <div>
-                            <strong>Smart Charging</strong>
-                            <p>Fast & reliable stations</p>
+                            <strong>Zero Emissions</strong>
+                            <p>For a better future</p>
                         </div>
                     </div>
 
@@ -78,10 +72,14 @@ export default function LoginPage() {
             {/* RIGHT SECTION */}
             <div className="right-section">
                 <div className="form-container">
-                    <h2>Welcome back</h2>
-                    <p>Login to your account</p>
+                    <h2>Create your account</h2>
+                    <p>Sign up to get started with ChargeSlot</p>
 
                     <form onSubmit={handleSubmit}>
+                        <div className="input-group">
+                            <label>Full Name</label>
+                            <input type="text" name="fullName" placeholder="Enter your full name" />
+                        </div>
 
                         <div className="input-group">
                             <label>Email Address</label>
@@ -90,12 +88,16 @@ export default function LoginPage() {
 
                         <div className="input-group">
                             <label>Password</label>
-                            <input type="password" name="password" placeholder="Enter your password" />
+                            <input type="password" name="password" placeholder="Create a password" />
                         </div>
 
-                        <button type="submit" className="signup-btn">
-                            Login →
-                        </button>
+                        <div className="password-hints">
+                            <span>✔ 8+ characters</span>
+                            <span>✔ 1 number</span>
+                            <span>✔ 1 special character</span>
+                        </div>
+
+                        <button type="submit" className="signup-btn">Sign Up →</button>
                     </form>
 
                     <div className="divider">
@@ -109,10 +111,7 @@ export default function LoginPage() {
                     </div>
 
                     <p className="signin-text">
-                        Don’t have an account?{" "}
-                        <span onClick={() => navigate("/")}>
-                            Sign up
-                        </span>
+                        Already have an account? <span>Sign in</span>
                     </p>
                 </div>
             </div>
