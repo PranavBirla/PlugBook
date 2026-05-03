@@ -17,8 +17,14 @@ const bookingSchema = new mongoose.Schema({
         default: "booked"
     },
     chargerType: String, // "AC" or "DC"
-    startTime: Date,
-    endTime: Date,
+    startTime: {
+        type: Date,
+        required: true,
+    },
+    endTime: {
+        type: Date,
+        required: true,
+    },
 }, {
     timestamps: true
 }

@@ -4,14 +4,52 @@ const bookingModel = require("../models/booking.model");
 async function createBooking(req, res) {
 
     try {
-        const { stationId, chargerType, duration } = req.body;
+        const { stationId, chargerType, startTime, endTime } = req.body;
 
-        if (!stationId || !["AC", "DC"].includes(chargerType) || !duration || duration <= 0) {
+        //Validation for correct format of time
+        const parsedStart = new Date(startTime);
+        const parsedEnd = new Date(endTime);
+
+        const durationMs = parsedEnd - parsedStart;
+        const durationMinutes = durationMs / (1000 * 60);
+
+        if (isNaN(parsedStart) || isNaN(parsedEnd)) {
+            return res.status(400).json({
+                message: "Invalid date format"
+            });
+        }
+
+        //Basic Validation
+        if (!stationId || !chargerType || !startTime || !endTime) {
             return res.status(400).json({ message: "Invalid input" });
         }
 
-        const startTime = new Date();
-        const endTime = new Date(startTime.getTime() + duration * 60000);
+        if (new Date(startTime) >= new Date(endTime)) {
+            return res.status(400).json({ message: "Invalid time range" });
+        }
+
+        //Duration Rules
+        if (durationMinutes < 10) {
+            return res.status(400).json({
+                message: "Minimum booking duration is 10 minutes"
+            });
+        }
+
+        if (durationMinutes > 480) {
+            return res.status(400).json({
+                message: "Maximum booking duration is 8 hours"
+            })
+        }
+
+        //Checking Overlapping
+        const overlappingBookings = await bookingModel.find({
+            station: stationId,
+            chargerType,
+            status: "booked",
+
+            startTime: { $lt: new Date(endTime) },
+            endTime: { $gt: new Date(startTime) },
+        });
 
         const station = await stationModel.findById(stationId);
 
@@ -19,17 +57,13 @@ async function createBooking(req, res) {
             return res.status(404).json({ message: "Station not found" });
         }
 
-        const activeBookings = await bookingModel.find({
-            station: stationId,
-            chargerType,
-            endTime: { $gt: new Date() }
-        });
+        const totalSlots = station.chargers[chargerType].total;
 
-        const available =
-            station.chargers.AC.total - activeBookings.length;
-
-        if (activeBookings.length >= station.chargers[chargerType].total) {
-            return res.status(400).json({ message: "No slots available" });
+        //check selected time overlap 
+        if (overlappingBookings.length >= totalSlots) {
+            return res.status(400).json({
+                message: "No slots available for this time"
+            });
         }
 
         const booking = await bookingModel.create({
@@ -54,6 +88,7 @@ async function createBooking(req, res) {
 };
 
 async function getMyBookings(req, res) {
+
     try {
         const bookings = await bookingModel.find({
             user: req.user.id,

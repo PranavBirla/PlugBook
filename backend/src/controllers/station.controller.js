@@ -28,11 +28,37 @@ async function createStation(req, res) {
 async function getAllStations(req, res) {
     try {
         const stations = await stationModel.find();
+        const { startTime, endTime } = req.query
 
-        // 🔥 get all active bookings at once
-        const bookings = await bookingModel.find({
-            endTime: { $gt: new Date() }
-        });
+        // get all active bookings at once
+        let bookings = [];
+
+        if (startTime && endTime) {
+            const parsedStart = new Date(startTime);
+            const parsedEnd = new Date(endTime);
+
+            if (isNaN(parsedStart) || isNaN(parsedEnd)) {
+                return res.status(400).json({
+                    message: "Invalid date format"
+                });
+            }
+
+            bookings = await bookingModel.find({
+                status: "booked",
+                startTime: { $lt: parsedEnd },
+                endTime: { $gt: parsedStart },
+            });
+
+        } else {
+            // fallback → current availability
+            const now = new Date();
+
+            bookings = await bookingModel.find({
+                status: "booked",
+                startTime: { $lte: now },
+                endTime: { $gt: now }
+            });
+        }
 
         const updatedStations = stations.map((station) => {
 
@@ -74,6 +100,7 @@ async function getAllStations(req, res) {
 async function getNearbyStations(req, res) {
     try {
         const { lat, lng } = req.query;
+        const { startTime, endTime } = req.query
 
         // convert string to number
         const userLat = parseFloat(lat);
@@ -81,10 +108,34 @@ async function getNearbyStations(req, res) {
 
         const stations = await stationModel.find();
 
-        const bookings = await bookingModel.find({
-            endTime: { $gt: new Date() },
-            status: "booked"
-        });
+        let bookings = [];
+
+        if (startTime && endTime) {
+            const parsedStart = new Date(startTime);
+            const parsedEnd = new Date(endTime);
+
+            if (isNaN(parsedStart) || isNaN(parsedEnd)) {
+                return res.status(400).json({
+                    message: "Invalid date format"
+                });
+            }
+
+            bookings = await bookingModel.find({
+                status: "booked",
+                startTime: { $lt: parsedEnd },
+                endTime: { $gt: parsedStart },
+            });
+
+        } else {
+            // fallback → current availability
+            const now = new Date();
+
+            bookings = await bookingModel.find({
+                status: "booked",
+                startTime: { $lte: now },
+                endTime: { $gt: now }
+            });
+        }
 
         const result = stations.map(station => {
 

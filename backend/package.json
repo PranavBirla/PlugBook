@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.3",
     "leaflet": "^1.9.4",
     "mongoose": "^9.6.1",
-    "router": "^2.2.0"
+    "router": "^2.2.0",
+    "socket.io": "^4.8.3"
   }
 }
