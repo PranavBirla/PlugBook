@@ -1,0 +1,42 @@
+.bg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: #EADFEF;
+
+    z-index: 0;
+}
+
+/* icons */
+.bg-icon {
+    position: absolute;
+
+    width: 40px;
+    height: auto;
+
+    opacity: 0.15;
+    /* subtle */
+    filter: grayscale(100%);
+
+    pointer-events: none;
+
+    transition: transform 0.3s ease;
+}
+
+/* responsive */
+@media (min-width: 768px) {
+    .bg-icon {
+        width: 50px;
+        opacity: 0.18;
+    }
+}
+
+@media (min-width: 1200px) {
+    .bg-icon {
+        width: 60px;
+        opacity: 0.2;
+    }
+}

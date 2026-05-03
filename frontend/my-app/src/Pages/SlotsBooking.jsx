@@ -7,13 +7,16 @@ import { CalendarCheck } from 'lucide-react';
 import { Plug } from 'lucide-react';
 import { Zap } from 'lucide-react';
 import Top from "../Components/Top";
+import axios from "axios";
 
 const SlotsBooking = () => {
     const [formData, setFormData] = useState({
-        stationId: "665f1a2b3c4d5e6f78901234",
+        stationId: "69f50dcc4bf009da6712fcec",
         chargerType: "",
-        from: "",
-        to: ""
+        fromDate: "",
+        toDate: "",
+        fromTime: "",
+        toTime: ""
     });
 
 
@@ -32,47 +35,51 @@ const SlotsBooking = () => {
             ...formData,
             chargerType: type
         });
+        console.log(type);
     };
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const duration = getDuration();
 
-        if (!formData.chargerType || duration <= 0) {
-            alert("Invalid input");
+        if (
+            !formData.chargerType ||
+            !formData.fromDate ||
+            !formData.toDate ||
+            !formData.fromTime ||
+            !formData.toTime
+        ) {
+            alert("Please fill all fields");
             return;
         }
 
         try {
-            const res = await fetch("http://localhost:5000/api/booking/create", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                credentials: "include", // IMPORTANT if using auth
-                body: JSON.stringify({
+
+            const startDateTime = new Date(`${formData.fromDate}T${formData.fromTime}:00`);
+            const endDateTime = new Date(`${formData.toDate}T${formData.toTime}:00`);
+
+            const startTimeISO = startDateTime.toISOString();
+            const endTimeISO = endDateTime.toISOString();
+
+            const res = await axios.post(
+                "http://localhost:3000/api/bookings/create",
+                {
                     stationId: formData.stationId,
                     chargerType: formData.chargerType,
-                    duration: duration
-                })
-            });
+                    startTime: startTimeISO,
+                    endTime: endTimeISO
+                },
+                {
+                    withCredentials: true
+                }
+            );
 
-            const data = await res.json();
-            console.log(data);
+            console.log(res.data);
 
         } catch (err) {
-            console.error(err);
+            console.error("Booking Error:", err.response?.data || err.message);
         }
-    };
-
-
-    const getDuration = () => {
-        const [fh, fm] = formData.from.split(":").map(Number);
-        const [th, tm] = formData.to.split(":").map(Number);
-
-        return (th * 60 + tm) - (fh * 60 + fm);
     };
 
 
@@ -96,11 +103,25 @@ const SlotsBooking = () => {
                             <div id="leftsection">
                                 <div>
                                     <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                                        Select Date
+                                        Select Date(from)
                                     </label>
 
                                     <input
                                         type="date"
+                                        name="fromDate"
+                                        onChange={handleChange}
+                                        className="w-full border rounded-lg px-4 py-3 text-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="text-sm font-semibold text-gray-700 mb-2 mt-2 block">
+                                        Select Date(to)
+                                    </label>
+
+                                    <input
+                                        type="date"
+                                        name="toDate"
+                                        onChange={handleChange}
                                         className="w-full border rounded-lg px-4 py-3 text-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
                                     />
                                 </div>
@@ -112,7 +133,7 @@ const SlotsBooking = () => {
                                         <label className="text-xs text-gray-500">From</label>
                                         <input
                                             type="time"
-                                            name="from"
+                                            name="fromTime"
                                             onChange={handleChange}
                                             className="w-full border rounded-lg px-3 py-2 text-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
                                         />
@@ -124,7 +145,7 @@ const SlotsBooking = () => {
                                         <label className="text-xs text-gray-500">To</label>
                                         <input
                                             type="time"
-                                            name="to"
+                                            name="toTime"
                                             onChange={handleChange}
                                             className="w-full border rounded-lg px-3 py-2 text-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
                                         />
@@ -138,19 +159,29 @@ const SlotsBooking = () => {
                                     <div className="flex flex-col justify-between gap-3 mb-3">
                                         <h2 className="text-sm font-semibold text-gray-700">Charging Type</h2>
 
-                                        <div className="flex items-center justify-center gap-3 text-xs">
+                                        <div className="flex items-center justify-center gap-3 text-xs transition-all duration-200">
                                             <button
                                                 type="button"
                                                 onClick={() => handleType("AC")}
-                                                className="font-light w-32 text-sm flex items-center border-zinc-200 border-[1px] justify-center gap-2  text-black py-4 px-2 rounded-2xl hover:scale-105 transition" >
-                                                <h1 className='text-lg'> AC</h1>
+                                                className={`w-32 flex items-center justify-center gap-2 py-4 px-2 rounded-2xl border transition 
+                                                        ${formData.chargerType === "AC"
+                                                        ? "bg-black text-white border-black scale-105"
+                                                        : "bg-white text-black border-gray-300 hover:scale-105"
+                                                    }`}
+                                            >
+                                                <h1 className="text-lg">AC</h1>
                                                 <Plug size={22} />
                                             </button>
                                             <button
                                                 type="button"
                                                 onClick={() => handleType("DC")}
-                                                className="font-light w-32 text-sm flex items-center justify-center gap-2 border-zinc-200 border-[1px] text-black py-4 px-2 rounded-2xl hover:scale-105 transition" >
-                                                <h1 className='text-lg'>DC</h1>
+                                                className={`w-32 flex items-center justify-center gap-2 py-4 px-2 rounded-2xl border transition 
+                                                        ${formData.chargerType === "DC"
+                                                        ? "bg-black text-white border-black scale-105"
+                                                        : "bg-white text-black border-gray-300 hover:scale-105"
+                                                    }`}
+                                            >
+                                                <h1 className="text-lg">DC</h1>
                                                 <Zap size={22} />
                                             </button>
                                         </div>

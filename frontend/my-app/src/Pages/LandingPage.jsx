@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import logo from "../assets/plugbook.png";
 import logoDark from "../assets/plugbook-dark.png";
 import "../css/landingPage.css";
+import BgIcons from "../Components/BgIcons"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,15 @@ export default function LandingPageNew() {
     const heroRef = useRef(null);
 
     useEffect(() => {
+        gsap.set(".logoDark", {
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            xPercent: -50,
+            yPercent: -50,
+            scale: 1,
+        });
+
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: heroRef.current,
@@ -23,50 +33,104 @@ export default function LandingPageNew() {
             },
         });
 
-        // 1️⃣ REVEAL WHITE LAYER
+        tl.to(".purple-bg", {
+            opacity: 0,
+            duration: 0.3,
+        }, 0.2);
+        
+        tl.set(".purple-bg", {
+            display: "none",
+        });
+
+        //  REVEAL WHITE LAYER
         tl.to(maskRef.current, {
             clipPath: "circle(80% at center)",
+            backgroundColor: "transparent",
             ease: "none",
         }, 0);
 
-        // 4️⃣ MOVE LOGO UP + SHRINK (MAIN HERO TRANSITION)
+        // MOVE LOGO UP + SHRINK (MAIN HERO TRANSITION)
         tl.to(".logoDark", {
             top: "10%",
-            scale: 0.4,
+            scale: 0.6,
             ease: "none",
         }, 1);
 
-        // 5️⃣ TEXT APPEARS
+        // TEXT APPEARS
         tl.to(".hero-text", {
-            y: -70,
             opacity: 1,
-            ease: "power2.out",
+            y: 0,
         }, 1.2);
 
-        // 6️⃣ BUTTON APPEARS
+        //  BUTTON APPEARS
         tl.to(".hero-btn", {
-            y: -70,
             opacity: 1,
-            ease: "power2.out",
+            y: 0,
         }, 1.4);
+
+
+        // PARALLAX EFFECT
+        gsap.to(".bg-wrapper", {
+            y: 80,
+            scrollTrigger: {
+                trigger: document.body,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1.5,
+            },
+        });
+
+        gsap.to(".logoDark", {
+            y: -120,
+            scrollTrigger: {
+                trigger: heroRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1.5,
+            },
+        });
+
+        gsap.to(".hero-text", {
+            y: -180,
+            scrollTrigger: {
+                trigger: heroRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1.5,
+            },
+        });
+
+        gsap.to(".hero-btn", {
+            y: -140,
+            scrollTrigger: {
+                trigger: heroRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1.5,
+            },
+        });
 
     }, []);
 
     return (
         <div className="body">
+            <BgIcons />
 
             {/* HERO SECTION */}
-            <section ref={heroRef} style={styles.hero}>
+            <section ref={heroRef} className="hero">
 
                 {/* PURPLE BACKGROUND */}
-                <div style={styles.purpleBg}>
-                    <img src={logo} style={styles.logo} />
+                <div className="purple-bg">
+                    <img src={logo} className="logo" />
                 </div>
 
                 {/* WHITE REVEAL LAYER */}
-                <div ref={maskRef} style={styles.maskLayer}>
+                <div ref={maskRef} className="mask-layer">
+
 
                     <div className="layer2">
+
+
 
                         {/* LOGO */}
                         <img src={logoDark} className="logoDark" />
@@ -87,57 +151,19 @@ export default function LandingPageNew() {
                         </button>
 
                     </div>
-
-
                 </div>
 
             </section>
 
             {/* EXTRA SCROLL SPACE */}
-            <section style={{ height: "100vh", background: "#A83AC7" }}></section>
+            <section>
+
+                <div className="section-2">
+
+                </div>
+
+            </section>
 
         </div>
     );
 }
-
-const styles = {
-    body: {
-        margin: 0,
-        padding: 0,
-    },
-
-    hero: {
-        position: "relative",
-        height: "100vh",
-        overflow: "hidden",
-    },
-
-    purpleBg: {
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        background: "radial-gradient(circle at center, #7c3aed, #4c1d95)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-
-    logo: {
-        width: "800px",
-        height: "auto",
-    },
-
-    maskLayer: {
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        background: "#ffffff",
-
-        clipPath: "circle(0% at center)", // 👈 IMPORTANT
-
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-
-};

@@ -9,6 +9,7 @@ import SlotsBooking from '../Pages/SlotsBooking'
 import TicketPage from '../Pages/TicketPage'
 import Loader from "../Components/Loader"
 import LandingPage from "../Pages/LandingPage"
+import BgIcons from "../Components/BgIcons"
 
 const AppRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AppRoutes = () => {
         <Route path="/slots" element={<SlotsBooking />} /> 
         <Route path="/tickets" element={<TicketPage/>} /> 
         <Route path="/" element={<LandingPage/>} /> 
+        <Route path="/bgicons" element={<BgIcons/>} /> 
 
 
         <Route path="/loader" element={<Loader />} />

@@ -1,8 +1,16 @@
+.body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+
 
 .hero {
     position: relative;
     height: 100vh;
     overflow: visible;
+    z-index: 1;
 }
 
 .purple-bg {
@@ -13,14 +21,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    z-index: 1;
 }
 
 .logo {
-    width: 200px;
+    width: 800px;
     height: auto;
     max-width: 800px;
-    outline: 3px solid red;
     display: block;
 }
 
@@ -28,9 +35,9 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: white;
-
+    background-color: white;
     clip-path: circle(0% at center);
+    z-index: 2;
 
     display: flex;
     justify-content: center;
@@ -50,7 +57,7 @@
     position: absolute;
     top: 30%;
     left: 50%;
-    transform: translate(-50%, 40px);
+    transform: translate(-50%, 0px);
     opacity: 0;
 }
 
@@ -69,7 +76,7 @@
     position: absolute;
     top: 60%;
     left: 50%;
-    transform: translate(-50%, 40px);
+    transform: translate(-50%, 0px);
     opacity: 0;
 }
 
@@ -82,4 +89,12 @@
     font-size: xx-large;
     font-weight: 900;
     color: #7c3aed;
+}
+
+
+.section-2 {
+    min-height: 100vh;
+    background: transparent;
+    position: relative;
+    z-index: 2;
 }
