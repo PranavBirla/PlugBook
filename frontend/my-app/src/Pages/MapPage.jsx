@@ -13,10 +13,8 @@ import { getNearbyStations } from "../services/api";
 import StationPopup from "../Components/StationPopUp";
 import RoutePath from "../Components/RoutePath";
 import { userIcon, stationIcon } from "../utils/mapIcons";
-import Loader from "../Components/Loader";
-import { io } from "socket.io-client";
-
-const socket = io("http://localhost:3000");
+import Navbar from "../Components/Navbar";
+import Top from "../Components/Top";
 
 export default function MapPage() {
     const [position, setPosition] = useState(null);
@@ -58,9 +56,9 @@ export default function MapPage() {
                 setLoading(false);
             },
             {
-                enableHighAccuracy: true,
-                maximumAge: 0,
-                timeout: 5000,
+                enableHighAccuracy: true, 
+                timeout: 10000,
+                maximumAge: 0
             }
         );
     }, []);
@@ -84,17 +82,18 @@ export default function MapPage() {
         alert("Geolocation not supported");
     }
 
-    if (loading) return <Loader />;
+    if (loading) return <p>Loading map...</p>;
+
+    // style={{
+    //             height: "100vh",
+    //             borderRadius: "20px",
+    //             overflow: "hidden",
+    //             margin: "10px" // optional, gives spacing from edges
+    //         }}
 
     return (
-        <div
-            style={{
-                height: "100vh",
-                borderRadius: "20px",
-                overflow: "hidden",
-                margin: "10px" // optional, gives spacing from edges
-            }}
-        >
+        <div className="h-[90vh] rounded-2xl overflow-hidden m-2.5 md:h-[100vh]" >
+            <Top/>
             
             <MapContainer
                 center={position}
@@ -146,7 +145,7 @@ export default function MapPage() {
 
 
             </MapContainer>
-            <div class="custom-cursor"></div>
+            <Navbar/>
         </div>
     );
 }

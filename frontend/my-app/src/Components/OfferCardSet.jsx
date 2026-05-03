@@ -3,7 +3,7 @@ import OfferCards from './OfferCards'
 
 const OfferCardSet = () => {
   return (
-    <div className=' mx-4 flex flex-col sm:flex-row  sm:gap-5 md:mx-12'>
+    <div className=' mx-4 flex flex-col sm:flex-row  sm:gap-5 sm:mx-10 md:mx-12'>
         <OfferCards />
         <OfferCards />
         

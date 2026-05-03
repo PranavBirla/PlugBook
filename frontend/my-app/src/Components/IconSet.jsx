@@ -18,27 +18,32 @@ const IconSet = () => {
       icon:  <EvCharger size={32} strokeWidth={1} />,
       lg:  <EvCharger size={40} strokeWidth={1} />,
       def:"Locate chargers easily around you.",
+      link:'/slots'
+
     },
     {
       id: 2,
       name: "My Booking",
       icon: <Ticket size={32} strokeWidth={1} />,
       lg: <Ticket size={40} strokeWidth={1} />,
-      def:"View and manage your booking."
+      def:"View and manage your booking.",
+      link:'/tickets'
     },
     {
       id: 3,
       name: "Payments",
       icon: <Wallet size={32} strokeWidth={1} />,
       lg: <Wallet size={40} strokeWidth={1} />,
-      def:"Manage payments and invoices."
+      def:"Manage payments and invoices.",
+      link:'/home'
     },
     {
       id: 4,
       name: "History",
       icon: <History size={32} strokeWidth={1} />,
       lg: <History size={44} strokeWidth={1} />,
-      def:"View your charging history."
+      def:"View your charging history.",
+      link:'/home'
     },
   ];
 
@@ -49,7 +54,7 @@ const IconSet = () => {
     <div className=' flex justify-around mx-4 my-3 sm:mx-7 md:mx-9'>
        {
         navItems.map(function(elem){
-          return <Icon id={elem.id} name={elem.name} icon={elem.icon} def={elem.def} lg={elem.lg} />
+          return <Icon id={elem.id} name={elem.name} icon={elem.icon} def={elem.def} lg={elem.lg} link={elem.link} />
 
 
         })
