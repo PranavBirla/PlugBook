@@ -54,7 +54,7 @@ export default function StationPopup({ station }) {
                     marginTop: "8px",
                     padding: "8px",
                     width: "100%",
-                    background: "#6C5CE7",
+                    background: "#895CE7",
                     color: "white",
                     border: "none",
                     borderRadius: "8px",

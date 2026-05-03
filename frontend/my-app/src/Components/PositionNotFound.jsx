@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import FloatingIcons from "../Components/FloatingIcons";
+import FloatingIcons from "./FloatingIcons";
 
 
 export default function PremiumLoader() {
@@ -87,7 +87,7 @@ export default function PremiumLoader() {
             </div>
 
             <p className="loader-text" style={styles.text}>
-                <span style={styles.highlight}>Preparing</span> your charging experience!
+                <span style={styles.highlight}>Position</span> Not Found!
             </p>
         </div>
 
@@ -134,7 +134,7 @@ const styles =
         alignItems: "center",
     },
     highlight: {
-        color: "#895CE7",
+        color: "#6C5CE7",
         fontWeight: 700,
     },
 
@@ -148,8 +148,8 @@ const styles =
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "rgba(135,92,231,0.05)",
-        boxShadow: "0 0 80px rgba(135,92,231,0.3)",
+        background: "rgba(108,92,231,0.05)",
+        boxShadow: "0 0 80px rgba(108,92,231,0.3)",
         overflow: "visible",
         zIndex: 5,
     },
@@ -160,7 +160,7 @@ const styles =
         height: "140%",
         borderRadius: "50%",
         background:
-            "radial-gradient(circle, rgba(135,92,231,0.4), transparent)",
+            "radial-gradient(circle, rgba(108,92,231,0.4), transparent)",
         animation: "pulse 2s infinite",
     },
 
@@ -168,8 +168,8 @@ const styles =
         width: "45%",
         height: "45%",
         borderRadius: "50%",
-        background: "#895CE7",
-        boxShadow: "0 0 40px #895CE7, 0 0 80px #895CE7",
+        background: "#6C5CE7",
+        boxShadow: "0 0 40px #6C5CE7, 0 0 80px #6C5CE7",
         zIndex: 2,
     },
 
