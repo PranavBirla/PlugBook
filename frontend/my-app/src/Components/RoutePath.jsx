@@ -21,7 +21,7 @@ export default function RoutePath({ from, to }) {
             lineOptions: {
                 styles: [
                     { color: "#A29BFE", weight: 12, opacity: 0.5 }, // glow layer
-                    { color: "#6C5CE7", weight: 5, opacity: 1 }     // main route
+                    { color: "#895CE7", weight: 5, opacity: 1 }     // main route
                 ]
             },
             addWaypoints: false,

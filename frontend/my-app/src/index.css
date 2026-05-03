@@ -2,6 +2,8 @@
 
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
+    height: 100%;
+    scroll-behavior: auto;
 }
 
 .custom-cursor {
@@ -16,6 +18,7 @@ body {
     transform: translate(-50%, -50%);
     /* Centers the div on the mouse tip */
 }
+
 
 
 
