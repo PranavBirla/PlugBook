@@ -51,7 +51,7 @@ const SlotsBooking = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                credentials: "include", // IMPORTANT if using auth
+                credentials: "include", 
                 body: JSON.stringify({
                     stationId: formData.stationId,
                     chargerType: formData.chargerType,
@@ -96,46 +96,63 @@ const SlotsBooking = () => {
                             <div id="leftsection">
                                 <div>
                                     <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                                        Select Date
+                                        Select Date & Time(from)
                                     </label>
-
-                                    <input
-                                        type="date"
-                                        className="w-full border rounded-lg px-4 py-3 text-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
-                                    />
-                                </div>
-
-
-                                <div className="flex items-center justify-center gap-4">
-
-                                    <div className="flex-1 w-1/2">
-                                        <label className="text-xs text-gray-500">From</label>
+                                    <div className="flex gap-2">
+                                        <input
+                                            type="date"
+                                            name="fromDate"
+                                            className="w-full border rounded-lg px-4 py-3 text-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
+                                        />
                                         <input
                                             type="time"
-                                            name="from"
+                                            name="fromTime"
                                             onChange={handleChange}
                                             className="w-full border rounded-lg px-3 py-2 text-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
                                         />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label className="text-sm font-semibold text-gray-700 mb-2 mt-2 block">
+                                        Select Date & Time(to)
+                                    </label>
+                                    <div className="flex gap-2">
+                                        <input
+                                            type="date"
+                                            name="toDate"
+                                            className="w-full border rounded-lg px-4 py-3 text-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
+                                        />
+                                        <input
+                                            type="time"
+                                            name="toTime"
+                                            onChange={handleChange}
+                                            className="w-full border rounded-lg px-3 py-2 text-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
+                                        />
+
+                                    </div>
+                                </div>
+
+
+                                {/* <div className="flex items-center justify-center gap-4">
+
+                                    <div className="flex-1 w-1/2">
+                                        <label className="text-xs text-gray-500">From</label>
+                                      
                                     </div>
 
 
 
                                     <div className="flex-1 w-1/2">
                                         <label className="text-xs text-gray-500">To</label>
-                                        <input
-                                            type="time"
-                                            name="to"
-                                            onChange={handleChange}
-                                            className="w-full border rounded-lg px-3 py-2 text-gray-500 outline-none focus:ring-2 focus:ring-purple-400"
-                                        />
+                                       
                                     </div>
-                                </div>
+                                </div> */}
 
                             </div>
 
                             <div id="rightsection">
                                 <div>
-                                    <div className="flex flex-col justify-between gap-3 mb-3">
+                                    <div className="flex flex-col justify-between gap-3 mb-3 ">
                                         <h2 className="text-sm font-semibold text-gray-700">Charging Type</h2>
 
                                         <div className="flex items-center justify-center gap-3 text-xs">

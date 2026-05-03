@@ -34,8 +34,7 @@ export default function MapPage() {
         
                 setPosition([lat, lng]);
         
-                // send location to socket
-                socket.emit("send-location", { lat, lng });
+                
         
                 // ONLY FETCH STATIONS FIRST TIME
                 if (stations.length === 0) {

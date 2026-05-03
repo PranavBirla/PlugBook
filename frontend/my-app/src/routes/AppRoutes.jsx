@@ -7,6 +7,8 @@ import SignUpPage from '../Pages/SignUpPage'
 import MapPage from '../Pages/MapPage';
 import SlotsBooking from '../Pages/SlotsBooking'
 import TicketPage from '../Pages/TicketPage'
+import Loader from '../Components/Loader'
+
 
 const AppRoutes = () => {
   return (

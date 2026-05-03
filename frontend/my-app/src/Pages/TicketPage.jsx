@@ -8,7 +8,7 @@ const TicketPage = () => {
     <div>
       <Top />
       <div>
-        <div className='m-4 text-xl '>MY Tickets</div>
+        <div className='my-4 text-xl '>MY Tickets</div>
 
         <div className='flex justify-center'><Ticket /></div>
       </div>

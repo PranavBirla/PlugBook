@@ -2,18 +2,21 @@ import React from 'react'
 import { CalendarDays } from 'lucide-react';
 import { Clock } from 'lucide-react';
 import { EvCharger } from 'lucide-react';
+import { TicketCheck } from 'lucide-react';
+
+
 const Ticket = () => {
     return (
-        <div className='bg-gray-100 h-53 w-86  flex flex-col justify-around items-center rounded-4xl px-2 relative'>
+        <div className='bg-white h-53 w-89  flex flex-col justify-around items-center rounded-4xl px-2 relative'>
 
-            <div className="absolute top-35 left-0 bg-gray-100 h-1 w-1 rounded-full  p-2">  </div>
-            <div className="absolute top-35 right-0  bg-gray-100 h-1 w-1 rounded-full  p-2"></div>
+            <div className="absolute top-35 left-0 bg-white h-1 w-1 rounded-full  p-2">  </div>
+            <div className="absolute top-35 right-0  bg-white h-1 w-1 rounded-full  p-2"></div>
 
 
-            <div className='bg-black text-white h-full w-full p-4 flex flex-col justify-around rounded-4xl'>
-                <div className='flex justify-between text-xl '>
-                    <p className=''><EvCharger /></p>
-                    <p>Scedule & Time</p>
+            <div className='bg-white text-black h-full w-full p-4 flex flex-col justify-around rounded-4xl border-gray-200 border-[1px]'>
+                <div className='flex justify-between text-sm p-4 '>
+                    <p className=''><TicketCheck size={26} /></p>
+                    <p className='text-purple-500 bg-purple-100 px-2 py-1 rounded-2xl' >upcoming</p>
                 </div>
                 <div className='flex justify-between font-light'>
                     <div className='flex flex-col'>

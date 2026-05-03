@@ -100,9 +100,10 @@ export default function LoginPage() {
                             <label>Password</label>
                             <input type="password" name="password" placeholder="Enter your password" />
                         </div>
+                        <div className="text-red-600 flex justify-end text-sm">invalid </div>
 
                         <button id="loginButton" type="submit" className="signup-btn">
-                            <h1>Login</h1>  
+                            login
                         </button>
                     </form>
 
