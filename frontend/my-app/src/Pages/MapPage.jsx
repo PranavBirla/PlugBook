@@ -13,6 +13,8 @@ import { getNearbyStations } from "../services/api";
 import StationPopup from "../Components/StationPopUp";
 import RoutePath from "../Components/RoutePath";
 import { userIcon, stationIcon } from "../utils/mapIcons";
+import Navbar from "../Components/Navbar";
+import Top from "../Components/Top";
 
 export default function MapPage() {
     const [position, setPosition] = useState(null);
@@ -56,7 +58,7 @@ export default function MapPage() {
                 console.error(err);
             },
             {
-                enableHighAccuracy: true, // 🔥 IMPORTANT
+                enableHighAccuracy: true, 
                 timeout: 10000,
                 maximumAge: 0
             }
@@ -69,15 +71,17 @@ export default function MapPage() {
 
     if (loading) return <p>Loading map...</p>;
 
+    // style={{
+    //             height: "100vh",
+    //             borderRadius: "20px",
+    //             overflow: "hidden",
+    //             margin: "10px" // optional, gives spacing from edges
+    //         }}
+
     return (
-        <div
-            style={{
-                height: "100vh",
-                borderRadius: "20px",
-                overflow: "hidden",
-                margin: "10px" // optional, gives spacing from edges
-            }}
-        >
+        <div className="h-[90vh] rounded-2xl overflow-hidden m-2.5 md:h-[100vh]" >
+            <Top/>
+            
             <MapContainer
                 center={position}
                 zoom={14}
@@ -128,6 +132,7 @@ export default function MapPage() {
 
 
             </MapContainer>
+            <Navbar/>
         </div>
     );
 }
