@@ -1,1 +1,70 @@
 @import "tailwindcss";
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    /* Crucial: lets you click "through" the div */
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    /* Centers the div on the mouse tip */
+}
+
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #6C5CE7;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.9);
+        opacity: 0.5;
+    }
+}
+
+@keyframes floatY {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}

@@ -13,6 +13,10 @@ import { getNearbyStations } from "../services/api";
 import StationPopup from "../Components/StationPopUp";
 import RoutePath from "../Components/RoutePath";
 import { userIcon, stationIcon } from "../utils/mapIcons";
+import Loader from "../Components/Loader";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3000");
 
 export default function MapPage() {
     const [position, setPosition] = useState(null);
@@ -21,53 +25,66 @@ export default function MapPage() {
     const [selectedStation, setSelectedStation] = useState(null);
 
 
-    // 🔥 GET USER LOCATION + FETCH STATIONS
+
+    // GET USER LOCATION + FETCH STATIONS
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(
+
+        navigator.geolocation.watchPosition(
             async (pos) => {
                 const lat = pos.coords.latitude;
                 const lng = pos.coords.longitude;
-
+        
                 setPosition([lat, lng]);
-
-                try {
-                    const data = await getNearbyStations(lat, lng);
-                    console.log("Stations:", data.data);
-                    setStations(data.data);
-                } catch (err) {
-                    console.error("API error:", err);
+        
+                // send location to socket
+                socket.emit("send-location", { lat, lng });
+        
+                // ONLY FETCH STATIONS FIRST TIME
+                if (stations.length === 0) {
+                    try {
+                        const data = await getNearbyStations(lat, lng);
+                        console.log("Stations:", data.data);
+                        setStations(data.data);
+                        setLoading(false);
+                    } catch (err) {
+                        console.error("API error:", err);
+                    }
                 }
-
-                setLoading(false);
             },
             (err) => {
                 console.error("Location error:", err);
-
-                // fallback location (Bhopal)
-                const lat = 23.25;
-                const lng = 77.43;
-
+        
                 setPosition([lat, lng]);
-
-                getNearbyStations(lat, lng).then(setStations);
                 setLoading(false);
             },
-            (err) => {
-                console.error(err);
-            },
             {
-                enableHighAccuracy: true, // 🔥 IMPORTANT
-                timeout: 10000,
-                maximumAge: 0
+                enableHighAccuracy: true,
+                maximumAge: 0,
+                timeout: 5000,
             }
         );
+    }, []);
+
+    useEffect(() => {
+        const handleLocation = (data) => {
+            console.log("Live location:", data);
+
+            //  update user marker
+            setPosition([data.lat, data.lng]);
+        };
+
+        socket.on("receive-location", handleLocation);
+
+        return () => {
+            socket.off("receive-location", handleLocation);
+        };
     }, []);
 
     if (!navigator.geolocation) {
         alert("Geolocation not supported");
     }
 
-    if (loading) return <p>Loading map...</p>;
+    if (loading) return <Loader />;
 
     return (
         <div
@@ -78,6 +95,7 @@ export default function MapPage() {
                 margin: "10px" // optional, gives spacing from edges
             }}
         >
+            
             <MapContainer
                 center={position}
                 zoom={14}
@@ -102,7 +120,7 @@ export default function MapPage() {
                         icon={stationIcon}
                         eventHandlers={{
                             click: () => {
-                                console.log("Clicked station:", station); // 👈 HERE
+                                console.log("Clicked station:", station);
                                 setSelectedStation(station);
                             },
                         }}
@@ -128,6 +146,7 @@ export default function MapPage() {
 
 
             </MapContainer>
+            <div class="custom-cursor"></div>
         </div>
     );
 }
