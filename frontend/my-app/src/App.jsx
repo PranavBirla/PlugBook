@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     const lenis = new Lenis({
       smooth: true,
-      lerp: 0.07,
+      lerp: 0.70,
     });
 
     lenis.on("scroll", ScrollTrigger.update);

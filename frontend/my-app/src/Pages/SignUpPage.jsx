@@ -37,7 +37,7 @@ export default function SignUpPage() {
 
     return (
         <div className="auth-container">
-             <div className="logo">
+             <div className="plugbook-logo">
                         
                         <span>PlugBook</span>
                     </div>

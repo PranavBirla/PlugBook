@@ -31,6 +31,7 @@ const SlotsBooking = () => {
         setFormData({
             ...formData,
             chargerType: type
+            
         });
     };
 

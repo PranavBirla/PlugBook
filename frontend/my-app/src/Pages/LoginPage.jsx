@@ -44,7 +44,7 @@ export default function LoginPage() {
 
     return (
         <div className="auth-container">
-            <div className="logo">
+            <div className="plugbook-logo">
                         
                         <span>PlugBook</span>
                     </div>
@@ -100,7 +100,7 @@ export default function LoginPage() {
                             <label>Password</label>
                             <input type="password" name="password" placeholder="Enter your password" />
                         </div>
-                        <div className="text-red-600 flex justify-end text-sm">invalid </div>
+                        <div className="text-red-400 flex justify-end text-sm">invalid </div>
 
                         <button id="loginButton" type="submit" className="signup-btn">
                             login
