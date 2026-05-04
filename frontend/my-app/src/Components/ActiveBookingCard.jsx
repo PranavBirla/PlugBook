@@ -5,13 +5,12 @@ import { EvCharger } from 'lucide-react';
 import { TicketCheck } from 'lucide-react';
 import { CalendarDays } from 'lucide-react';
 import { Plug } from 'lucide-react';
-
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const ActiveBookingCard = () => {
   return (
-    <div className=' py-3 px-2 m-4 sm:p-4 md:mx-30 rounded-3xl text-white bg-black border-purple-300 border-2 w-full fit flex gap-4 sm:gap-5 md:gap-7 items-center   xl:mx-20'>
+    <div className='py-3 px-2 m-4 sm:p-4 md:mx-30 rounded-3xl text-white bg-black border-purple-300 border-2 w-full fit flex gap-4 sm:gap-5 md:gap-7 items-center   xl:mx-20'>
       <div className='h-22 w-28 overflow-hidden rounded-3xl md:h-30 md:w-35 '>
         <img className='w-full h-full' src="public\selectedStationIcon.png" alt="" />
 
