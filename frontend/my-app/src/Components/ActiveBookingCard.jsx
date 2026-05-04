@@ -11,9 +11,9 @@ import { Link } from 'react-router-dom';
 
 const ActiveBookingCard = () => {
   return (
-    <div className=' py-3 px-2 m-2 sm:p-4 rounded-3xl text-white bg-black w-full fit flex gap-4 sm:gap-5 md:gap-7 items-center md:mx-20  xl:mx-20'>
+    <div className=' py-3 px-2 m-4 sm:p-4 md:mx-30 rounded-3xl text-white bg-black border-purple-300 border-2 w-full fit flex gap-4 sm:gap-5 md:gap-7 items-center   xl:mx-20'>
       <div className='h-22 w-28 overflow-hidden rounded-3xl md:h-30 md:w-35 '>
-        <img className='w-full h-full' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2rgEBL1FjFn6TYclGqveFIxyFJB98yhnF2gvFXOWzNacOZ3yc3XR2ovvSJckUo8JAiYxE7_3f6SxEessO1ucwanukfXCii1h-wQMuORI&s=10" alt="" />
+        <img className='w-full h-full' src="public\selectedStationIcon.png" alt="" />
 
       </div> 
       <div className='gap-1 flex flex-col sm:gap-2   w-full'>
@@ -25,7 +25,7 @@ const ActiveBookingCard = () => {
             </div>
         </div>
 
-        <div className=' mx-2 text-lg font-black flex justify-between md:gap-3 font-light'>
+        <div className=' mx-2 text-lg font-light flex justify-between md:justify-center md:gap-25 lg:gap:35'>
           <div className=''>
 
             <h1 className=' '>5:30 PM</h1>

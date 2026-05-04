@@ -6,6 +6,7 @@ import { Ticket } from 'lucide-react';
 import { Wallet } from 'lucide-react';
 import { History } from 'lucide-react';
 import { EvCharger } from 'lucide-react';
+import { CalendarCheck } from 'lucide-react';
 
 const IconSet = () => {
 
@@ -18,7 +19,7 @@ const IconSet = () => {
       icon:  <EvCharger size={32} strokeWidth={1} />,
       lg:  <EvCharger size={40} strokeWidth={1} />,
       def:"Locate chargers easily around you.",
-      link:'/slots'
+      link:'/map'
 
     },
     {
@@ -27,13 +28,13 @@ const IconSet = () => {
       icon: <Ticket size={32} strokeWidth={1} />,
       lg: <Ticket size={40} strokeWidth={1} />,
       def:"View and manage your booking.",
-      link:'/tickets'
+      link:'/home'
     },
     {
       id: 3,
-      name: "Payments",
-      icon: <Wallet size={32} strokeWidth={1} />,
-      lg: <Wallet size={40} strokeWidth={1} />,
+      name: "Active Booking",
+      icon: <CalendarCheck size={32} strokeWidth={1} />,
+      lg: <CalendarCheck size={40} strokeWidth={1} />,
       def:"Manage payments and invoices.",
       link:'/activebooking'
     },

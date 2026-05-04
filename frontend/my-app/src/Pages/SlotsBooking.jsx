@@ -30,8 +30,7 @@ const SlotsBooking = () => {
 
 
 
-    const navigate = useNavigate();
-
+    
     const [formData, setFormData] = useState({
         stationId: stationIdFromState || "",
         chargerType: "",
@@ -142,13 +141,13 @@ const SlotsBooking = () => {
             );
             navigate("/tickets", {
                 
-                state: { bookingData: response.data },
+                state: { bookingData: res.data },
             });
 
             console.log(res.data);
 
         } catch (err) {
-            console.error("Booking Error:", err.response?.data || err.message);
+            console.error("Booking Error:", err.res?.data || err.message);
         }
     };
 
@@ -225,7 +224,6 @@ const SlotsBooking = () => {
                                     <div className="flex gap-2">
                                         <input
                                             type="date"
-                                            name="toDate"
                                             onChange={handleChange}
                                             name="fromDate"
                                             className="w-full border rounded-lg px-4 py-3 text-gray-500 outline-none focus:ring-1 focus:ring-purple-200"
@@ -246,6 +244,7 @@ const SlotsBooking = () => {
                                         <input
                                             type="date"
                                             name="toDate"
+                                            onChange={handleChange}
                                             className="w-full border rounded-lg px-4 py-3 text-gray-500 outline-none focus:ring-1 focus:ring-purple-200"
                                         />
                                         <input

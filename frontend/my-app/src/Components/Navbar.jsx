@@ -28,7 +28,7 @@ const Navbar = () => {
             )}
           </NavLink>
 
-          <NavLink to="/slots">
+          <NavLink to="/map">
             {({ isActive }) => (
               <CalendarCheck
                 strokeWidth={1}
