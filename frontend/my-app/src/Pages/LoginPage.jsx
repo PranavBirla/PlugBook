@@ -3,18 +3,29 @@ import "../css/signup.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ShieldCheck } from 'lucide-react';
+import { useState, useEffect } from "react";
 
 
 export default function LoginPage() {
 
     const navigate = useNavigate();
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+
+        setError(""); 
+
+        if (!email || !password) {
+            setError("Please fill all fields");
+            return;
+        }
 
         try {
-            const email = e.target.email.value;
-            const password = e.target.password.value;
+
 
             const response = await axios.post(
                 "http://localhost:3000/api/auth/user/login",
@@ -37,7 +48,10 @@ export default function LoginPage() {
             navigate("/home");
 
         } catch (error) {
-            console.error(error.response?.data || error.message);
+            const msg =
+                error.response?.data?.message || "Login failed";
+
+            setError(msg);
         }
     };
 
@@ -45,19 +59,19 @@ export default function LoginPage() {
     return (
         <div className="auth-container">
             <div className="plugbook-logo">
-                        
-                        <span>PlugBook</span>
-                    </div>
+
+                <span>PlugBook</span>
+            </div>
 
 
             <div className="left-section">
-                
+
                 <div className="left-content">
                     <div className="bogo">
-                        
+
                         <span>PlugBook</span>
                     </div>
-                    
+
 
                     <h1 id="tag">
                         Charge Smarter. <span>Drive Better.</span>
@@ -93,14 +107,18 @@ export default function LoginPage() {
 
                         <div className="input-group">
                             <label>Email Address</label>
-                            <input type="email" name="email" placeholder="Enter your email address" />
+                            <input type="email"  onChange={() => setError("")} name="email" placeholder="Enter your email address" />
                         </div>
 
                         <div className="input-group">
                             <label>Password</label>
-                            <input type="password" name="password" placeholder="Enter your password" />
+                            <input type="password"  onChange={() => setError("")} name="password" placeholder="Enter your password" />
                         </div>
-                        <div className="text-red-400 flex justify-end text-sm">invalid </div>
+                        {error && (
+                            <div className="mb-3 p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
+                                {error}
+                            </div>
+                        )}
 
                         <button id="loginButton" type="submit" className="signup-btn">
                             login
@@ -125,7 +143,7 @@ export default function LoginPage() {
 
                     <p className="switch">
                         Don’t have an account?{" "}
-                       
+
                         <Link className="bold" to='/register' >Sign up</Link>
                     </p>
                 </div>

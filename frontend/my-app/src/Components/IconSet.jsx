@@ -35,7 +35,7 @@ const IconSet = () => {
       icon: <Wallet size={32} strokeWidth={1} />,
       lg: <Wallet size={40} strokeWidth={1} />,
       def:"Manage payments and invoices.",
-      link:'/home'
+      link:'/activebooking'
     },
     {
       id: 4,

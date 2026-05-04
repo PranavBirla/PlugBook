@@ -20,17 +20,17 @@ export default function StationPopup({ station }) {
                 {station.address}
             </p>
 
-            <p>📍 {station?.distance < 1
+            <p> {station?.distance < 1
                 ? `${(station.distance * 1000).toFixed(0)} m away`
                 : `${station.distance.toFixed(2)} km away`}
             </p>
 
             <p>
-                ⚡ AC: {station.chargers.AC.available}/{station.chargers.AC.total}
+                 AC: {station.chargers.AC.available}/{station.chargers.AC.total}
             </p>
 
             <p>
-                ⚡ DC: {station.chargers.DC.available}/{station.chargers.DC.total}
+                DC: {station.chargers.DC.available}/{station.chargers.DC.total}
             </p>
 
             <button

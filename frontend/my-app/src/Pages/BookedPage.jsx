@@ -1,9 +1,6 @@
 import React from 'react'
-import Ticket from '../Components/Ticket'
-import Navbar from '../Components/Navbar'
-import Top from '../Components/Top'
 
-const TicketPage = () => {
+const BookedPage = () => {
   return (
     <div>
       <Top />
@@ -18,4 +15,4 @@ const TicketPage = () => {
   )
 }
 
-export default TicketPage
+export default BookedPage

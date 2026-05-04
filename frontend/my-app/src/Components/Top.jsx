@@ -1,6 +1,7 @@
 import React from 'react'
 import { Bell } from 'lucide-react';
 import NavTop from './NavTop';
+import BackButton from './BackButton';
 
 const Top = () => {
   return (
@@ -10,7 +11,7 @@ const Top = () => {
           <NavTop />
         </div>
 
-        <Bell strokeWidth={1} />
+        <BackButton/>
       </div>
   )
 }

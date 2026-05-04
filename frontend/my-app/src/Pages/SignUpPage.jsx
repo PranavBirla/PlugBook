@@ -4,9 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ShieldCheck } from 'lucide-react';
 import { MoveRight } from 'lucide-react'
+import { useState, useEffect } from "react";
 export default function SignUpPage() {
 
     const navigate = useNavigate();
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,23 +32,26 @@ export default function SignUpPage() {
             navigate("/home");
 
         } catch (error) {
-            console.error(error.response?.data || error.message);
+            const msg =
+                error.response?.data?.message || "Signup failed";
+
+            setError(msg);
         }
     };
 
 
     return (
         <div className="auth-container">
-             <div className="plugbook-logo">
-                        
-                        <span>PlugBook</span>
-                    </div>
+            <div className="plugbook-logo">
+
+                <span>PlugBook</span>
+            </div>
 
             {/* LEFT SECTION (DESKTOP ONLY) */}
             <div className="left-section">
                 <div className="left-content">
-                     <div className="bogo">
-                     
+                    <div className="bogo">
+
                         <span>PlugBook</span>
                     </div>
 
@@ -86,15 +91,19 @@ export default function SignUpPage() {
 
                         <div className="input-group">
                             <label>Email Address</label>
-                            <input type="email" name="email" placeholder="Enter your email address" />
+                            <input type="email"  onChange={() => setError("")} name="email" placeholder="Enter your email address" />
                         </div>
 
                         <div className="input-group">
                             <label>Password</label>
-                            <input type="password" name="password" placeholder="Create a password" />
+                            <input type="password"  onChange={() => setError("")} name="password" placeholder="Create a password" />
                         </div>
 
-                        
+                        {error && (
+                            <div className="mb-3 p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
+                                {error}
+                            </div>
+                        )}
 
                         <button type="submit" className="signup-btn">Sign Up </button>
                     </form>
@@ -116,7 +125,7 @@ export default function SignUpPage() {
                     </div>
 
                     <p className="switch">
-                        Already have an account? 
+                        Already have an account?
                         <Link className="bold" to='/login' >Sign in</Link>
                     </p>
                 </div>

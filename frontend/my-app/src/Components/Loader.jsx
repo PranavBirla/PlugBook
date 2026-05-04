@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import FloatingIcons from "../Components/FloatingIcons";
+import BgIcons from "../Components/BgIcons";
 
 
 export default function PremiumLoader() {
@@ -70,7 +70,7 @@ export default function PremiumLoader() {
     return (
         <div style={styles.container}>
 
-            <FloatingIcons />  
+            <BgIcons />  
 
             <div ref={orbRef} style={styles.orb} >
                 {particles.map((p) => (
@@ -127,7 +127,6 @@ const styles =
 {
     container: {
         height: "100vh",
-        background: "#ffffff",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
