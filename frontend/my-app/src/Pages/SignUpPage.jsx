@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/signup.css";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import API from "../api/axios";
 import { ShieldCheck } from 'lucide-react';
 import { MoveRight } from 'lucide-react'
 export default function SignUpPage() {
@@ -16,7 +16,7 @@ export default function SignUpPage() {
             const email = e.target.email.value;
             const password = e.target.password.value;
 
-            const response = await axios.post("http://localhost:3000/api/auth/user/register", {
+            const response = await API.post("/api/auth/user/register", {
                 fullName,
                 email,
                 password

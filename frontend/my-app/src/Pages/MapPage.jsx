@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
     MapContainer,
     TileLayer,
@@ -11,13 +11,13 @@ import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import "../utils/fixLeafletIcon";
 import { getNearbyStations } from "../services/api";
 import { useMap } from "react-leaflet";
-import StationPopup from "../Components/StationPopUp";
 import Loader from "../Components/Loader";
 import PositionNotFound from "../Components/PositionNotFound";
 import RoutePath from "../Components/RoutePath";
-import { userIcon, stationIcon } from "../utils/mapIcons";
+import { userIcon, stationIcon, selectedStationIcon } from "../utils/mapIcons";
 import Navbar from "../Components/Navbar";
 import Top from "../Components/Top";
+import StationCard from "../Components/StationCard";
 
 
 
@@ -51,6 +51,17 @@ export default function MapPage() {
         });
     };
 
+    const selectedRef = useRef(null);
+
+    useEffect(() => {
+        if (selectedRef.current) {
+            selectedRef.current.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
+    }, [selectedStation]);
+
     // GET USER LOCATION + FETCH STATIONS
     useEffect(() => {
 
@@ -60,22 +71,20 @@ export default function MapPage() {
             async (pos) => {
                 const lat = pos.coords.latitude;
                 const lng = pos.coords.longitude;
-                const accuracy = pos.coords.accuracy;
 
-                // ❌ ignore bad GPS readings
-                // if (accuracy > 200) return;
-
-                lastPosition = { lat, lng };
-                // ❌ ignore unrealistic jumps (> 200m instantly)
                 if (lastPosition) {
                     const distanceMeters =
                         Math.sqrt(
                             Math.pow(lat - lastPosition.lat, 2) +
                             Math.pow(lng - lastPosition.lng, 2)
-                        ) * 111000; // convert to meters
+                        ) * 111000;
 
                     if (distanceMeters > 200) return;
                 }
+
+                lastPosition = { lat, lng };
+
+                animateToPosition([lat, lng]);
 
 
 
@@ -90,7 +99,7 @@ export default function MapPage() {
                     } catch (err) {
                         console.error("API error:", err);
                     } finally {
-                        setLoading(false); //  ALWAYS runs
+                        setLoading(false);
                     }
                 }
             },
@@ -111,23 +120,6 @@ export default function MapPage() {
         );
     }, []);
 
-    // useEffect(() => {
-    //     const handleLocation = (data) => {
-    //         console.log("Live location:", data);
-
-    //         //  update user marker
-    //         setUsers((prev) => ({
-    //             ...prev,
-    //             [data.id]: { lat: data.lat, lng: data.lng },
-    //         }));
-    //     };
-
-    //     socket.on("receive-location", handleLocation);
-
-    //     return () => {
-    //         socket.off("receive-location", handleLocation);
-    //     };
-    // }, []);
 
     if (!navigator.geolocation) {
         alert("Geolocation not supported");
@@ -135,14 +127,6 @@ export default function MapPage() {
 
     if (loading) return <Loader />;
     if (!position) return <PositionNotFound />;
-
-    // style={{
-    //             height: "100vh",
-    //             borderRadius: "20px",
-    //             overflow: "hidden",
-    //             margin: "10px" // optional, gives spacing from edges
-    //         }}
-
 
     function RecenterMap({ position }) {
         const map = useMap();
@@ -157,60 +141,73 @@ export default function MapPage() {
     }
 
     return (
-        <div className="h-[90vh] rounded-2xl overflow-hidden m-2.5 md:h-[100vh]" >
+        <div className="h-screen flex flex-col">
+
             <Top />
 
-            <MapContainer
-                center={position}
-                zoom={14}
-                zoomControl={false}
-                scrollWheelZoom={true}
-                style={{ height: "100vh", width: "100%" }}
-            >
-                <TileLayer
-                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                />
+            <div className="flex flex-col lg:flex-row h-[calc(100vh-80px)]">
 
-                {position && (
-                    <Marker position={position} icon={userIcon}>
-                        <Popup>You are here</Popup>
-                    </Marker>
-                )}
-
-                {/* STATION MARKERS */}
-                {stations.map((station) => (
-                    <Marker
-                        key={station._id}
-                        position={[station.location.lat, station.location.lng]}
-                        icon={stationIcon}
-                        eventHandlers={{
-                            click: () => {
-                                console.log("Clicked station:", station);
-                                setSelectedStation(station);
-                            },
-                        }}
+                <div className="h-[55%] lg:h-full lg:w-[60%] relative">
+                    <MapContainer
+                        center={position}
+                        zoom={14}
+                        zoomControl={false}
+                        scrollWheelZoom={true}
+                        style={{ height: "100%", width: "100%" }}
                     >
-                        <Popup>
-                            <StationPopup station={station} />
-                        </Popup>
-                    </Marker>
+                        <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
 
-                ))}
+                        {position && (
+                            <Marker position={position} icon={userIcon} />
+                        )}
 
-                {/* RoutePath */}
-                {selectedStation && (
-                    <RoutePath
-                        from={position}
-                        to={[
-                            selectedStation.location.lat,
-                            selectedStation.location.lng,
-                        ]}
-                    />
-                )}
+                        {stations.map((station) => (
+                            <Marker
+                                key={station._id}
+                                position={[station.location.lat, station.location.lng]}
+                                icon={
+                                    selectedStation?._id === station._id
+                                        ? selectedStationIcon
+                                        : stationIcon
+                                }
+                                eventHandlers={{
+                                    click: () => {
+                                        setSelectedStation(station);
+                                    }
+                                }}
+                            />
+                        ))}
 
-                <RecenterMap position={position} />
+                        {selectedStation && (
+                            <RoutePath
+                                from={position}
+                                to={[
+                                    selectedStation.location.lat,
+                                    selectedStation.location.lng
+                                ]}
+                            />
+                        )}
 
-            </MapContainer>
+                        <RecenterMap position={position} />
+                    </MapContainer>
+                </div>
+
+                <div className="flex-1 lg:w-[40%] bg-white p-4 overflow-y-auto z-10">
+                    <h2 className="text-lg font-semibold mb-3">Nearest Stations</h2>
+
+                    {stations.map((station) => (
+                        <StationCard
+                            key={station._id}
+                            station={station}
+                            isSelected={selectedStation?._id === station._id}
+                            onSelect={() => setSelectedStation(station)}
+                            refProp={selectedStation?._id === station._id ? selectedRef : null}
+                        />
+                    ))}
+                </div>
+
+            </div>
+
             <Navbar />
         </div>
     );

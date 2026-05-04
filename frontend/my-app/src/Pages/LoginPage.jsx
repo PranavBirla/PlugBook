@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/signup.css";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import API from "../api/axios";
 import { ShieldCheck } from 'lucide-react';
 
 
@@ -16,8 +16,8 @@ export default function LoginPage() {
             const email = e.target.email.value;
             const password = e.target.password.value;
 
-            const response = await axios.post(
-                "http://localhost:3000/api/auth/user/login",
+            const response = await API.post(
+                "/api/auth/user/login",
                 {
                     email,
                     password

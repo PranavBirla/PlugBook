@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Bell } from 'lucide-react';
 import CardHome from '../Components/CardHome';
 import Navbar from '../Components/Navbar';
@@ -6,18 +6,40 @@ import { MoveRight } from 'lucide-react';
 import { CalendarCheck } from 'lucide-react';
 import { Plug } from 'lucide-react';
 import { Zap } from 'lucide-react';
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Top from "../Components/Top";
-import axios from "axios";
+import API from "../api/axios";
+
 
 const SlotsBooking = () => {
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const station = location.state?.station;
+    const stationIdFromState = station?._id;
+
+
+
+    useEffect(() => {
+        if (!station) {
+            navigate("/map");
+        }
+    }, [station, navigate]);
+
+
+
     const [formData, setFormData] = useState({
-        stationId: "69f50dcc4bf009da6712fcec",
+        stationId: stationIdFromState || "",
         chargerType: "",
         fromDate: "",
         toDate: "",
         fromTime: "",
         toTime: ""
     });
+
+    const [availability, setAvailability] = useState(null);
 
 
     const handleChange = (e) => {
@@ -37,6 +59,47 @@ const SlotsBooking = () => {
         });
         console.log(type);
     };
+
+
+    const fetchAvailability = async () => {
+        try {
+            const startDateTime = new Date(`${formData.fromDate}T${formData.fromTime}:00`);
+            const endDateTime = new Date(`${formData.toDate}T${formData.toTime}:00`);
+
+            const res = await API.get(
+                "/api/station/nearby-stations",
+                {
+                    params: {
+                        lat: station.location.lat,
+                        lng: station.location.lng,
+                        startTime: startDateTime.toISOString(),
+                        endTime: endDateTime.toISOString()
+                    }
+                }
+            );
+
+            // Find THIS station from response
+            const updatedStation = res.data.find(
+                (s) => s._id === station._id
+            );
+
+            setAvailability(updatedStation?.chargers);
+
+        } catch (err) {
+            console.error("Availability Error:", err);
+        }
+    };
+
+    useEffect(() => {
+        if (
+            formData.fromDate &&
+            formData.fromTime &&
+            formData.toDate &&
+            formData.toTime
+        ) {
+            fetchAvailability();
+        }
+    }, [formData.fromDate, formData.fromTime, formData.toDate, formData.toTime]);
 
 
     const handleSubmit = async (e) => {
@@ -62,8 +125,8 @@ const SlotsBooking = () => {
             const startTimeISO = startDateTime.toISOString();
             const endTimeISO = endDateTime.toISOString();
 
-            const res = await axios.post(
-                "http://localhost:3000/api/bookings/create",
+            const res = await API.post(
+                "/api/bookings/create",
                 {
                     stationId: formData.stationId,
                     chargerType: formData.chargerType,
@@ -92,6 +155,48 @@ const SlotsBooking = () => {
                     <div className='lg:hidden'>
                         <CardHome />
                     </div>
+                </div>
+
+                <div className="bg-white rounded-2xl p-4 mx-4 mt-3 shadow-sm">
+
+                    <h2 className="text-lg font-semibold">
+                        {station?.stationName}
+                    </h2>
+
+                    <p className="text-sm text-gray-500">
+                        {station?.distance !== undefined && (
+                            station.distance < 1
+                                ? `${(station.distance * 1000).toFixed(0)} m away`
+                                : `${station.distance.toFixed(2)} km away`
+                        )}
+                    </p>
+
+                    <div className="flex gap-4 mt-2 text-sm">
+
+                        <p>
+                            AC:
+                            <span className="text-green-500 font-semibold ml-1">
+                                {availability ? availability.AC.available : station?.chargers.AC.available}
+                            </span>
+                            / {station?.chargers.AC.total}
+                        </p>
+
+                        <p>
+                            DC:
+                            <span className="text-green-500 font-semibold ml-1">
+                                {availability ? availability.DC.available : station?.chargers.DC.available}
+                            </span>
+                            / {station?.chargers.DC.total}
+                        </p>
+
+                        {availability && (
+                            <p className="text-xs mt-2 text-gray-500">
+                                Showing availability for selected time
+                            </p>
+                        )}
+
+                    </div>
+
                 </div>
 
                 <div className='pb-10  lg:px-20 '>

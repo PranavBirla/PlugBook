@@ -7,6 +7,7 @@ import SignUpPage from '../Pages/SignUpPage'
 import MapPage from '../Pages/MapPage';
 import SlotsBooking from '../Pages/SlotsBooking'
 import TicketPage from '../Pages/TicketPage'
+import AvailabilityPage from '../Pages/AvailabilityPage'
 import Loader from "../Components/Loader"
 import LandingPage from "../Pages/LandingPage"
 import BgIcons from "../Components/BgIcons"
@@ -15,14 +16,15 @@ const AppRoutes = () => {
   return (
     
       <Routes>
+        <Route path="/" element={<LandingPage/>} /> 
         <Route path='/home' element={<Homepage/>}  />
         <Route path='/login' element={<LoginPage/>}  />
         <Route path='/register' element={<SignUpPage/>}  />
         <Route path="/map" element={<MapPage />} />
         <Route path="/slots" element={<SlotsBooking />} /> 
         <Route path="/tickets" element={<TicketPage/>} /> 
-        <Route path="/" element={<LandingPage/>} /> 
         <Route path="/bgicons" element={<BgIcons/>} /> 
+        <Route path="/availability" element={<AvailabilityPage/>} /> 
 
 
         <Route path="/loader" element={<Loader />} />

@@ -121,7 +121,7 @@ export default function LandingPageNew() {
 
                 {/* PURPLE BACKGROUND */}
                 <div className="purple-bg">
-                    <img src={logo} className="logo" />
+                    <img src={logo} className="logo1" />
                 </div>
 
                 {/* WHITE REVEAL LAYER */}
