@@ -13,3 +13,9 @@ export const stationIcon = new L.Icon({
     iconSize: [35, 35],
     iconAnchor: [17, 35],
 });
+
+export const selectedStationIcon = new L.Icon({
+    iconUrl: "selectedStationIcon.png",
+    iconSize: [55, 55],
+    iconAnchor: [17, 35],
+});

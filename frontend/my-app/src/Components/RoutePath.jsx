@@ -4,15 +4,12 @@ import L from "leaflet";
 import "leaflet-routing-machine";
 
 export default function RoutePath({ from, to }) {
-    const map = useMap(); // ✅ THIS replaces mapRef
+    const map = useMap(); 
+
 
     useEffect(() => {
-        if (!from || !to) return;
-
-        console.log("RoutePath running");
-        console.log("From:", from);
-        console.log("To:", to);
-
+        if (!map || !from || !to) return;
+    
         const routing = L.Routing.control({
             waypoints: [
                 L.latLng(from[0], from[1]),
@@ -20,17 +17,24 @@ export default function RoutePath({ from, to }) {
             ],
             lineOptions: {
                 styles: [
-                    { color: "#A29BFE", weight: 12, opacity: 0.5 }, // glow layer
-                    { color: "#895CE7", weight: 5, opacity: 1 }     // main route
+                    { color: "#A29BFE", weight: 12, opacity: 0.5 },
+                    { color: "#895CE7", weight: 5, opacity: 1 }
                 ]
             },
             addWaypoints: false,
             draggableWaypoints: false,
+            show: false,
             createMarker: () => null,
         }).addTo(map);
-
+    
         return () => {
-            map.removeControl(routing);
+            if (map && routing) {
+                try {
+                    map.removeControl(routing);
+                } catch (err) {
+                    console.log("Cleanup safe error:", err);
+                }
+            }
         };
     }, [map, from, to]);
 
