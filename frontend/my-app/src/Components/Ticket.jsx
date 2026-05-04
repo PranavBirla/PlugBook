@@ -8,14 +8,20 @@ import { Plug } from 'lucide-react';
 import { MoveRight } from 'lucide-react';
 
 
-const Ticket = () => {
+const Ticket = ({ booking }) => {
+    
+    if (!booking) {
+        return <p className="text-center mt-10">No booking data found</p>;
+    }
+
     return (
+
         <div className='relative '>
-              <div className="absolute bottom-16 left-[-2px] bg-white h-3 w-3 rounded-full   p-2">  </div>
-                <div className="absolute bottom-16 right-[-2px]  bg-white h-3 w-3 rounded-full  p-2"></div>
+            <div className="absolute bottom-16 left-[-2px] bg-white h-3 w-3 rounded-full   p-2">  </div>
+            <div className="absolute bottom-16 right-[-2px]  bg-white h-3 w-3 rounded-full  p-2"></div>
             <div className='bg-white h-fit w-89  flex flex-col justify-around items-center rounded-4xl '>
 
-              
+
 
 
                 <div className='bg-[#bda8ec91] text-black h-full w-full px-4 flex flex-col justify-around rounded-2xl'>
@@ -28,12 +34,12 @@ const Ticket = () => {
                     <div className='flex justify-between font-light'>
                         <div className='flex flex-col'>
                             <p className='text-gray-500 font-sans'>From</p>
-                            <h1 className='text-xl font-light'>5:30 PM</h1>
+                            <h1 className='text-xl font-light'>{new Date(booking?.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</h1>
                         </div>
                         <div className='flex items-center'><MoveRight strokeWidth={1} size={23} /></div>
                         <div>
                             <p className='text-[#9981ce] font-sans'>To</p>
-                            <h1 className='text-xl font-light'>6:34 PM</h1>
+                            <h1 className='text-xl font-light'>{new Date(booking?.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</h1>
                         </div>
                     </div>
 
@@ -51,21 +57,21 @@ const Ticket = () => {
                             <div><CalendarDays strokeWidth={1} size={18} /></div>
                             <div className='text-sm flex flex-col gap-2 items-center'>
                                 <p>Date</p>
-                                <p className='text-xs text-zinc-500' >24-04-2026</p>
+                                <p className='text-xs text-zinc-500' >{new Date(booking?.startTime).toLocaleDateString()}</p>
                             </div>
                         </div>
                         <div className='w-1/3 flex justify-center items-center gap-2 bg-[#bda8ec91]'>
                             <div><Clock strokeWidth={1} size={18} /></div>
                             <div className='text-sm flex flex-col gap-2 items-center'>
                                 <p>Time</p>
-                                <p className='text-xs text-zinc-500' >5:30 PM</p>
+                                <p className='text-xs text-zinc-500' >{new Date(booking?.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                             </div>
                         </div>
                         <div className='w-1/3 flex justify-center items-center gap-2 bg-[#bda8ec91]'>
                             <div><Plug strokeWidth={1} size={18} /></div>
                             <div className='text-sm flex flex-col gap-2 items-center'>
                                 <p>Charger</p>
-                                <p className='text-xs text-zinc-500' >AC</p>
+                                <p className='text-xs text-zinc-500' >{booking?.chargerType}</p>
                             </div>
                         </div>
 
@@ -87,7 +93,7 @@ const Ticket = () => {
 
             <div className='bg-[#895CE7] p-4 flex justify-between rounded-2xl'>
                 <div><p className='text-xs text-zinc-300'>Booking ID</p>
-                    <p className='text-sm '>PB-638-263-78</p>
+                    <p className='text-sm '>{booking?._id}</p>
                 </div>
                 <div><p className='text-xs text-zinc-300'>Total fare</p>
                     <p className='text-m text-green-600'>$ 12</p>
