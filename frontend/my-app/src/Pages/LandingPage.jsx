@@ -7,12 +7,18 @@ import logoDark from "../assets/plugbook-dark.png";
 import "../css/landingPage.css";
 import BgIcons from "../Components/BgIcons"
 import { Link } from 'react-router-dom'
+import SplitText from "../Components/SplitText";
+import CurvedLoop from "../Components/CurvedLoop";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPageNew() {
     const maskRef = useRef(null);
     const heroRef = useRef(null);
+
+    const handleAnimationComplete = () => {
+        console.log('All letters have animated!');
+    };
 
     useEffect(() => {
         gsap.set(".logoDark", {
@@ -38,7 +44,7 @@ export default function LandingPageNew() {
             opacity: 0,
             duration: 0.3,
         }, 0.2);
-        
+
         tl.set(".purple-bg", {
             display: "none",
         });
@@ -111,6 +117,16 @@ export default function LandingPageNew() {
             },
         });
 
+        gsap.to(".curved-section", {
+            y: -50,
+            scrollTrigger: {
+                trigger: ".curved-section",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1.8,
+            },
+        });
+
     }, []);
 
     return (
@@ -146,7 +162,7 @@ export default function LandingPageNew() {
                             </div>
                         </h2>
 
-                        
+
 
                         <Link to='/register' className="hero-btn">Get Started</Link>
 
@@ -155,10 +171,41 @@ export default function LandingPageNew() {
 
             </section>
 
+            {/* CURVED LOOP TRANSITION */}
+            <div className="curved-section">
+                <CurvedLoop
+                    marqueeText="EV CHARGING • FAST • SMART • AVAILABLE • "
+                    speed={1.5}
+                    curveAmount={0}
+                    interactive={true}
+                />
+            </div>
+
             {/* EXTRA SCROLL SPACE */}
             <section>
 
                 <div className="section-2">
+
+                    <div className="section-2">
+
+
+                        <SplitText
+                            text="Welcom! To PlugBook..."
+                            className="text-8xl font-semibold text-center"
+                            delay={50}
+                            duration={1.25}
+                            ease="power3.out"
+                            splitType="chars"
+                            from={{ opacity: 0, y: 40 }}
+                            to={{ opacity: 1, y: 0 }}
+                            threshold={0.1}
+                            rootMargin="-100px"
+                            textAlign="center"
+                            onLetterAnimationComplete={handleAnimationComplete}
+                            showCallback
+                        />
+
+                    </div>
 
                 </div>
 

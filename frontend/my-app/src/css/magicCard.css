@@ -1,0 +1,17 @@
+.card-glow {
+    position: relative;
+}
+
+.card-glow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+
+    background: radial-gradient(300px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+            rgba(132, 0, 255, calc(var(--glow-intensity, 0) * 0.6)),
+            transparent 60%);
+
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
