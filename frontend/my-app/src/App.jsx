@@ -7,6 +7,7 @@ import Lenis from '@studio-freight/lenis'
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CanvasCursor from "./Components/CanvasCursor";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,7 +17,7 @@ function App() {
   useEffect(() => {
     const lenis = new Lenis({
       smooth: true,
-      lerp: 0.70,
+      lerp: 0.07,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
@@ -29,7 +30,12 @@ function App() {
 
   }, []);
 
-  return <AppRoutes />;
+  return (
+    <>
+      <CanvasCursor />
+      <AppRoutes />;
+    </>
+  );
 }
 
 
