@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Top from "../Components/Top";
 import API from "../api/axios";
-
+import { MapPinCheckInside } from 'lucide-react';
 
 const SlotsBooking = () => {
 
@@ -30,7 +30,7 @@ const SlotsBooking = () => {
 
 
 
-    
+
     const [formData, setFormData] = useState({
         stationId: stationIdFromState || "",
         chargerType: "",
@@ -140,7 +140,7 @@ const SlotsBooking = () => {
                 }
             );
             navigate("/tickets", {
-                
+
                 state: { bookingData: res.data },
             });
 
@@ -155,21 +155,22 @@ const SlotsBooking = () => {
     return (
         <div className=' '>
             <Top />
-            <div className='w-full h-full flex flex-col lg:flex lg:flex-row'>
-                <div className='w-full lg:w-1/2'>
+            <div className='w-full h-full flex flex-col lg:flex lg:flex-row justify-end'>
+                <div className='w-full lg:w-1/2 lg:hidden'>
 
                     <div className='lg:hidden'>
                         <CardHome />
                     </div>
                 </div>
 
-                <div className="bg-white rounded-2xl p-4 mx-4 mt-3 shadow-sm">
-
+                <div className="bg-white rounded-2xl p-4 mx-4 mt-3 shadow-sm md:mx-12  lg:flex lg:flex-col lg:gap-4 lg:px-10 lg:mx-40 lg:h-2/3">
+                    <div className="hidden lg:block lg:w-full"><img className="rounded-2xl" src="public\img-car-home.png" alt="" /></div>
                     <h2 className="text-lg font-semibold">
                         {station?.stationName}
                     </h2>
 
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 flex">
+                        <MapPinCheckInside size={20} />
                         {station?.distance !== undefined && (
                             station.distance < 1
                                 ? `${(station.distance * 1000).toFixed(0)} m away`
@@ -205,11 +206,11 @@ const SlotsBooking = () => {
 
                 </div>
 
-                <div className='pb-10  lg:px-20 '>
+                <div className='  '>
                     <form onSubmit={handleSubmit}
-                        className=" bg-white flex items-center justify-center border border-gray-200 rounded-2xl mx-4 md:mx-12 p-4 mt-3 lg:p-11 lg:h-130">
+                        className=" bg-white flex items-center justify-center border border-gray-200 rounded-2xl mx-4 md:mx-12 p-4 mt-3  lg:h-2/3">
 
-                        <div className="w-full md bg-white rounded-2xl p-1 flex flex-col gap-4 md:flex-row md:justify-center md:gap-20 lg:justify-center lg:flex-col  ">
+                        <div className="w-full h-full md bg-white rounded-2xl p-10 flex flex-col gap-4 md:flex-row md:justify-center md:gap-20 lg:justify-center lg:flex-col  ">
 
                             <div id="leftsection">
                                 <div>

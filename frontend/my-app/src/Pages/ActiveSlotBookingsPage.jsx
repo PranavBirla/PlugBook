@@ -30,10 +30,10 @@ const ActiveSlotBookings = () => {
 
 
   return (
-    <div className='w-full'>
-      <Navtop />
+    <div className='w-full '>
+   <Top/>
 
-      <div className='flex flex-col justify-center lg:w-4/5 m-auto'>
+      <div className='mx-2 flex flex-col items-center justify-center lg:w-4/5 lg:m-auto'>
 
         {bookings.length === 0 ? (
           <p className="text-center mt-10 text-gray-500">

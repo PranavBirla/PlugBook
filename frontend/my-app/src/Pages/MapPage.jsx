@@ -141,7 +141,7 @@ export default function MapPage() {
     }
 
     return (
-        <div className="h-screen flex flex-col">
+        <div className="h-screen flex flex-col relative">
 
             <Top />
 
@@ -208,7 +208,7 @@ export default function MapPage() {
 
             </div>
 
-            <Navbar />
+            <div className="fixed bottom-0 left-0 w-full z-[1000]"><Navbar /></div>
         </div>
     );
 }

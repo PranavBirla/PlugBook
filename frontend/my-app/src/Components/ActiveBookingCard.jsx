@@ -33,26 +33,24 @@ const ActiveBookingCard = ({ booking }) => {
 
 
   return (
-    <div onClick={handleOpenTicket} className='py-3 px-2 m-4 sm:p-4 md:mx-30 rounded-3xl text-white bg-black border-purple-300 border-2 w-full fit flex gap-4 sm:gap-5 md:gap-7 items-center   xl:mx-20'>
-      <div className='h-22 w-28 overflow-hidden rounded-3xl md:h-30 md:w-35 '>
-        <img className='w-full h-full' src="public\selectedStationIcon.png" alt="" />
+    <div onClick={handleOpenTicket} className='py-3 px-2 mx-1 sm:p-4  md:mx-30 rounded-3xl text-black bg-white shadow-[0_0_15px_rgba(0,0,0,0.2)]  w-full fit flex gap-4 sm:gap-5 md:gap-7 items-center   xl:mx-20'>
+      <div className='h-22 w-30 overflow-hidden rounded-3xl md:h-30 md:w-35 '>
+        <img className='w-full h-full' src="public\img-car-home.png" alt="" />
 
       </div>
       <div className='gap-1 flex flex-col sm:gap-2   w-full'>
-      <h2 className="text-sm">{booking.station?.stationName}</h2>
-        <div className='flex justify-between md:mx-4 '>
+      
+        <div className='flex justify-between items-center '>
+          <h2 className="text-xs md:text-sm font-medium">{booking.station?.stationName}</h2>
           <div className={`text-xs px-2 py-1 rounded-xl w-fit 
                   ${status === "Ongoing" ? "bg-green-200 text-green-600" : "bg-gray-200 text-gray-600"}
                 `}>
             {status}
           </div>
-          <div>
-            {/* <Link to="/tickets" ><ChevronRight /></Link> */}
-
-          </div>
+          
         </div>
 
-        <div className=' mx-2 text-lg font-light flex justify-between md:justify-center md:gap-25 lg:gap:35'>
+        <div className=' mx-2 text-sm  md:text-lg font-light flex justify-between md:justify-center md:gap-25 lg:gap:35'>
           <div className=''>
 
             <h1 className=' '>{new Date(booking.startTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</h1>
@@ -66,26 +64,26 @@ const ActiveBookingCard = ({ booking }) => {
 
         </div>
 
-        <div className='w-full flex my-4 bg-black gap-[1.5px] '>
-          <div className='w-1/3 flex justify-center items-center gap-1 bg-black '>
+        <div className='w-full flex my-1 bg-gray-400 gap-[1.5px] '>
+          <div className='w-1/3 flex justify-center items-center gap-1 bg-white '>
             <div><CalendarDays strokeWidth={1} size={18} /></div>
             <div className='text-sm flex flex-col gap-2 items-center'>
 
-              <p className='text-xs text-zinc-400' >{new Date(booking.startTime).toLocaleDateString()}</p>
+              <p className='text-xs font-normal' >{new Date(booking.startTime).toLocaleDateString()}</p>
             </div>
           </div>
-          <div className='w-1/3 flex justify-center items-center gap-2 bg-black'>
+          <div className='w-1/3 flex justify-center items-center gap-1 bg-white'>
             <div><Clock strokeWidth={1} size={18} /></div>
             <div className='text-sm flex flex-col gap-2 items-center'>
 
-              <p className='text-xs text-zinc-400' >{new Date(booking.startTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
+              <p className='text-xs font-normal' >{new Date(booking.startTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
             </div>
           </div>
-          <div className='w-1/3 flex justify-center items-center gap-2 bg-black'>
+          <div className='w-1/3 flex justify-center items-center gap-1 bg-white'>
             <div><Plug strokeWidth={1} size={18} /></div>
             <div className='text-sm flex flex-col gap-2 items-center'>
 
-              <p className='text-xs text-zinc-400' >{booking.chargerType}</p>
+              <p className='text-xs font-normal' >{booking.chargerType}</p>
             </div>
           </div>
 
