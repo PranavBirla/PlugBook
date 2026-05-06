@@ -18,9 +18,9 @@ const Homepage = () => {
           <CardHome />
         </div>
         <div className='hidden md:block'>
-          <MagicCard>
+          {/* <MagicCard> */}
             <CardDekstop />
-          </MagicCard>
+          {/* </MagicCard> */}
         </div>
         <IconSet />
         <div className=' flex items-center text-xl mx-4 font-medium  md:text-2xl sm:mx-8 md:mx-10 lg:text-3xl lg:mx-12 '>
