@@ -16,19 +16,30 @@ const TicketPage = () => {
 
   // final booking object
   const booking = bookingFromCreate || bookingFromCard;
+return (
+  <div className='relative min-h-screen overflow-hidden'>
+  
+  <Top />
 
-  return (
-    <div>
-      <Top />
-      <div>
-        <div className='m-4 text-2xl text-zinc-700 font-black'>MY Ticket</div>
+  {/* Background image behind lower ticket area */}
+  
 
-        <div className='flex justify-center'><Ticket booking={booking} /></div>
-      </div>
-
-      <Navbar />
+  {/* Content */}
+  <div className='relative z-10'>
+    
+    <div className='m-4 text-2xl text-zinc-700 font-black shadow-2xl'>
+      MY Ticket
     </div>
-  )
+
+    <div className='flex justify-center mt-8'>
+      <Ticket booking={booking} />
+    </div>
+
+  </div>
+
+  <Navbar />
+</div>
+)
 }
 
 export default TicketPage

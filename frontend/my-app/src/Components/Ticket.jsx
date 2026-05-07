@@ -16,15 +16,15 @@ const Ticket = ({ booking }) => {
 
     return (
 
-        <div className='relative '>
-            <div className="absolute bottom-16 left-[-2px] bg-white h-3 w-3 rounded-full   p-2">  </div>
-            <div className="absolute bottom-16 right-[-2px]  bg-white h-3 w-3 rounded-full  p-2"></div>
-            <div className='bg-white h-fit w-89  flex flex-col justify-around items-center rounded-4xl '>
+        <div className='relative w-89 bg-white p-3 flex justify-center items-center flex-col rounded-2xl'>
+            <div className="absolute top-53 left-[2px] bg-white h-6 w-6 rounded-full   p-2">  </div>
+            <div className="absolute top-53 right-[2px]  bg-white h-6 w-6 rounded-full  p-2"></div>
+            <div className='bg-white h-fit w-full  flex flex-col justify-around items-center rounded-4xl '>
 
 
 
 
-                <div className='bg-[#bda8ec91] text-black h-full w-full px-4 flex flex-col justify-around rounded-2xl'>
+                <div className='bg-zinc-300 text-black h-full w-full px-4 flex flex-col justify-around rounded-2xl'>
                     <div className='flex justify-between text-m py-4 '>
                         <p className='flex justify-center items-center gap-1'>Plugbook<TicketCheck strokeWidth={1} size={25} /></p>
                         <p className='text-green-400 bg-gray-200 px-2 py-1 rounded-2xl' >upcoming</p>
@@ -52,22 +52,22 @@ const Ticket = ({ booking }) => {
 
                     </div>
 
-                    <div className='w-full flex my-4 bg-white gap-[1.5px] sh'>
-                        <div className='w-1/3 flex justify-center items-center gap-2 bg-[#bda8ec91] '>
+                    <div className='w-full flex my-4  gap-[1.5px] sh'>
+                        <div className='w-1/3 flex justify-center items-center gap-2  '>
                             <div><CalendarDays strokeWidth={1} size={18} /></div>
                             <div className='text-sm flex flex-col gap-2 items-center'>
                                 <p>Date</p>
                                 <p className='text-xs text-zinc-500' >{new Date(booking?.startTime).toLocaleDateString()}</p>
                             </div>
                         </div>
-                        <div className='w-1/3 flex justify-center items-center gap-2 bg-[#bda8ec91]'>
+                        <div className='w-1/3 flex justify-center items-center gap-2 '>
                             <div><Clock strokeWidth={1} size={18} /></div>
                             <div className='text-sm flex flex-col gap-2 items-center'>
                                 <p>Time</p>
                                 <p className='text-xs text-zinc-500' >{new Date(booking?.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                             </div>
                         </div>
-                        <div className='w-1/3 flex justify-center items-center gap-2 bg-[#bda8ec91]'>
+                        <div className='w-1/3 flex justify-center items-center gap-2 '>
                             <div><Plug strokeWidth={1} size={18} /></div>
                             <div className='text-sm flex flex-col gap-2 items-center'>
                                 <p>Charger</p>
@@ -88,15 +88,15 @@ const Ticket = ({ booking }) => {
 
             </div>
 
-            <div className="border-t-2 border-dashed border-gray-400 mx-4 flex justify-center items-center relative "></div>
+            <div className="border-t-2 border-dashed border-gray-900 mx-4 flex justify-center items-center relative "></div>
 
 
-            <div className='bg-[#895CE7] p-4 flex justify-between rounded-2xl'>
-                <div><p className='text-xs text-zinc-300'>Booking ID</p>
-                    <p className='text-sm '>{booking?._id}</p>
+            <div className='bg-gray-600 p-4 flex flex-col justify-between rounded-2xl w-full'>
+                <div ><p className='text-sm text-zinc-500'>Booking ID :</p>
+                    <p className='text-xs '>{booking?._id}</p>
                 </div>
-                <div><p className='text-xs text-zinc-300'>Total fare</p>
-                    <p className='text-m text-green-600'>$ 12</p>
+                <div className='w-2/3 m-auto'>
+                    <img src="public\dummy barcode.png" alt="" />
                 </div>
 
             </div>

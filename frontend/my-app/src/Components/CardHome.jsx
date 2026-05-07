@@ -13,16 +13,15 @@ const CardHome = () => {
         <div className="absolute -top-10 -left-10 w-40 h-40 bg-purple-300/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-52 h-52 bg-indigo-300/20 rounded-full blur-3xl"></div>
 
-        {/* car image */}
-        <div className="absolute right-0 bottom-0 h-full flex items-end justify-end pointer-events-none">
+        <div className=" absolute right-0 bottom-0 h-full flex items-end justify-end pointer-events-none">
           <img
-            src="public\Photopea.png"
+            src="public\img2.png"
             alt="EV"
-            className="h-[82%] sm:h-[90%] md:h-[95%] w-auto object-contain drop-shadow-lg"
+            className=" object-cover drop-shadow-lg"
           />
         </div>
 
-        {/* content */}
+       
         <div className='relative z-10 w-45 m-4 text-xl font-medium flex flex-col gap-4 
         sm:text-2xl sm:w-55 
         md:text-3xl md:w-70 md:m-8 
