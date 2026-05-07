@@ -8,10 +8,12 @@ import OfferCardSet from '../Components/OfferCardSet';
 import Top from '../Components/Top';
 import CardDekstop from '../Components/CardDekstop';
 import MagicCard from "../Components/MagicCard";
+import BgIcons from '../Components/BgIcons';
 
 const Homepage = () => {
   return (
     <div className='relative '>
+      {/* <BgIcons/> */}
       <div className="pb-20 md:pb-0">
         <Top />
         <div className="md:hidden">

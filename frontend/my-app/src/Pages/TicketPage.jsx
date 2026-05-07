@@ -2,6 +2,7 @@ import React from 'react'
 import Ticket from '../Components/Ticket'
 import Navbar from '../Components/Navbar'
 import Top from '../Components/Top'
+import BgIcons from "../Components/BgIcons"
 
 
 import { useLocation } from "react-router-dom";

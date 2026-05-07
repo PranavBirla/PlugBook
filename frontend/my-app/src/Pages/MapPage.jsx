@@ -18,6 +18,7 @@ import { userIcon, stationIcon, selectedStationIcon } from "../utils/mapIcons";
 import Navbar from "../Components/Navbar";
 import Top from "../Components/Top";
 import StationCard from "../Components/StationCard";
+import BgIcons from "../Components/BgIcons";
 
 
 
@@ -142,18 +143,18 @@ export default function MapPage() {
 
     return (
         <div className="h-screen flex flex-col relative">
-
+            <BgIcons/>
             <Top />
 
             <div className="flex flex-col lg:flex-row h-[calc(100vh-80px)]">
 
-                <div className="h-[55%] lg:h-full lg:w-[60%] relative">
+                <div className="h-[45%] lg:h-[85%] mt-14 ml-4 lg:w-[60%] relative rounded-2xl overflow-hidden">
                     <MapContainer
                         center={position}
                         zoom={14}
                         zoomControl={false}
                         scrollWheelZoom={true}
-                        style={{ height: "100%", width: "100%" }}
+                        style={{ height: "100%", width: "100%", border: "2px" }}
                     >
                         <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
 
@@ -192,7 +193,7 @@ export default function MapPage() {
                     </MapContainer>
                 </div>
 
-                <div className="flex-1 lg:w-[40%] bg-white p-4 overflow-y-auto z-10">
+                <div className="flex-1 lg:w-[40%] bg-[#EADFEF] p-4 overflow-y-auto z-10">
                     <h2 className="text-lg font-semibold mb-3">Nearest Stations</h2>
 
                     {stations.map((station) => (
@@ -208,7 +209,7 @@ export default function MapPage() {
 
             </div>
 
-            <div className="fixed bottom-0 left-0 w-full z-[1000]"><Navbar /></div>
+            <div className="fixed bottom-0 left-0 w-full z-[1000] md:hidden "><Navbar /></div>
         </div>
     );
 }

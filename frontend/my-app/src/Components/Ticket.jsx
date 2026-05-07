@@ -8,15 +8,31 @@ import { Plug } from 'lucide-react';
 import { MoveRight } from 'lucide-react';
 
 
+
 const Ticket = ({ booking }) => {
-    
+
+    const now = new Date();
+    const start = new Date(booking.startTime);
+    const end = new Date(booking.endTime);
+
     if (!booking) {
         return <p className="text-center mt-10">No booking data found</p>;
+    }
+
+    let status = ""
+
+    if (now < start) {
+        status = "Upcoming";
+    } else if (now >= start && now <= end) {
+        status = "Ongoing";
+    } else {
+        status = "Expired"
     }
 
     return (
 
         <div className='relative '>
+
             <div className="absolute bottom-16 left-[-2px] bg-white h-3 w-3 rounded-full   p-2">  </div>
             <div className="absolute bottom-16 right-[-2px]  bg-white h-3 w-3 rounded-full  p-2"></div>
             <div className='bg-white h-fit w-89  flex flex-col justify-around items-center rounded-4xl '>
@@ -27,7 +43,11 @@ const Ticket = ({ booking }) => {
                 <div className='bg-[#bda8ec91] text-black h-full w-full px-4 flex flex-col justify-around rounded-2xl'>
                     <div className='flex justify-between text-m py-4 '>
                         <p className='flex justify-center items-center gap-1'>Plugbook<TicketCheck strokeWidth={1} size={25} /></p>
-                        <p className='text-green-400 bg-gray-200 px-2 py-1 rounded-2xl' >upcoming</p>
+                        <div className={`text-xs px-2 py-1 rounded-xl w-fit 
+                  ${status === "Ongoing" ? "bg-green-200 text-green-600" : status === "Upcoming" ? "bg-blue-200 text-blue-600" : "bg-gray-200 text-gray-600"}
+                `}>
+                            {status}
+                        </div>
                         {/* <p className='text-gray-500 bg-gray-200 px-2 py-1 rounded-2xl' >Expired</p> */}
 
                     </div>

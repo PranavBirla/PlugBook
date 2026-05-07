@@ -1,10 +1,18 @@
 @import "tailwindcss";
 
+* {
+    cursor: url('./PurpleCursor.png') 0 0, auto;
+}
+
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     height: 100%;
     scroll-behavior: auto;
-    cursor: none;
+}
+
+button,
+a {
+    cursor: url('/PurpleCursor.png') 4 4, pointer;
 }
 
 .custom-cursor {
@@ -19,6 +27,7 @@ body {
     transform: translate(-50%, -50%);
     /* Centers the div on the mouse tip */
 }
+
 
 
 

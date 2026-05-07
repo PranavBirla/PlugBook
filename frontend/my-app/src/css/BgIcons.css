@@ -1,4 +1,11 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .bg-wrapper {
+    margin: 0;
     position: absolute;
     top: 0;
     left: 0;
@@ -7,7 +14,7 @@
 
     background: #EADFEF;
 
-    z-index: 0;
+    z-index: -1;
 }
 
 /* icons */
