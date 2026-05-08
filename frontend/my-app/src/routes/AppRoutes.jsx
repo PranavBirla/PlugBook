@@ -13,6 +13,7 @@ import LandingPage from "../Pages/LandingPage"
 import BgIcons from "../Components/BgIcons"
 import ActiveSlotBookings from '../Pages/ActiveSlotBookingsPage'
 import HistorySlotBookings from '../Pages/HistorySlotBookings'
+import UserProfilePage from "../Pages/UserProfilePage"
 
 const AppRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const AppRoutes = () => {
         <Route path="/availability" element={<AvailabilityPage/>} /> 
         <Route path="/activebooking" element={<ActiveSlotBookings/>} /> 
         <Route path="/historybooking" element={<HistorySlotBookings/>} /> 
+        <Route path="/user" element={<UserProfilePage/>} /> 
 
         <Route path="/loader" element={<Loader />} />
       </Routes>

@@ -1,72 +1,313 @@
-import React from 'react'
-import { MoveRight } from 'lucide-react';
-import { Clock } from 'lucide-react';
-import { EvCharger } from 'lucide-react';
-import { TicketCheck } from 'lucide-react';
-import { CalendarDays } from 'lucide-react';
-import { Plug } from 'lucide-react';
-import { ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { MoveRight, CalendarDays, ChevronRight } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 
 const ActiveBookingCard = ({ booking }) => {
 
-  const now = new Date();
-  const start = new Date(booking.startTime);
-  const end = new Date(booking.endTime);
+    const now = new Date();
+    const start = new Date(booking.startTime);
+    const end = new Date(booking.endTime);
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const handleOpenTicket = () => {
-    navigate("/tickets", {
-      state: { booking }
-    });
-  };
+    const handleOpenTicket = () => {
+        navigate("/tickets", {
+            state: { booking }
+        });
+    };
 
-  let status = "";
+    let status = "";
 
-  if (now < start) {
-    status = "Upcoming";
-  } else if (now >= start && now <= end) {
-    status = "Ongoing";
-  }
+    if (now < start) {
+        status = "Upcoming";
+    } else if (now >= start && now <= end) {
+        status = "Ongoing";
+    }
 
+    return (
 
-  return (
-    <div onClick={handleOpenTicket} className=' flex flex-col mx-4 bg-white relative rounded-4xl overflow-hidden shadow-[0_0_20px_0_rgba(0,0,0,0.2)] sm:mx-12 md:flex-row'>
-      <div className='md:w-1/3'><img src="public\img1.png" alt="" /></div>
+        <div
+            onClick={handleOpenTicket}
+            className="
+                booking-card
+                relative
+                overflow-hidden
+                rounded-[32px]
 
-      <div className='flex justify-center md:mx-20 md:w-2/3 md:justify-around'>
-        <div className='flex justify-between items-center py-3 px-5 absolute bottom-0  my-2 rounded-4xl bg-white/[0.90] w-12/13 md:static md:gap-4'>
-          <div className='flex flex-col gap-1 md:gap-4 '>
-            <h2 className="text-xs   font-medium md:text-lg">{booking.station?.stationName}</h2>
-            <div className='text-zinc-600 flex justify-between font-light'>
+                min-h-[260px]
+                md:min-h-[290px]
 
+                p-5
+                md:p-7
 
-              <h1 className='text-xs  md:text-sm '>{new Date(booking?.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</h1>
+                flex
+                flex-col
+                justify-between
 
-              <div className='flex items-center'><MoveRight strokeWidth={1} size={18} /></div>
+                cursor-pointer
+                group
+            "
+            style={{
+                backgroundImage:
+                    "url('/booking-bg.jpg')"
+            }}
+        >
 
+            {/* IMAGE OVERLAY */}
 
-              <h1 className='text-xs md:text-sm'>{new Date(booking?.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</h1>
+            <div className="
+                absolute
+                inset-0
+                bg-gradient-to-br
+                from-black/80
+                via-black/65
+                to-[#895CE7]/30
+            " />
+
+            {/* GLASS LAYER */}
+
+            <div className="
+                absolute
+                inset-0
+                backdrop-blur-[2px]
+            " />
+
+            {/* PURPLE GLOW */}
+
+            <div className="
+                absolute
+                -bottom-10
+                -right-10
+                w-52
+                h-52
+                bg-[#895CE7]/20
+                blur-[90px]
+                opacity-0
+                group-hover:opacity-100
+                transition-all
+                duration-500
+            " />
+
+            {/* CONTENT */}
+
+            <div className="relative z-10 flex flex-col h-full">
+
+                {/* TOP */}
+
+                <div className="flex items-start justify-between gap-4">
+
+                    {/* TIME */}
+
+                    <div>
+
+                        <div className="
+                            flex
+                            items-center
+                            gap-3
+                            text-white
+                        ">
+
+                            <h1 className="
+                                text-3xl
+                                md:text-5xl
+                                font-black
+                                tracking-tight
+                            ">
+                                {new Date(booking?.startTime).toLocaleTimeString([], {
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                })}
+                            </h1>
+
+                            <MoveRight
+                                strokeWidth={1.5}
+                                className="opacity-70"
+                            />
+
+                            <h1 className="
+                                text-3xl
+                                md:text-5xl
+                                font-black
+                                tracking-tight
+                            ">
+                                {new Date(booking?.endTime).toLocaleTimeString([], {
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                })}
+                            </h1>
+
+                        </div>
+
+                        {/* TIMELINE ACCENT */}
+
+                        <div className="
+                            mt-4
+                            w-24
+                            h-[3px]
+                            rounded-full
+                            bg-gradient-to-r
+                            from-[#895CE7]
+                            to-[#c9afff]
+                        " />
+
+                    </div>
+
+                    {/* STATUS PILL */}
+
+                    <div
+                        className={` px-4 py-2 rounded-full text-xs md:text-sm font-medium border backdrop-blur-xl shadow-lg whitespace-nowrap
+
+                            ${status === "Ongoing"
+                                ? "bg-green-400/10 text-green-300 border-green-300/20"
+                                : "bg-[#895CE7]/20 text-[#e7d8ff] border-[#caaeff]/20"
+                            }
+                        `}
+                    >
+                        {status}
+                    </div>
+
+                </div>
+
+                {/* MIDDLE */}
+
+                <div className="mt-8">
+
+                    {/* STATION NAME */}
+
+                    <h2 className="
+                        text-2xl
+                        md:text-4xl
+                        font-bold
+                        text-white
+                        leading-tight
+                        max-w-[90%]
+                    ">
+                        {booking.station?.stationName}
+                    </h2>
+
+                    {/* DATE */}
+
+                    <div className="
+                        mt-5
+                        flex
+                        items-center
+                        gap-2
+                        text-zinc-300
+                    ">
+
+                        <CalendarDays size={16} />
+
+                        <p className="
+                            text-sm
+                            md:text-base
+                        ">
+                            {new Date(booking?.startTime).toDateString()}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {/* BOTTOM */}
+
+                <div className="
+                    mt-8
+                    flex
+                    items-center
+                    justify-between
+                    gap-4
+                ">
+
+                    {/* GLASS PILL */}
+
+                    <div className="
+                        flex
+                        items-center
+                        gap-3
+
+                        px-5
+                        py-3
+
+                        rounded-full
+
+                        bg-white/10
+                        border
+                        border-white/10
+
+                        backdrop-blur-xl
+
+                        text-white
+                        text-sm
+                        md:text-base
+                    ">
+
+                        <div className="
+                            w-2
+                            h-2
+                            rounded-full
+                            bg-[#caaeff]
+                        " />
+
+                        Active Booking
+
+                    </div>
+
+                    {/* BUTTON */}
+
+                    <div className="
+                        flex
+                        items-center
+                        gap-2
+
+                        text-white
+
+                        group-hover:translate-x-1
+                        transition-all
+                        duration-300
+                    ">
+
+                        <span className="
+                            text-sm
+                            md:text-base
+                            font-medium
+                        ">
+                            Open Ticket
+                        </span>
+
+                        <ChevronRight size={18} />
+
+                    </div>
+
+                </div>
 
             </div>
-          </div>
-          <div className={`text-xs px-2 py-2 rounded-4xl w-fit md:text-sm lg:p-3
-                  ${status === "Ongoing" ? "bg-green-200 text-green-600" : "bg-gray-400 text-gray-700"}
-                `}>
-            {status}
-          </div>
+
+            <style jsx>{`
+
+                .booking-card {
+                    background-size: cover;
+                    background-position: center;
+                    transition:
+                        transform 0.45s ease,
+                        box-shadow 0.45s ease;
+                    box-shadow:
+                        0 10px 40px rgba(0,0,0,0.15);
+                }
+
+                .booking-card:hover {
+                    transform:
+                        translateY(-5px)
+                        scale(1.01);
+
+                    box-shadow:
+                        0 20px 60px rgba(137,92,231,0.28);
+                }
+
+            `}</style>
 
         </div>
-      </div>
 
+    );
+};
 
-
-
-
-    </div>
-  )
-}
-
-export default ActiveBookingCard
+export default ActiveBookingCard;

@@ -1,231 +1,558 @@
 import React from "react";
+
 import {
     MoveRight,
-    Clock,
     CalendarDays,
     Plug,
     ChevronRight,
     History,
+    Clock3,
 } from "lucide-react";
 
 import { useNavigate } from "react-router-dom";
 
 const HistoryBookingCard = ({ booking }) => {
+
     const navigate = useNavigate();
 
     const handleOpenTicket = () => {
+
         navigate("/tickets", {
             state: { booking },
         });
+
     };
 
     return (
+
         <div
             onClick={handleOpenTicket}
             className="
-        group
-        relative
-        overflow-hidden
-        cursor-pointer
-        py-3
-        px-3
-        sm:p-4
-        mx-1
-        md:mx-20
-        xl:mx-28
-        rounded-[28px]
-        border
-        border-zinc-300/50
-        bg-gradient-to-br
-        from-zinc-100
-        via-zinc-50
-        to-zinc-200/70
-        shadow-[0_6px_25px_rgba(0,0,0,0.08)]
-        hover:shadow-[0_10px_35px_rgba(0,0,0,0.12)]
-        transition-all
-        duration-300
-        hover:-translate-y-1
-      "
+                history-card
+                group
+
+                relative
+                overflow-hidden
+
+                cursor-pointer
+
+                rounded-[34px]
+
+                min-h-[260px]
+                md:min-h-[290px]
+
+                p-5
+                md:p-7
+
+                flex
+                flex-col
+                justify-between
+            "
+            style={{
+                backgroundImage:
+                    "url('/booking-bg-dead.jpg')"
+            }}
         >
-            {/* subtle glow */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-white/10 via-zinc-300/10 to-white/10"></div>
 
-            <div className="relative flex gap-4 sm:gap-5 md:gap-7 items-center">
+            {/* DEAD OVERLAY */}
 
-                {/* IMAGE */}
-                <div
-                    className="
-            h-24
-            w-28
-            md:h-32
-            md:w-36
-            overflow-hidden
-            rounded-3xl
-            bg-zinc-200
-            shrink-0
-          "
-                >
-                    <img
-                        className="
-              w-full
-              h-full
-              object-cover
-              grayscale-[25%]
-              opacity-90
-            "
-                        src="/img-car-home.png"
-                        alt=""
-                    />
-                </div>
+            <div className="
+                absolute
+                inset-0
 
-                {/* CONTENT */}
-                <div className="flex flex-col gap-2 w-full">
+                bg-gradient-to-br
+                from-zinc-400/10
+                via-zinc-200/15
+                to-zinc-400/10
+            " />
 
-                    {/* TOP */}
-                    <div className="flex justify-between items-start">
+            {/* GRAY GLASS LAYER */}
 
-                        <div>
-                            <h2 className="text-sm md:text-base font-semibold text-zinc-800">
-                                {booking.station?.stationName}
-                            </h2>
+            <div className="
+                absolute
+                inset-0
 
-                            <p className="text-xs text-zinc-500 mt-1 flex items-center gap-1">
-                                <History size={13} />
-                                Booking Completed
-                            </p>
-                        </div>
+                backdrop-blur-[3px]
 
-                        {/* STATUS */}
-                        <div
-                            className="
-                px-3
-                py-1
-                rounded-full
-                text-[11px]
-                md:text-xs
-                font-medium
-                bg-zinc-300/70
-                text-zinc-700
-                border
-                border-zinc-400/40
-                backdrop-blur-md
-              "
-                        >
-                            Expired
-                        </div>
-                    </div>
+                bg-zinc-100/10
+            " />
 
-                    {/* TIME SECTION */}
-                    <div
-                        className="
-              mx-1
-              md:mx-2
-              flex
-              justify-between
-              md:justify-center
-              md:gap-24
-              items-center
-            "
-                    >
-                        <div>
-                            <h1 className="text-lg md:text-2xl font-light text-zinc-800 tracking-wide">
+            {/* SUBTLE GLOW */}
+
+            <div className="
+                absolute
+                -bottom-16
+                -right-10
+
+                w-60
+                h-60
+
+                bg-zinc-400/10
+
+                blur-[100px]
+
+                opacity-0
+                group-hover:opacity-100
+
+                transition-all
+                duration-500
+            " />
+
+            {/* FADED NOISE EFFECT */}
+
+            <div className="
+                absolute
+                inset-0
+
+                opacity-[0.03]
+
+                bg-[radial-gradient(circle_at_center,white_1px,transparent_1px)]
+                bg-[size:18px_18px]
+            " />
+
+            {/* CONTENT */}
+
+            <div className="
+                relative
+                z-10
+
+                flex
+                flex-col
+                h-full
+            ">
+
+                {/* TOP */}
+
+                <div className="
+                    flex
+                    items-start
+                    justify-between
+                    gap-4
+                ">
+
+                    {/* TIME */}
+
+                    <div>
+
+                        <div className="
+                            flex
+                            items-center
+                            gap-3
+
+                            text-white
+                        ">
+
+                            <h1 className="
+                                text-3xl
+                                md:text-5xl
+
+                                font-black
+
+                                tracking-tight
+
+                                text-zinc-100
+                            ">
                                 {new Date(booking.startTime).toLocaleTimeString([], {
                                     hour: "2-digit",
                                     minute: "2-digit",
                                 })}
                             </h1>
-                        </div>
 
-                        <div className="flex items-center text-zinc-500">
-                            <MoveRight strokeWidth={1.5} size={24} />
-                        </div>
+                            <MoveRight
+                                strokeWidth={1.5}
+                                className="
+                                    text-zinc-500
+                                "
+                            />
 
-                        <div>
-                            <h1 className="text-lg md:text-2xl font-light text-zinc-800 tracking-wide">
+                            <h1 className="
+                                text-3xl
+                                md:text-5xl
+
+                                font-black
+
+                                tracking-tight
+
+                                text-zinc-400
+                            ">
                                 {new Date(booking.endTime).toLocaleTimeString([], {
                                     hour: "2-digit",
                                     minute: "2-digit",
                                 })}
                             </h1>
+
                         </div>
+
+                        {/* FADED TIMELINE */}
+
+                        <div className="
+                            mt-4
+
+                            w-24
+                            h-[3px]
+
+                            rounded-full
+
+                            bg-gradient-to-r
+                            from-zinc-500
+                            to-zinc-700
+                        " />
+
                     </div>
 
-                    {/* INFO STRIP */}
-                    <div
-                        className="
-              mt-1
-              w-full
-              grid
-              grid-cols-3
-              overflow-hidden
-              rounded-2xl
-              border
-              border-zinc-300/60
-              bg-white/50
-              backdrop-blur-xl
-            "
-                    >
-                        {/* DATE */}
-                        <div className="flex justify-center items-center gap-2 py-3 border-r border-zinc-300/50">
-                            <CalendarDays
-                                strokeWidth={1.5}
-                                size={17}
-                                className="text-zinc-600"
-                            />
+                    {/* STATUS */}
 
-                            <p className="text-[11px] md:text-xs text-zinc-700 font-medium">
-                                {new Date(booking.startTime).toLocaleDateString()}
-                            </p>
-                        </div>
+                    <div className="
+                        px-4
+                        py-2
 
-                        {/* START TIME */}
-                        <div className="flex justify-center items-center gap-2 py-3 border-r border-zinc-300/50">
-                            <Clock
-                                strokeWidth={1.5}
-                                size={17}
-                                className="text-zinc-600"
-                            />
+                        rounded-full
 
-                            <p className="text-[11px] md:text-xs text-zinc-700 font-medium">
-                                {new Date(booking.startTime).toLocaleTimeString([], {
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                })}
-                            </p>
-                        </div>
+                        text-xs
+                        md:text-sm
 
-                        {/* CHARGER */}
-                        <div className="flex justify-center items-center gap-2 py-3">
-                            <Plug
-                                strokeWidth={1.5}
-                                size={17}
-                                className="text-zinc-600"
-                            />
+                        font-medium
 
-                            <p className="text-[11px] md:text-xs text-zinc-700 font-medium">
-                                {booking.chargerType}
-                            </p>
-                        </div>
+                        border
+                        border-zinc-500/20
+
+                        bg-zinc-500/10
+
+                        text-zinc-300
+
+                        backdrop-blur-xl
+
+                        shadow-lg
+
+                        whitespace-nowrap
+                    ">
+                        Expired
                     </div>
+
                 </div>
 
-                {/* RIGHT ICON */}
-                <div
-                    className="
-            hidden
-            md:flex
-            items-center
-            justify-center
-            text-zinc-400
-            group-hover:text-zinc-700
-            transition-colors
-          "
-                >
-                    <ChevronRight strokeWidth={1.5} />
+                {/* MIDDLE */}
+
+                <div className="mt-8">
+
+                    {/* STATION */}
+
+                    <h2 className="
+                        text-2xl
+                        md:text-4xl
+
+                        font-bold
+
+                        text-zinc-200
+
+                        leading-tight
+
+                        max-w-[90%]
+                    ">
+                        {booking.station?.stationName}
+                    </h2>
+
+                    {/* SUBTEXT */}
+
+                    <div className="
+                        mt-5
+
+                        flex
+                        flex-wrap
+                        items-center
+                        gap-3
+
+                        text-zinc-400
+                    ">
+
+                        <div className="
+                            flex
+                            items-center
+                            gap-2
+                        ">
+                            <History size={15} />
+
+                            <p className="
+                                text-sm
+                                md:text-base
+                            ">
+                                Session Completed
+                            </p>
+                        </div>
+
+                        <div className="
+                            w-1
+                            h-1
+                            rounded-full
+                            bg-zinc-600
+                        " />
+
+                        <div className="
+                            flex
+                            items-center
+                            gap-2
+                        ">
+                            <Clock3 size={15} />
+
+                            <p className="
+                                text-sm
+                                md:text-base
+                            ">
+                                Archived Booking
+                            </p>
+                        </div>
+
+                    </div>
+
                 </div>
+
+                {/* INFO STRIP */}
+
+                <div className="
+                    mt-8
+
+                    grid
+                    grid-cols-3
+
+                    overflow-hidden
+
+                    rounded-[24px]
+
+                    border
+                    border-zinc-500/10
+
+                    bg-white/[0.04]
+
+                    backdrop-blur-2xl
+                ">
+
+                    {/* DATE */}
+
+                    <div className="
+                        flex
+                        flex-col
+                        items-center
+                        justify-center
+
+                        gap-2
+
+                        py-4
+
+                        border-r
+                        border-zinc-500/10
+                    ">
+
+                        <CalendarDays
+                            strokeWidth={1.5}
+                            size={17}
+                            className="text-zinc-400"
+                        />
+
+                        <p className="
+                            text-[11px]
+                            md:text-xs
+
+                            text-zinc-300
+
+                            font-medium
+
+                            text-center
+                        ">
+                            {new Date(booking.startTime).toLocaleDateString()}
+                        </p>
+
+                    </div>
+
+                    {/* START */}
+
+                    <div className="
+                        flex
+                        flex-col
+                        items-center
+                        justify-center
+
+                        gap-2
+
+                        py-4
+
+                        border-r
+                        border-zinc-500/10
+                    ">
+
+                        <Clock3
+                            strokeWidth={1.5}
+                            size={17}
+                            className="text-zinc-400"
+                        />
+
+                        <p className="
+                            text-[11px]
+                            md:text-xs
+
+                            text-zinc-300
+
+                            font-medium
+                        ">
+                            {new Date(booking.startTime).toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            })}
+                        </p>
+
+                    </div>
+
+                    {/* CHARGER */}
+
+                    <div className="
+                        flex
+                        flex-col
+                        items-center
+                        justify-center
+
+                        gap-2
+
+                        py-4
+                    ">
+
+                        <Plug
+                            strokeWidth={1.5}
+                            size={17}
+                            className="text-zinc-400"
+                        />
+
+                        <p className="
+                            text-[11px]
+                            md:text-xs
+
+                            text-zinc-300
+
+                            font-medium
+                        ">
+                            {booking.chargerType}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {/* BOTTOM */}
+
+                <div className="
+                    mt-6
+
+                    flex
+                    items-center
+                    justify-between
+                    gap-4
+                ">
+
+                    {/* GLASS PILL */}
+
+                    <div className="
+                        flex
+                        items-center
+                        gap-3
+
+                        px-5
+                        py-3
+
+                        rounded-full
+
+                        bg-zinc-400/10
+
+                        border
+                        border-zinc-500/10
+
+                        backdrop-blur-xl
+
+                        text-zinc-300
+
+                        text-sm
+                        md:text-base
+                    ">
+
+                        <div className="
+                            w-2
+                            h-2
+
+                            rounded-full
+
+                            bg-zinc-500
+                        " />
+
+                        Booking Archived
+
+                    </div>
+
+                    {/* ACTION */}
+
+                    <div className="
+                        flex
+                        items-center
+                        gap-2
+
+                        text-zinc-300
+
+                        group-hover:translate-x-1
+
+                        transition-all
+                        duration-300
+                    ">
+
+                        <span className="
+                            text-sm
+                            md:text-base
+
+                            font-medium
+                        ">
+                            View Ticket
+                        </span>
+
+                        <ChevronRight size={18} />
+
+                    </div>
+
+                </div>
+
             </div>
+
+            <style jsx>{`
+
+                .history-card {
+
+                    background-size: cover;
+                    background-position: center;
+
+                    transition:
+                        transform 0.45s ease,
+                        box-shadow 0.45s ease;
+
+                    box-shadow:
+                        0 10px 40px rgba(0,0,0,0.18);
+
+                    filter:
+                        saturate(0.65);
+                }
+
+                .history-card:hover {
+
+                    transform:
+                        translateY(-4px)
+                        scale(1.005);
+
+                    box-shadow:
+                        0 20px 60px rgba(0,0,0,0.3);
+
+                    filter:
+                        saturate(0.8);
+                }
+
+            `}</style>
+
         </div>
+
     );
+
 };
 
 export default HistoryBookingCard;
