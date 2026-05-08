@@ -134,7 +134,7 @@ const SplitText = ({
             wordWrap: 'break-word',
             willChange: 'transform, opacity'
         };
-        const classes = `split-parent overflow-hidden inline-block whitespace-normal ${className}`;
+        const classes = `split-parent overflow-hidden inline-block whitespace-normal text-white ${className}`;
         const Tag = tag || 'p';
 
         return (

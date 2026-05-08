@@ -25,11 +25,11 @@ const IconSet = () => {
     },
     {
       id: 2,
-      name: "My Booking",
+      name: "Availability",
       icon: <Ticket size={32} strokeWidth={1} />,
       lg: <Ticket size={40} strokeWidth={1} />,
-      def: "View and manage your booking.",
-      link: '/home'
+      def: "Check slots on preferred time.",
+      link: '/availability'
     },
     {
       id: 3,

@@ -77,13 +77,14 @@ export default function LandingPageNew() {
 
 
         // PARALLAX EFFECT
-        gsap.to(".bg-wrapper", {
-            y: 80,
+        gsap.to(".bg-image", {
+            y: 220,
+            ease: "none",
             scrollTrigger: {
                 trigger: document.body,
                 start: "top top",
                 end: "bottom top",
-                scrub: 1.5,
+                scrub: 1.2,
             },
         });
 
@@ -130,8 +131,46 @@ export default function LandingPageNew() {
     }, []);
 
     return (
-        <div className="body">
-            <BgIcons />
+        <div className=" body h-full opacity-90">
+            {/* <BgIcons /> */}
+
+            {/* PARALLAX BACKGROUND */}
+
+            <div className="bg-wrapper fixed inset-0 -z-10 overflow-hidden">
+
+                <div
+                    className="
+    bg-image
+    absolute
+    inset-0
+    bg-no-repeat
+"
+    style={{
+        backgroundImage: "url('/full-bg3.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+    }}
+                />
+
+                {/* DARK OVERLAY */}
+                <div className="
+    absolute
+    inset-0
+    bg-black/35
+" />
+
+                {/* PURPLE TINT */}
+                <div className="
+    absolute
+    inset-0
+    bg-[#895CE7]/10
+" />
+
+            </div>
+
+
+
+
 
             {/* HERO SECTION */}
             <section ref={heroRef} className="hero">
@@ -174,9 +213,9 @@ export default function LandingPageNew() {
             {/* CURVED LOOP TRANSITION */}
             <div className="curved-section">
                 <CurvedLoop
-                    marqueeText="EV CHARGING • FAST • SMART • AVAILABLE • "
+                    marqueeText="EV CHARGING • FAST • BOOKING • AVAILABLE • "
                     speed={1.5}
-                    curveAmount={0}
+                    curveAmount={150}
                     interactive={true}
                 />
             </div>

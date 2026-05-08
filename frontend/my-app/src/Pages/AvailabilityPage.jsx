@@ -2,15 +2,22 @@ import { useState, useEffect } from "react";
 import API from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
+
 export default function AvailabilityPage() {
 
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        fromDate: "",
-        toDate: "",
-        fromTime: "",
-        toTime: ""
+    const [formData, setFormData] = useState(() => {
+        const saved = sessionStorage.getItem("availabilityForm");
+
+        return saved
+            ? JSON.parse(saved)
+            : {
+                fromDate: "",
+                toDate: "",
+                fromTime: "",
+                toTime: ""
+            };
     });
 
     const [location, setLocation] = useState({
@@ -18,7 +25,13 @@ export default function AvailabilityPage() {
         lng: null
     });
 
-    const [stations, setStations] = useState([]);
+    const [stations, setStations] = useState(() => {
+        const savedStations = sessionStorage.getItem("stations");
+
+        return savedStations
+            ? JSON.parse(savedStations)
+            : [];
+    });
 
     const handleChange = (e) => {
         setFormData({
@@ -26,7 +39,6 @@ export default function AvailabilityPage() {
             [e.target.name]: e.target.value
         });
     };
-
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
@@ -42,9 +54,24 @@ export default function AvailabilityPage() {
         );
     }, []);
 
+    useEffect(() => {
+        sessionStorage.setItem(
+            "availabilityForm",
+            JSON.stringify(formData)
+        );
+    }, [formData]);
+
+    useEffect(() => {
+        sessionStorage.setItem(
+            "stations",
+            JSON.stringify(stations)
+        );
+    }, [stations]);
+
     const fetchStations = async () => {
 
         try {
+
             const startDateTime = new Date(`${formData.fromDate}T${formData.fromTime}:00`);
             const endDateTime = new Date(`${formData.toDate}T${formData.toTime}:00`);
 
@@ -68,17 +95,13 @@ export default function AvailabilityPage() {
                 }
             );
 
-            setStations(res.data);
+            const sorted = res.data.sort((a, b) => {
+                const aSlots = a.chargers.AC.available + a.chargers.DC.available;
+                const bSlots = b.chargers.AC.available + b.chargers.DC.available;
+                return bSlots - aSlots;
+            });
 
-
-            // //Better Availability by maximum available slots
-            // const sorted = res.data.sort((a, b) => {
-            //     const aSlots = a.chargers.AC.available + a.chargers.DC.available;
-            //     const bSlots = b.chargers.AC.available + b.chargers.DC.available;
-            //     return bSlots - aSlots;
-            // });
-
-            // setStations(sorted);
+            setStations(sorted);
 
         } catch (err) {
             console.error("Fetch error:", err);
@@ -86,84 +109,549 @@ export default function AvailabilityPage() {
     };
 
     return (
-        <div className="p-4">
-            <h1 className="text-xl font-semibold mb-4">
-                Find Available Stations
-            </h1>
 
-            <div className="space-y-3">
+        <div className="relative min-h-screen overflow-hidden">
 
-                <input
-                    type="date"
-                    name="fromDate"
-                    onChange={handleChange}
-                    className="w-full border p-2 rounded"
+            {/* ================= BACKGROUND ================= */}
+
+            <div className="fixed inset-0 -z-10">
+
+                {/* GRADIENT TOP */}
+                <div
+                    className="
+                        h-screen
+                        bg-cover
+                        bg-center
+                        bg-no-repeat
+                        opacity-90
+                    "
+
+                    style={{
+                        backgroundImage:
+                            "url('/background1.jpg')"
+                    }}
                 />
 
-                <input
-                    type="time"
-                    name="fromTime"
-                    onChange={handleChange}
-                    className="w-full border p-2 rounded"
-                />
-
-                <input
-                    type="date"
-                    name="toDate"
-                    onChange={handleChange}
-                    className="w-full border p-2 rounded"
-                />
-
-                <input
-                    type="time"
-                    name="toTime"
-                    onChange={handleChange}
-                    className="w-full border p-2 rounded"
-                />
-
-                <button
-                    onClick={fetchStations}
-                    className="mt-4 bg-black text-white px-4 py-2 rounded"
-                >
-                    Find Stations
-                </button>
+                {/* LIGHT LOWER SECTION */}
+                <div className="h-[55vh] bg-zinc-100" />
 
             </div>
 
-            <div className="mt-6 space-y-3">
-                {stations.map((station) => (
-                    <div
-                        key={station._id}
-                        className="p-4 border rounded-lg"
-                    >
-                        <h2 className="font-semibold">
-                            {station.stationName}
-                        </h2>
+            {/* EXTRA GLOW */}
+            <div className="absolute top-0 left-0 w-full h-[500px] bg-[#895CE7]/10 blur-[120px] -z-10" />
 
-                        <p className="text-sm text-gray-500">
-                            {station.distance.toFixed(2)} km away
-                        </p>
+            {/* ================= PAGE ================= */}
 
-                        <p className="text-sm mt-1">
-                            AC: {station.chargers.AC.available} / {station.chargers.AC.total}
-                        </p>
+            <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-14">
 
-                        <p className="text-sm">
-                            DC: {station.chargers.DC.available} / {station.chargers.DC.total}
-                        </p>
+                {/* ================= HEADING ================= */}
+
+                <div className="mb-10">
+
+                    <h1 className="
+                        text-4xl
+                        md:text-6xl
+                        font-black
+                        tracking-tight
+                        text-zinc-900
+                    ">
+                        Find Available
+                    </h1>
+
+                    <h1 className="
+                        text-4xl
+                        md:text-6xl
+                        font-black
+                        tracking-tight
+                        text-[#895CE7]
+                    ">
+                        EV Stations
+                    </h1>
+
+                    <p className="
+                        mt-4
+                        text-zinc-600
+                        max-w-xl
+                        text-sm
+                        md:text-base
+                    ">
+                        Discover nearby charging stations with real-time slot availability and seamless booking.
+                    </p>
+
+                </div>
+
+                {/* ================= FILTER CARD ================= */}
+
+                <div
+                    className="
+                        relative
+                        overflow-hidden
+                        rounded-[32px]
+                        border border-white/40
+                        bg-white/60
+                        backdrop-blur-2xl
+                        shadow-[0_10px_50px_rgba(0,0,0,0.08)]
+                        p-5 md:p-8
+                    "
+                >
+
+                    {/* glow */}
+                    <div className="
+                        absolute
+                        top-0
+                        right-0
+                        w-52
+                        h-52
+                        bg-[#895CE7]/10
+                        blur-[100px]
+                    " />
+
+                    <div className="relative z-10">
+
+                        {/* FROM */}
+
+                        <div className="mb-6">
+
+                            <h3 className="
+                                text-sm
+                                font-semibold
+                                text-zinc-500
+                                uppercase
+                                tracking-widest
+                                mb-3
+                            ">
+                                From
+                            </h3>
+
+                            <div className="flex flex-col md:flex-row gap-4">
+
+                                <input
+                                    type="date"
+                                    name="fromDate"
+                                    onChange={handleChange}
+                                    className="
+                                        premium-input
+                                        w-full
+                                    "
+                                />
+
+                                <input
+                                    type="time"
+                                    name="fromTime"
+                                    onChange={handleChange}
+                                    className="
+                                        premium-input
+                                        w-full
+                                    "
+                                />
+
+                            </div>
+
+                        </div>
+
+                        {/* TO */}
+
+                        <div>
+
+                            <h3 className="
+                                text-sm
+                                font-semibold
+                                text-zinc-500
+                                uppercase
+                                tracking-widest
+                                mb-3
+                            ">
+                                To
+                            </h3>
+
+                            <div className="flex flex-col md:flex-row gap-4">
+
+                                <input
+                                    type="date"
+                                    name="toDate"
+                                    onChange={handleChange}
+                                    className="
+                                        premium-input
+                                        w-full
+                                    "
+                                />
+
+                                <input
+                                    type="time"
+                                    name="toTime"
+                                    onChange={handleChange}
+                                    className="
+                                        premium-input
+                                        w-full
+                                    "
+                                />
+
+                            </div>
+
+                        </div>
+
+                        {/* BUTTON */}
 
                         <button
-                            onClick={() =>
-                                navigate("/slots", { state: { station } })
-                            }
-                            className="mt-2 bg-black text-white px-3 py-1 rounded text-sm"
+                            onClick={fetchStations}
+                            className="
+                                group
+                                mt-8
+                                w-full md:w-fit
+                                px-8
+                                py-4
+                                rounded-2xl
+                                bg-[#895CE7]
+                                text-white
+                                font-semibold
+                                shadow-[0_10px_30px_rgba(137,92,231,0.35)]
+                                transition-all
+                                duration-300
+                                hover:scale-[1.02]
+                                hover:shadow-[0_20px_50px_rgba(137,92,231,0.45)]
+                            "
                         >
-                            Book →
+
+                            <span className="flex items-center justify-center gap-2">
+                                Find Stations
+                                <span className="group-hover:translate-x-1 transition-all">
+                                    →
+                                </span>
+                            </span>
+
                         </button>
+
                     </div>
-                ))}
+
+                </div>
+
+                {/* ================= RESULTS ================= */}
+
+                <div className="mt-10">
+
+                    {stations.length > 0 && (
+
+                        <div className="mb-6">
+
+                            <h2 className="
+                                text-2xl
+                                md:text-3xl
+                                font-bold
+                                text-zinc-900
+                            ">
+                                Nearby Stations
+                            </h2>
+
+                            <p className="text-zinc-500 mt-1">
+                                Sorted by highest availability
+                            </p>
+
+                        </div>
+
+                    )}
+
+                    {/* ================= CARD GRID ================= */}
+
+                    <div className="
+                        grid
+                        grid-cols-1
+                        lg:grid-cols-2
+                        gap-6
+                    ">
+
+                        {stations.map((station) => {
+
+                            const totalAvailable =
+                                station.chargers.AC.available +
+                                station.chargers.DC.available;
+
+                            return (
+
+                                <div
+                                    key={station._id}
+                                    className="
+                                        station-card
+                                        relative
+                                        overflow-hidden
+                                        rounded-[30px]
+                                        min-h-[280px]
+                                        p-6
+                                        flex
+                                        flex-col
+                                        justify-between
+                                        group
+                                    "
+                                    style={{
+                                        backgroundImage:
+                                            "url('https://images.unsplash.com/photo-1593941707882-a5bac6861d75?q=80&w=2070&auto=format&fit=crop')"
+                                    }}
+                                >
+
+                                    {/* OVERLAY */}
+                                    <div className="
+                                        absolute
+                                        inset-0
+                                        bg-gradient-to-t
+                                        from-black/85
+                                        via-black/55
+                                        to-black/20
+                                    " />
+
+                                    {/* PURPLE GLOW */}
+                                    <div className="
+                                        absolute
+                                        -bottom-10
+                                        -right-10
+                                        w-52
+                                        h-52
+                                        bg-[#895CE7]/20
+                                        blur-[80px]
+                                        opacity-0
+                                        group-hover:opacity-100
+                                        transition-all
+                                        duration-500
+                                    " />
+
+                                    {/* CONTENT */}
+                                    <div className="relative z-10">
+
+                                        {/* TOP */}
+                                        <div className="flex items-start justify-between gap-4">
+
+                                            <div>
+
+                                                <h2 className="
+                                                    text-2xl
+                                                    md:text-3xl
+                                                    font-bold
+                                                    text-white
+                                                    leading-tight
+                                                ">
+                                                    {station.stationName}
+                                                </h2>
+
+                                                <p className="
+                                                    mt-2
+                                                    text-zinc-300
+                                                    text-sm
+                                                ">
+                                                    {station.distance.toFixed(2)} km away
+                                                </p>
+
+                                            </div>
+
+                                            {/* AVAILABILITY BADGE */}
+
+                                            <div className="
+                                                bg-white/10
+                                                border border-white/10
+                                                backdrop-blur-xl
+                                                px-4
+                                                py-2
+                                                rounded-full
+                                                text-white
+                                                text-sm
+                                                font-semibold
+                                                whitespace-nowrap
+                                            ">
+                                                {totalAvailable} Slots
+                                            </div>
+
+                                        </div>
+
+                                        {/* SLOT SECTION */}
+
+                                        <div className="
+                                            flex
+                                            gap-4
+                                            mt-8
+                                        ">
+
+                                            {/* AC */}
+
+                                            <div className="
+                                                flex-1
+                                                bg-white/10
+                                                border border-white/10
+                                                backdrop-blur-xl
+                                                rounded-3xl
+                                                p-5
+                                            ">
+
+                                                <p className="
+                                                    text-zinc-300
+                                                    text-xs
+                                                    uppercase
+                                                    tracking-widest
+                                                ">
+                                                    AC Slots
+                                                </p>
+
+                                                <h1 className="
+                                                    text-4xl
+                                                    font-black
+                                                    text-green-400
+                                                    mt-2
+                                                ">
+                                                    {station.chargers.AC.available}
+                                                </h1>
+
+                                                <p className="
+                                                    text-zinc-400
+                                                    text-sm
+                                                    mt-1
+                                                ">
+                                                    out of {station.chargers.AC.total}
+                                                </p>
+
+                                            </div>
+
+                                            {/* DC */}
+
+                                            <div className="
+                                                flex-1
+                                                bg-white/10
+                                                border border-white/10
+                                                backdrop-blur-xl
+                                                rounded-3xl
+                                                p-5
+                                            ">
+
+                                                <p className="
+                                                    text-zinc-300
+                                                    text-xs
+                                                    uppercase
+                                                    tracking-widest
+                                                ">
+                                                    DC Slots
+                                                </p>
+
+                                                <h1 className="
+                                                    text-4xl
+                                                    font-black
+                                                    text-[#c7a7ff]
+                                                    mt-2
+                                                ">
+                                                    {station.chargers.DC.available}
+                                                </h1>
+
+                                                <p className="
+                                                    text-zinc-400
+                                                    text-sm
+                                                    mt-1
+                                                ">
+                                                    out of {station.chargers.DC.total}
+                                                </p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    {/* BUTTON */}
+
+                                    <div className="relative z-10 mt-8">
+
+                                        <button
+                                            onClick={() =>
+                                                navigate("/slots", { state: { station } })
+                                            }
+                                            className="
+                                                book-btn
+                                                w-full
+                                                md:w-fit
+                                                px-6
+                                                py-3
+                                                rounded-2xl
+                                                bg-white
+                                                text-black
+                                                font-semibold
+                                                transition-all
+                                                duration-300
+                                            "
+                                        >
+                                            Book Slot →
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            );
+
+                        })}
+
+                    </div>
+
+                </div>
+
             </div>
 
+            {/* ================= CUSTOM CSS ================= */}
+
+            <style jsx>{`
+
+                .premium-input {
+                    background: rgba(255,255,255,0.7);
+                    border: 1px solid rgba(255,255,255,0.5);
+                    backdrop-filter: blur(10px);
+                    border-radius: 20px;
+                    padding: 16px 18px;
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: #18181b;
+                    outline: none;
+                    transition: all 0.3s ease;
+                    box-shadow:
+                        0 4px 20px rgba(0,0,0,0.04);
+                }
+
+                .premium-input:focus {
+                    transform: translateY(-1px);
+                    border-color: #895CE7;
+                    box-shadow:
+                        0 0 0 4px rgba(137,92,231,0.15),
+                        0 10px 30px rgba(137,92,231,0.12);
+                    background: rgba(255,255,255,0.9);
+                }
+
+                .station-card {
+                    background-size: cover;
+                    background-position: center;
+                    transition:
+                        transform 0.4s ease,
+                        box-shadow 0.4s ease;
+                    box-shadow:
+                        0 10px 40px rgba(0,0,0,0.12);
+                }
+
+                .station-card:hover {
+                    transform:
+                        translateY(-4px)
+                        scale(1.01);
+
+                    box-shadow:
+                        0 20px 60px rgba(137,92,231,0.25);
+                }
+
+                .book-btn:hover {
+                    background: #895CE7;
+                    color: white;
+                    transform: scale(1.02);
+                    box-shadow:
+                        0 10px 30px rgba(137,92,231,0.35);
+                }
+
+                input[type="date"]::-webkit-calendar-picker-indicator,
+                input[type="time"]::-webkit-calendar-picker-indicator {
+                    opacity: 0.7;
+                    cursor: pointer;
+                }
+
+            `}</style>
+
         </div>
+
     );
 }

@@ -77,9 +77,9 @@
 
     width: 120px;
     border-radius: 30px;
-    background: #000;
+    background: #fff;
     padding: 6px;
-    color: white;
+    color: black;
     position: absolute;
     display: flex;
     justify-content: center;
@@ -92,12 +92,13 @@
 .hero-text1 {
     font-size: xx-large;
     font-weight: 700;
+    color: #fff;
 }
 
 .hero-text2 {
     font-size: xx-large;
     font-weight: 900;
-    color: #7c3aed;
+    color: #fff;
 }
 
 .curved-section {
