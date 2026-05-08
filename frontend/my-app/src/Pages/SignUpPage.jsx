@@ -72,7 +72,7 @@ export default function SignUpPage() {
                         </div>
                     </div>
                     <div id="frontImg">
-                        <img src="public\sigin.png" alt="" />
+                        <img src="/sigin.png" alt="" />
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ const CardHome = () => {
 
         <div className=" absolute right-0 bottom-0 h-full flex items-end justify-end pointer-events-none">
           <img
-            src="public\img2.png"
+            src="/img2.png"
             alt="EV"
             className=" object-cover drop-shadow-lg"
           />

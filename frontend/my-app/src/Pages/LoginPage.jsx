@@ -91,7 +91,7 @@ export default function LoginPage() {
                         </div>
                     </div>
                     <div id="frontImg">
-                        <img src="public\sigin.png" alt="" />
+                        <img src="/sigin.png" alt="" />
                     </div>
 
 

@@ -72,7 +72,7 @@ const Homepage = () => {
           
           <div className='border-t border-black/10 my-8 mx-6'></div>
 
-          <div className='flex flex-col gap-4 mx-4 tracking-widest mt-8'>
+          <div className='flex flex-col gap-4  tracking-widest mt-8'>
             <div className='flex '> 
               <h1 className='text-2xl font-medium bg-sky-100 px-1 w-fit '>Our Vision</h1>
             </div>

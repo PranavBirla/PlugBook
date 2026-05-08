@@ -18,11 +18,12 @@ const ActiveBookingCard = ({ booking }) => {
 
     let status = "";
 
-    if (now < start) {
-        status = "Upcoming";
-    } else if (now >= start && now <= end) {
-        status = "Ongoing";
-    }
+  if (now < start) {
+    status = "Upcoming";
+  } else if (now >= start && now <= end) {
+    status = "Ongoing";
+  }
+
 
     return (
 
