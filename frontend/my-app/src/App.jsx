@@ -7,7 +7,10 @@ import Lenis from '@studio-freight/lenis'
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import CanvasCursor from "./Components/CanvasCursor";
+import CustomCursor from './Components/CustomCursor';
+// import FollowCursor from './Components/FollowCursor';
+// import RippleCursor from './Components/RippleCursor';
+// import CanvasCursor from "./Components/CanvasCursor";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,7 +35,6 @@ function App() {
 
   return (
     <>
-      <CanvasCursor />
       <AppRoutes />;
     </>
   );

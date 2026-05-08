@@ -8,30 +8,48 @@ import OfferCardSet from '../Components/OfferCardSet';
 import Top from '../Components/Top';
 import CardDekstop from '../Components/CardDekstop';
 import MagicCard from "../Components/MagicCard";
+import BgIcons from '../Components/BgIcons';
+import { ArrowRight } from 'lucide-react';
+import CardHome2 from '../Components/CardHome2';
 
 const Homepage = () => {
   return (
     <div className='relative '>
+      {/* <BgIcons/> */}
       <div className="pb-20 md:pb-0">
         <Top />
-        <div className="md:hidden">
+        <div className="mb-10 md:hidden">
           <CardHome />
         </div>
         <div className='hidden md:block'>
           {/* <MagicCard> */}
-            <CardDekstop />
+          <CardDekstop />
           {/* </MagicCard> */}
         </div>
         <IconSet />
-        <div className=' flex items-center text-xl mx-4 font-medium  md:text-2xl sm:mx-8 md:mx-10 lg:text-3xl lg:mx-12 '>
-          <div className='hidden lg:block'><Percent size={32} strokeWidth={2} /> </div>
-          <div className='hidden md:block lg:hidden'><Percent size={26} strokeWidth={2} /> </div>
-          <div className='md:hidden'><Percent size={22} strokeWidth={2} /> </div>
-          <h1>Offers</h1>
-        </div>
-        <OfferCardSet />
-        <OfferCardSet />
 
+        <div className=" mt-10 md:hidden">
+          <CardHome2 />
+        </div>
+        <div className='my-15'>
+          <div className='flex flex-col gap-4 mx-4 tracking-widest mt-6'><h1 className='text-2xl font-medium bg-amber-50 px-1 w-fit '>Our Research</h1>
+            <p className='text-sm text-zinc-500 ml-5 leading-loose '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque alias eius quae? Aut beatae quod vero saepe? Aliquid nisi minima eaque magni quas nam esse.</p>
+            <div className='flex justify-end'>
+              <button className='shadow-[0_6px_20px_rgba(0,0,0,0.18)] flex gap-1 items-center text-md text-white bg-black rounded-3xl py-1 px-3 mx-4'>View <ArrowRight size={20} /></button>
+            </div>
+          </div>
+          <div className='border-t border-black/10 my-8 mx-6'></div>
+
+          <div className='flex flex-col gap-4 mx-4 tracking-widest mt-8'>
+            <div className='flex '> 
+              <h1 className='text-2xl font-medium bg-sky-100 px-1 w-fit '>Our Vision</h1>
+            </div>
+            <p className='text-sm text-zinc-500 ml-5 leading-loose '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus laborum iusto, dolores recusandae molestias fuga iure ex sapiente illo possimus qui ratione amet eaque, inventore dolorum unde error accusantium provident?</p>
+            <div className='flex justify-end '>
+              <button className='shadow-[0_6px_20px_rgba(0,0,0,0.18)] flex gap-1 items-center text-md text-white bg-black rounded-3xl py-1 px-3 mx-4'>View <ArrowRight size={20} /></button>
+            </div>
+          </div>
+        </div>
       </div>
       <Navbar />
 

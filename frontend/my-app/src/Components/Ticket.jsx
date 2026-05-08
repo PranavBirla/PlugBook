@@ -8,17 +8,32 @@ import { Plug } from 'lucide-react';
 import { MoveRight } from 'lucide-react';
 
 
+
 const Ticket = ({ booking }) => {
-    
+
+    const now = new Date();
+    const start = new Date(booking.startTime);
+    const end = new Date(booking.endTime);
+
     if (!booking) {
         return <p className="text-center mt-10">No booking data found</p>;
+    }
+
+    let status = ""
+
+    if (now < start) {
+        status = "Upcoming";
+    } else if (now >= start && now <= end) {
+        status = "Ongoing";
+    } else {
+        status = "Expired"
     }
 
     return (
 
         <div className='relative w-89 bg-white p-3 flex justify-center items-center flex-col rounded-2xl'>
-            <div className="absolute top-53 left-[2px] bg-white h-6 w-6 rounded-full   p-2">  </div>
-            <div className="absolute top-53 right-[2px]  bg-white h-6 w-6 rounded-full  p-2"></div>
+            <div className="absolute top-51 left-[2px] bg-white h-6 w-6 rounded-full   p-2">  </div>
+            <div className="absolute top-51 right-[2px]  bg-white h-6 w-6 rounded-full  p-2"></div>
             <div className='bg-white h-fit w-full  flex flex-col justify-around items-center rounded-4xl '>
 
 
@@ -27,7 +42,11 @@ const Ticket = ({ booking }) => {
                 <div className='bg-zinc-300 text-black h-full w-full px-4 flex flex-col justify-around rounded-2xl'>
                     <div className='flex justify-between text-m py-4 '>
                         <p className='flex justify-center items-center gap-1'>Plugbook<TicketCheck strokeWidth={1} size={25} /></p>
-                        <p className='text-green-400 bg-gray-200 px-2 py-1 rounded-2xl' >upcoming</p>
+                        <div className={`text-xs px-2 py-1 rounded-xl w-fit 
+                  ${status === "Ongoing" ? "bg-green-200 text-green-600" : status === "Upcoming" ? "bg-blue-200 text-blue-600" : "bg-gray-200 text-gray-600"}
+                `}>
+                            {status}
+                        </div>
                         {/* <p className='text-gray-500 bg-gray-200 px-2 py-1 rounded-2xl' >Expired</p> */}
 
                     </div>
@@ -88,14 +107,15 @@ const Ticket = ({ booking }) => {
 
             </div>
 
-            <div className="border-t-2 border-dashed border-gray-900 mx-4 flex justify-center items-center relative "></div>
+  <div className="w-full px-2">
+    <div className="border-t-2 border-dashed border-gray-500"></div>
+</div>
 
-
-            <div className='bg-gray-600 p-4 flex flex-col justify-between rounded-2xl w-full'>
-                <div ><p className='text-sm text-zinc-500'>Booking ID :</p>
+            <div className='bg-gray-400 p-4 flex flex-col justify-between rounded-2xl w-full'>
+                <div ><p className='text-sm text-zinc-500 mb-2'>Booking ID :</p>
                     <p className='text-xs '>{booking?._id}</p>
                 </div>
-                <div className='w-2/3 m-auto'>
+                <div className='w-1/2 m-auto mt-2'>
                     <img src="public\dummy barcode.png" alt="" />
                 </div>
 

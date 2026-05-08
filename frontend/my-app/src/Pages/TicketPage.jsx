@@ -2,6 +2,7 @@ import React from 'react'
 import Ticket from '../Components/Ticket'
 import Navbar from '../Components/Navbar'
 import Top from '../Components/Top'
+import BgIcons from "../Components/BgIcons"
 
 
 import { useLocation } from "react-router-dom";
@@ -27,7 +28,7 @@ return (
   {/* Content */}
   <div className='relative z-10'>
     
-    <div className='m-4 text-2xl text-zinc-700 font-black shadow-2xl'>
+    <div className='m-4 text-2xl text-zinc-700 font-black '>
       MY Ticket
     </div>
 
