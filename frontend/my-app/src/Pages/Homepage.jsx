@@ -12,6 +12,7 @@ import BgIcons from '../Components/BgIcons';
 import { ArrowRight } from 'lucide-react';
 import CardHome2 from '../Components/CardHome2';
 import OurResearch from '../Components/OurResearch';
+import OurFeatures from '../Components/OurFeatures';
 
 const Homepage = () => {
   return (
@@ -72,15 +73,8 @@ const Homepage = () => {
           
           <div className='border-t border-black/10 my-8 mx-6'></div>
 
-          <div className='flex flex-col gap-4  tracking-widest mt-8'>
-            <div className='flex '> 
-              <h1 className='text-2xl font-medium bg-sky-100 px-1 w-fit '>Our Vision</h1>
-            </div>
-            <p className='text-sm text-zinc-500 ml-5 leading-loose '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus laborum iusto, dolores recusandae molestias fuga iure ex sapiente illo possimus qui ratione amet eaque, inventore dolorum unde error accusantium provident?</p>
-            <div className='flex justify-end '>
-              <button className='shadow-[0_6px_20px_rgba(0,0,0,0.18)] flex gap-1 items-center text-md text-white bg-black rounded-3xl py-1 px-3 mx-4'>View <ArrowRight size={20} /></button>
-            </div>
-          </div>
+          <OurFeatures/>
+          
         </div>
       </div>
       <Navbar />

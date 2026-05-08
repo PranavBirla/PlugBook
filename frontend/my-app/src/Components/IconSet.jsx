@@ -53,7 +53,7 @@ const IconSet = () => {
 
 
   return (
-    <div className=' flex justify-around mx-4 my-3 sm:mx-7 md:mx-9'>
+    <div className=' flex justify-around mx-4 my-16 sm:mx-7 md:mx-9'>
       {
         navItems.map(function (elem) {
           return <Icon id={elem.id} name={elem.name} icon={elem.icon} def={elem.def} lg={elem.lg} link={elem.link} />
