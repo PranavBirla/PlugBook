@@ -7,8 +7,10 @@ const cors = require("cors");
 
 const app = express();
 
+require("dotenv").config();
+
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL,
     credentials: true
 }));
 
@@ -18,5 +20,9 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use("/api/station", stationRoutes);
+
+app.get("/", (req, res) => {
+    res.send("Backend Running");
+});
 
 module.exports = app;
