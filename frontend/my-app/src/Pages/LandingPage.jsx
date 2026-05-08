@@ -146,7 +146,7 @@ export default function LandingPageNew() {
     bg-no-repeat
 "
     style={{
-        backgroundImage: "url('/full-bg3.jpg')",
+        backgroundImage: "url('/full-bg2.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
     }}
