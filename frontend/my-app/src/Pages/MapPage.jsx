@@ -143,12 +143,39 @@ export default function MapPage() {
 
     return (
         <div className="h-screen flex flex-col relative">
-            <BgIcons/>
+            {/* <BgIcons/> */}
+
+            {/* ================= BACKGROUND ================= */}
+
+            <div className="fixed inset-0 -z-10">
+
+                {/* GRADIENT TOP */}
+                <div
+                    className="
+                        h-[100vh]
+                        bg-cover
+                        bg-center
+                        bg-no-repeat
+                        opacity-90
+                    "
+
+                    style={{
+                        backgroundImage:
+                            "url('/background2.jpg')"
+                    }}
+                />
+
+                {/* LIGHT LOWER SECTION */}
+                <div className="h-[55vh] bg-zinc-100" />
+
+            </div>
+
+
             <Top />
 
             <div className="flex flex-col lg:flex-row h-[calc(100vh-80px)]">
 
-                <div className="h-[45%] lg:h-[85%] mt-14 ml-4 lg:w-[60%] relative rounded-2xl overflow-hidden">
+                <div className="h-[45%] lg:h-[85%] md:ml-4 md:mt-14  lg:w-[60%] relative rounded-2xl overflow-hidden">
                     <MapContainer
                         center={position}
                         zoom={14}
@@ -193,7 +220,7 @@ export default function MapPage() {
                     </MapContainer>
                 </div>
 
-                <div className="flex-1 lg:w-[40%] bg-[#EADFEF] p-4 overflow-y-auto z-10">
+                <div className="flex-1 lg:w-[40%] p-4 overflow-y-auto z-10">
                     <h2 className="text-lg font-semibold mb-3">Nearest Stations</h2>
 
                     {stations.map((station) => (

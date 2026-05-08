@@ -14,6 +14,33 @@ const Homepage = () => {
   return (
     <div className='relative '>
       {/* <BgIcons/> */}
+
+      {/* ================= BACKGROUND ================= */}
+
+      <div className="fixed inset-0 -z-10">
+
+        {/* GRADIENT TOP */}
+        <div
+          className="
+        md:h-[100vh]
+        h-[55vh]
+        bg-cover
+        bg-center
+        bg-no-repeat
+        opacity-90
+    "
+
+          style={{
+            backgroundImage:
+              "url('/background1.jpg')"
+          }}
+        />
+
+        {/* LIGHT LOWER SECTION */}
+        <div className="h-[55vh] bg-zinc-100" />
+
+      </div>
+
       <div className="pb-20 md:pb-0">
         <Top />
         <div className="md:hidden">
@@ -21,7 +48,7 @@ const Homepage = () => {
         </div>
         <div className='hidden md:block'>
           {/* <MagicCard> */}
-            <CardDekstop />
+          <CardDekstop />
           {/* </MagicCard> */}
         </div>
         <IconSet />

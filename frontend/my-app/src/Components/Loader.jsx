@@ -70,7 +70,35 @@ export default function PremiumLoader() {
     return (
         <div style={styles.container}>
 
-            <BgIcons />  
+            {/* <BgIcons />   */}
+
+            <div className="fixed inset-0 -z-10">
+
+                {/* GRADIENT TOP */}
+                <div
+                    className="
+        h-screen
+        bg-cover
+        bg-center
+        bg-no-repeat
+        opacity-90
+    "
+
+                    style={{
+                        backgroundImage:
+                            "url('/background2.jpg')"
+                    }}  
+                />
+
+
+                {/* BLACK OVERLAY */}
+        <div className="
+            absolute
+            inset-0
+            bg-black/35
+        " />
+
+            </div>
 
             <div ref={orbRef} style={styles.orb} >
                 {particles.map((p) => (
@@ -87,7 +115,7 @@ export default function PremiumLoader() {
             </div>
 
             <p className="loader-text" style={styles.text}>
-                <span style={styles.highlight}>Preparing</span> your charging experience!
+                <span style={styles.highlight}>Loading</span> your charging experience!
             </p>
         </div>
 
@@ -133,8 +161,9 @@ const styles =
         alignItems: "center",
     },
     highlight: {
-        color: "#895CE7",
+        color: "rgba(203, 195, 244, 1)",
         fontWeight: 700,
+        fontSize: "45px"
     },
 
     orb: {
@@ -147,8 +176,8 @@ const styles =
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "rgba(135,92,231,0.05)",
-        boxShadow: "0 0 80px rgba(135,92,231,0.3)",
+        background: "rgba(244 ,244 ,244 , 0.5)",
+        boxShadow: "0 0 80px rgba(244 ,244 ,244 , 0.3)",
         overflow: "visible",
         zIndex: 5,
     },
@@ -159,7 +188,7 @@ const styles =
         height: "140%",
         borderRadius: "50%",
         background:
-            "radial-gradient(circle, rgba(135,92,231,0.4), transparent)",
+            "radial-gradient(circle, rgba(244 ,244 ,244 , 0.2), transparent)",
         animation: "pulse 2s infinite",
     },
 
@@ -167,7 +196,7 @@ const styles =
         width: "45%",
         height: "45%",
         borderRadius: "50%",
-        background: "#895CE7",
+        background: "#ffffff",
         boxShadow: "0 0 40px #895CE7, 0 0 80px #895CE7",
         zIndex: 2,
     },
@@ -182,16 +211,16 @@ const styles =
     eye: {
         width: "10px",
         height: "10px",
-        background: "#fff",
+        background: "#000000",
         borderRadius: "50%",
-        boxShadow: "0 0 10px #fff",
+        boxShadow: "0 0 10px #895CE7",
     },
 
     text: {
         marginTop: "30px",
-        fontSize: "40px",
+        fontSize: "35px",
         fontWeight: 600,
-        color: "#1a1a1a",
+        color: "rgba(210, 210, 210, 0.9)",
         letterSpacing: "0.3px",
         textAlign: "center",
         maxWidth: "460px",
@@ -204,10 +233,10 @@ const styles =
 
 const particleStyle = {
     position: "absolute",
-    width: "20px",
-    height: "20px",
-    background: "#6C5CE7",
+    width: "15px",
+    height: "15px",
+    background: "#ffffff",
     borderRadius: "50%",
-    boxShadow: "0 0 20px #6C5CE7, 0 0 40px #6C5CE7",
+    boxShadow: "0 0 20px #fff, 0 0 40px #6C5CE7",
     pointerEvents: "none",
 };

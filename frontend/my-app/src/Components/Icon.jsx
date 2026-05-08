@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 const Icon = (prop) => {
     return (
         <div className='w-2/9'>
-            <Link to={prop.link} className='bg-black text-white flex flex-col gap-1 justify-center items-center  px-2 py-3 border-[2px] border-purple-900 rounded-2xl shadow-sm hover:scale-[105%] duration-500'>
+            <Link to={prop.link} className='bg-black text-white flex flex-col gap-1 justify-center items-center  px-2 py-3 border-[0.5px] border-zinc-800 rounded-2xl shadow-sm hover:scale-[105%] duration-500'>
                 <div className='flex flex-col items-center md:flex-row md:items-start gap-2 md:gap-4 md:py-4'>
                     <div className='lg:hidden' >
                         {prop.icon}

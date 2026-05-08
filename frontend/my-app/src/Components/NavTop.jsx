@@ -8,6 +8,7 @@ const Nav = () => {
     const navLinks = [
         { name: "Home", path: "/home" },
         { name: "Map", path: "/map" },
+        { name: "Bookings", path: "/activebooking" },
         { name: "User", path: "/user" },
     ];
 
