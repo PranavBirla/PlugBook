@@ -22,7 +22,7 @@ const OurResearch = () => {
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: "top 80%",
+                    start: "top 120%",
                 }
             });
 
@@ -33,7 +33,7 @@ const OurResearch = () => {
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: "top 78%",
+                    start: "top 188%",
                 }
             });
 
@@ -41,11 +41,11 @@ const OurResearch = () => {
                 y: 40,
                 opacity: 0,
                 duration: 1,
-                delay: 0.15,
+                delay: 0.55,
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: "top 75%",
+                    start: "top 155%",
                 }
             });
 
@@ -57,7 +57,7 @@ const OurResearch = () => {
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: "top 72%",
+                    start: "top 92%",
                 }
             });
 

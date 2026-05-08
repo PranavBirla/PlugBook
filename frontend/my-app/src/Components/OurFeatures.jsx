@@ -44,7 +44,7 @@ const OurFeatures = () => {
                 y: 60,
                 opacity: 0,
                 duration: 1,
-                delay: 0.1,
+                delay: 0.9,
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: sectionRef.current,
