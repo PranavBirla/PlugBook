@@ -116,7 +116,7 @@ const Ticket = ({ booking }) => {
                     <p className='text-xs '>{booking?._id}</p>
                 </div>
                 <div className='w-1/2 m-auto mt-2'>
-                    <img src="public\dummy barcode.png" alt="" />
+                    <img src="/dummy-barcode.png" alt="" />
                 </div>
 
             </div>

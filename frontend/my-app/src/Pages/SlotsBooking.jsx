@@ -163,8 +163,8 @@ const SlotsBooking = () => {
                     </div>
                 </div>
 
-                <div className="bg-white rounded-2xl p-4 mx-4 mt-3 shadow-sm md:mx-12  lg:flex lg:flex-col lg:gap-4 lg:px-10 lg:mx-40 lg:h-2/3">
-                    <div className="hidden lg:block lg:w-full"><img className="rounded-2xl" src="public\img-car-home.png" alt="" /></div>
+                <div className="bg-white rounded-2xl p-4 mx-4 mt-3 shadow-sm md:mx-12  lg:flex lg:flex-col lg:px-6 xl:px-10 lg:mx-10 xl:mx-40 lg:h-2/3">
+                    <div className="hidden lg:block lg:w-full"><img className="rounded-2xl" src="/img-car-home.png" alt="" /></div>
                     <h2 className="text-lg font-semibold">
                         {station?.stationName}
                     </h2>
@@ -210,7 +210,7 @@ const SlotsBooking = () => {
                     <form onSubmit={handleSubmit}
                         className=" bg-white flex items-center justify-center border border-gray-200 rounded-2xl mx-4 md:mx-12 p-4 mt-3  lg:h-2/3">
 
-                        <div className="w-full h-full md bg-white rounded-2xl p-10 flex flex-col gap-4 md:flex-row md:justify-center md:gap-20 lg:justify-center lg:flex-col  ">
+                        <div className="w-full h-full md bg-white rounded-2xl p-5 sm:p-10 flex flex-col gap-4 md:flex-row md:justify-center md:gap-20 lg:justify-center lg:flex-col  ">
 
                             <div id="leftsection">
                                 <div>
@@ -222,18 +222,18 @@ const SlotsBooking = () => {
                                     <label className="text-m font-black   text-gray-500 mb-2 mt-2 block">
                                         Select Date & Time (from)
                                     </label>
-                                    <div className="flex gap-2">
+                                    <div className="flex flex-col sm:flex-row gap-2">
                                         <input
                                             type="date"
                                             onChange={handleChange}
                                             name="fromDate"
-                                            className="w-full border rounded-lg px-4 py-3 text-gray-500 outline-none focus:ring-1 focus:ring-purple-200"
+                                            className="w-full border border-gray-300 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none focus:border-black focus:bg-white transition-all duration-200"
                                         />
                                         <input
                                             type="time"
                                             name="fromTime"
                                             onChange={handleChange}
-                                            className="w-full border rounded-lg px-3 py-2 text-gray-500 outline-none focus:ring-1 focus:ring-purple-200"
+                                            className="w-full border border-gray-300 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none focus:border-black focus:bg-white transition-all duration-200"
                                         />
                                     </div>
                                 </div>
@@ -241,18 +241,18 @@ const SlotsBooking = () => {
                                     <label className="text-m font-black   text-gray-500 mb-2 mt-2 block">
                                         Select Date & Time (to)
                                     </label>
-                                    <div className="flex gap-2">
+                                    <div className="flex flex-col sm:flex-row gap-2">
                                         <input
                                             type="date"
                                             name="toDate"
                                             onChange={handleChange}
-                                            className="w-full border rounded-lg px-4 py-3 text-gray-500 outline-none focus:ring-1 focus:ring-purple-200"
+                                            className="w-full border border-gray-300 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none focus:border-black focus:bg-white transition-all duration-200"
                                         />
                                         <input
                                             type="time"
                                             name="toTime"
                                             onChange={handleChange}
-                                            className="w-full border rounded-lg px-3 py-2 text-gray-500 outline-none focus:ring-1 focus:ring-purple-200"
+                                            className="w-full border border-gray-300 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-700 outline-none focus:border-black focus:bg-white transition-all duration-200"
                                         />
 
                                     </div>

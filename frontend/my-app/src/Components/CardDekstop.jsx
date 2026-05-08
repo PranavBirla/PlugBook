@@ -16,6 +16,7 @@ const CardDekstop = () => {
 
           {/* overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
 
           {/* text */}
           <div className="absolute bottom-4 left-4 text-white">
@@ -41,6 +42,7 @@ const CardDekstop = () => {
 
           {/* overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
 
 
           <div className="absolute bottom-4 left-4 text-white">
@@ -64,7 +66,7 @@ const CardDekstop = () => {
             alt=""
           />
 
-         
+
           <div className="absolute inset-0  bg-gradient-to-t from-black/50 to-transparent "></div>
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>

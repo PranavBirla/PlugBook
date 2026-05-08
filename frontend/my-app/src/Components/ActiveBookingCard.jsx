@@ -34,7 +34,7 @@ const ActiveBookingCard = ({ booking }) => {
 
   return (
     <div onClick={handleOpenTicket} className=' flex flex-col mx-4 bg-white relative rounded-4xl overflow-hidden shadow-[0_0_20px_0_rgba(0,0,0,0.2)] sm:mx-12 md:flex-row'>
-      <div className='md:w-1/3'><img src="public\img1.png" alt="" /></div>
+      <div className='md:w-1/3'><img src="/img1.png" alt="" /></div>
 
       <div className='flex justify-center md:mx-20 md:w-2/3 md:justify-around'>
         <div className='flex justify-between items-center py-3 px-5 absolute bottom-0  my-2 rounded-4xl bg-white/[0.90] w-12/13 md:static md:gap-4'>

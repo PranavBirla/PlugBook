@@ -58,8 +58,8 @@ const Homepage = () => {
         <div className=" mt-10 md:hidden">
           <CardHome2 />
         </div>
-        <div className='my-15'>
-          <div className='flex flex-col gap-4 mx-4 tracking-widest mt-6'><h1 className='text-2xl font-medium bg-amber-50 px-1 w-fit '>Our Research</h1>
+        <div className='my-15 mx-4 md:mx-10 lg:mx-12'>
+          <div className='flex flex-col gap-4 tracking-widest mt-6'><h1 className='text-2xl font-medium bg-amber-50 px-1 w-fit '>Our Research</h1>
             <p className='text-sm text-zinc-500 ml-5 leading-loose '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque alias eius quae? Aut beatae quod vero saepe? Aliquid nisi minima eaque magni quas nam esse.</p>
             <div className='flex justify-end'>
               <button className='shadow-[0_6px_20px_rgba(0,0,0,0.18)] flex gap-1 items-center text-md text-white bg-black rounded-3xl py-1 px-3 mx-4'>View <ArrowRight size={20} /></button>
@@ -67,7 +67,7 @@ const Homepage = () => {
           </div>
           <div className='border-t border-black/10 my-8 mx-6'></div>
 
-          <div className='flex flex-col gap-4 mx-4 tracking-widest mt-8'>
+          <div className='flex flex-col gap-4  tracking-widest mt-8'>
             <div className='flex '> 
               <h1 className='text-2xl font-medium bg-sky-100 px-1 w-fit '>Our Vision</h1>
             </div>

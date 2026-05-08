@@ -60,7 +60,7 @@ export default function StationCard({ station, isSelected, onSelect, refProp }) 
 
             {/* RIGHT IMAGE (dummy for now) */}
             <div className="w-1/3 lg:w-1/2 rounded-2xl overflow-hidden mt-4">
-                <img className="rounded-2xl" src="public\img-car-home.png" alt="" />
+                <img className="rounded-2xl" src="/img-car-home.png" alt="" />
             </div>
 
         </div>
