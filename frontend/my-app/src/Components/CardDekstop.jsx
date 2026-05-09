@@ -1,93 +1,177 @@
 import React from 'react'
 
 const CardDekstop = () => {
-  return (
-    <div className="h-[350px] mx-4 mt-2 sm:mx-10 md:mx-12 lg:mx-14">
 
-      <div className="shadow-sm hover:shadow-[0_10px_35px_rgba(137,92,231,0.18)] bg-zinc-200 border border-gray-200 h-full w-full flex gap-1.5 overflow-hidden rounded-2xl">
+    const cards = [
+        {
+            img: "/img2.png",
+            tag: "Eco Friendly",
+            title: "Drive Clean Energy",
+            desc: "Sustainable Future",
+        },
 
-        {/* IMAGE 1 */}
-        <div className="w-1/2 lg:w-1/3 relative ">
-          <img
-            className="h-full w-full object-cover"
-            src="/img2.png"
-            alt=""
-          />
+        {
+            img: "/img1.png",
+            tag: "Find Chargers",
+            title: "Nearby Instantly",
+            desc: "Real-Time Locations",
+        },
 
-          {/* overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        {
+            img: "/img-car-home.png",
+            tag: "Fast Charging",
+            title: "Book Your Slot",
+            desc: "No Waiting Time",
+        }
+    ];
 
-          {/* text */}
-          <div className="absolute bottom-4 left-4 text-white">
-            <p className="text-[10px] tracking-widest uppercase opacity-80">
-              Eco Friendly
-            </p>
-            <h2 className="text-lg font-semibold leading-tight">
-              Drive Clean Energy
-            </h2>
-            <p className="text-xs opacity-80">
-              Sustainable Future
-            </p>
-          </div>
-        </div>
+    return (
 
-        {/* IMAGE 2 */}
-        <div className="w-1/2 lg:w-1/3 relative">
-          <img
-            className="h-full w-full object-cover"
-            src="/img1.png"
-            alt=""
-          />
+        <section className="px-4 sm:px-8 md:px-10 lg:px-14 py-10">
 
-          {/* overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <div className="relative">
 
+                {/* GLOW */}
 
-          <div className="absolute bottom-4 left-4 text-white">
-            <p className="text-[10px] tracking-widest uppercase opacity-80">
-              Find Chargers
-            </p>
-            <h2 className="text-lg font-semibold leading-tight">
-              Nearby Instantly
-            </h2>
-            <p className="text-xs opacity-80">
-              Real-Time Locations
-            </p>
-          </div>
-        </div>
+                <div className="absolute inset-0 bg-[#595CE7]/60 blur-[120px]" />
 
+                {/* GRID */}
 
-        <div className="hidden lg:block lg:w-1/3 relative">
-          <img
-            className="h-full w-full object-cover"
-            src="/img-car-home.png"
-            alt=""
-          />
+                <div className="
+                    relative z-10
+                    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+                    gap-4
+                ">
 
+                    {cards.map((card, index) => (
 
-          <div className="absolute inset-0  bg-gradient-to-t from-black/50 to-transparent "></div>
+                        <div
+                            key={index}
+                            className="
+                                group relative overflow-hidden
+                                h-[240px] md:h-[300px] lg:h-[360px]
+                                rounded-[32px]
+                                border border-white/10
+                                bg-white/[0.04]
+                                backdrop-blur-2xl
+                                shadow-[0_10px_40px_rgba(0,0,0,0.22)]
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                transition-all duration-700
 
+                                hover:scale-[1.02]
+                                hover:border-[#895CE7]/30
+                            "
+                        >
 
-          <div className="absolute bottom-4 left-4 text-white">
-            <p className="text-[10px] tracking-widest uppercase opacity-80">
-              Fast Charging
-            </p>
-            <h2 className="text-lg font-semibold leading-tight">
-              Book Your Slot
-            </h2>
-            <p className="text-xs opacity-80">
-              No Waiting Time
-            </p>
-          </div>
-        </div>
+                            {/* IMAGE */}
 
-      </div>
-    </div>
-  )
+                            <img
+                                src={card.img}
+                                alt=""
+                                className="
+                                    absolute inset-0
+                                    w-full h-full object-cover
+                                    transition-all duration-1000
+                                    group-hover:scale-105
+                                "
+                            />
+
+                            {/* DARK OVERLAY */}
+
+                            <div className="
+                                absolute inset-0
+                                bg-black/25
+                            " />
+
+                            {/* PURPLE TINT */}
+
+                            <div className="
+                                absolute inset-0
+                                bg-[#895CE7]/10
+                            " />
+
+                            {/* GRADIENT */}
+
+                            <div className="
+                                absolute inset-0
+                                bg-gradient-to-t
+                                from-black/80
+                                via-black/10
+                                to-transparent
+                            " />
+
+                            {/* GLOW */}
+
+                            <div className="
+                                absolute inset-0 opacity-0
+                                bg-[#895CE7]/10 blur-3xl
+                                transition-all duration-700
+                                group-hover:opacity-100
+                            " />
+
+                            {/* CONTENT */}
+
+                            <div className="
+                                absolute bottom-0 left-0
+                                w-full p-5 md:p-6
+                            ">
+
+                                {/* TAG */}
+
+                                <div className="
+                                    w-fit px-4 py-2 mb-4
+                                    rounded-full
+                                    border border-white/10
+                                    bg-white/10
+                                    backdrop-blur-xl
+                                    text-[#eadfff]
+                                    text-[10px] md:text-xs
+                                    font-medium tracking-[0.18em]
+                                    uppercase
+                                ">
+
+                                    {card.tag}
+
+                                </div>
+
+                                {/* TITLE */}
+
+                                <h2 className="
+                                    text-2xl md:text-3xl
+                                    font-black tracking-tight
+                                    text-white leading-[1]
+                                ">
+
+                                    {card.title}
+
+                                </h2>
+
+                                {/* DESC */}
+
+                                <p className="
+                                    mt-3
+                                    text-zinc-300
+                                    text-sm md:text-[15px]
+                                ">
+
+                                    {card.desc}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    ))}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    )
+
 }
 
 export default CardDekstop

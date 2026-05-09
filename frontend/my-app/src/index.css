@@ -1,11 +1,49 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "Mirano";
+    src: url("/fonts/MiranoExtendedFreebie-Light.ttf") format("opentype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Mirano";
+    src: url("/fonts/MiranoExtendedFreebie-LightItalic.ttf") format("opentype");
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Eyekons";
+    src: url("/fonts/Eyekons.otf") format("opentype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Monowire";
+    src: url("/fonts/MONOWIRE.otf") format("opentype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Davigo";
+    src: url("/fonts/DavigoProDemo-Medium.ttf") format("opentype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Galldis";
+    src: url("/fonts/Galldis.ttf") format("opentype");
+    font-weight: 300;
+}
+
 * {
     cursor: url('./PurpleCursor.png') 0 0, auto;
+    font-family: 'Eyekons', sans-serif;
 }
 
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
     height: 100%;
     scroll-behavior: auto;
 }
