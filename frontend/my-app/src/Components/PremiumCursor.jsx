@@ -63,17 +63,29 @@ export default function PremiumCursor() {
 
         // SELECT INTERACTIVE ELEMENTS
 
-        const interactiveElements = document.querySelectorAll(
-            "button, a, input, textarea, .cursor-hover, img"
+        const handleHover = (e) => {
+
+            const target = e.target.closest(
+                "button, a, input, textarea, .cursor-hover, img"
+            );
+
+            if (target) {
+
+                handleMouseEnter();
+
+            } else {
+
+                handleMouseLeave();
+
+            }
+
+        };
+
+        document.addEventListener(
+            "mouseover",
+            handleHover
         );
 
-        interactiveElements.forEach((el) => {
-
-            el.addEventListener("mouseenter", handleMouseEnter);
-
-            el.addEventListener("mouseleave", handleMouseLeave);
-
-        });
 
         window.addEventListener("mousemove", moveCursor);
 
@@ -86,19 +98,10 @@ export default function PremiumCursor() {
                 moveCursor
             );
 
-            interactiveElements.forEach((el) => {
-
-                el.removeEventListener(
-                    "mouseenter",
-                    handleMouseEnter
-                );
-
-                el.removeEventListener(
-                    "mouseleave",
-                    handleMouseLeave
-                );
-
-            });
+            document.removeEventListener(
+                "mouseover",
+                handleHover
+            );
 
         };
 
