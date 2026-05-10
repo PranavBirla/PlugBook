@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 
 import "leaflet/dist/leaflet.css";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
-import { CircleArrowLeft } from 'lucide-react';
+import { CircleArrowLeft, ArrowRight, } from 'lucide-react';
 import {
     
     MapPinned,
@@ -254,7 +254,7 @@ export default function MapPage() {
                     >
 
                         {showPanel
-                            ? <ChevronLeft size={22} />
+                            ? <ArrowRight size={22} />
                             : <MapPinned size={22} />
                         }
 

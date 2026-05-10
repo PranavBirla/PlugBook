@@ -181,7 +181,7 @@ export default function LandingPageDesktop() {
 
             {/* BG */}
 
-            <div className="fixed inset-0 -z-10 overflow-hidden">
+            <div className="absolute blur-sm inset-0 -z-10 overflow-hidden">
 
                 <img
                     src="/full-bg2.jpg"
