@@ -92,7 +92,7 @@ async function cancelBooking(req, res) {
 
         const { bookingId } = req.params
 
-        const booking = await bookingModel.find({bookingId})
+        const booking = await bookingModel.findById(bookingId);
 
         if(!booking) {
             return res.status(404).json({
@@ -114,7 +114,7 @@ async function cancelBooking(req, res) {
             });
         }
 
-        booking.status = "cancelled;"
+        booking.status = "cancelled"
 
         await booking.save();
 
@@ -125,7 +125,7 @@ async function cancelBooking(req, res) {
     } catch(err) {
         console.log(err)
         res.status(500).json({
-            message: message.err
+            message: err.message
         });
     }
 }

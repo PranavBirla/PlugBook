@@ -4,6 +4,7 @@ import Ticket from "../Components/Ticket";
 
 import Navbar from "../Components/Navbar";
 import Top from "../Components/Top";
+import API from "../api/axios";
 
 import { useLocation } from "react-router-dom";
 
