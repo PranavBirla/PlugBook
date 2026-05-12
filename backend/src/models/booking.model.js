@@ -14,8 +14,8 @@ const bookingSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["active", "cancelled", "upcoming", "expired"],
-        default: "active"
+        enum: ["booked", "cancelled", "upcoming", "expired"],
+        default: "booked"
     },
     chargerType: String, // "AC" or "DC"
     startTime: {
