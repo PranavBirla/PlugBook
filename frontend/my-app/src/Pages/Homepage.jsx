@@ -69,12 +69,12 @@ const Homepage = () => {
         <div className='my-15'>
 
 
-          <OurResearch/>
-          
-          <div className='border-t border-black/10 my-8 mx-6'></div>
+          <OurResearch />
 
-          <OurFeatures/>
-          
+        
+
+          <OurFeatures />
+
         </div>
       </div>
       <Navbar />

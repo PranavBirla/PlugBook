@@ -138,7 +138,7 @@ export default function AvailabilityPage() {
             </div>
 
             {/* EXTRA GLOW */}
-            <div className="absolute top-0 left-0 w-full h-[500px] bg-[#895CE7]/10 blur-[120px] -z-10" />
+            <div className="absolute top-0 left-0 w-full h-[500px] bg-[#895CE7]/10 blur-[140px] -z-10" />
 
             {/* ================= PAGE ================= */}
 
@@ -188,7 +188,7 @@ export default function AvailabilityPage() {
                         overflow-hidden
                         rounded-[32px]
                         border border-white/40
-                        bg-white/60
+                        bg-white/[0.05]
                         backdrop-blur-2xl
                         shadow-[0_10px_50px_rgba(0,0,0,0.08)]
                         p-5 md:p-8
@@ -230,8 +230,16 @@ export default function AvailabilityPage() {
                                     name="fromDate"
                                     onChange={handleChange}
                                     className="
-                                        premium-input
-                                        w-full
+                                         w-full
+                                                rounded-2xl
+                                                border border-white/10
+                                                bg-white/[0.06]
+                                                px-4 py-4
+                                                text-white
+                                                outline-none
+                                                focus:border-[#895CE7]/40
+                                                focus:bg-white/[0.08]
+                                                transition-all
                                     "
                                 />
 
@@ -240,8 +248,16 @@ export default function AvailabilityPage() {
                                     name="fromTime"
                                     onChange={handleChange}
                                     className="
-                                        premium-input
-                                        w-full
+                                         w-full
+                                                rounded-2xl
+                                                border border-white/10
+                                                bg-white/[0.06]
+                                                px-4 py-4
+                                                text-white
+                                                outline-none
+                                                focus:border-[#895CE7]/40
+                                                focus:bg-white/[0.08]
+                                                transition-all
                                     "
                                 />
 
@@ -271,8 +287,16 @@ export default function AvailabilityPage() {
                                     name="toDate"
                                     onChange={handleChange}
                                     className="
-                                        premium-input
                                         w-full
+                                                rounded-2xl
+                                                border border-white/10
+                                                bg-white/[0.06]
+                                                px-4 py-4
+                                                text-white
+                                                outline-none
+                                                focus:border-[#895CE7]/40
+                                                focus:bg-white/[0.08]
+                                                transition-all
                                     "
                                 />
 
@@ -281,8 +305,16 @@ export default function AvailabilityPage() {
                                     name="toTime"
                                     onChange={handleChange}
                                     className="
-                                        premium-input
-                                        w-full
+                                         w-full
+                                                rounded-2xl
+                                                border border-white/10
+                                                bg-white/[0.06]
+                                                px-4 py-4
+                                                text-white
+                                                outline-none
+                                                focus:border-[#895CE7]/40
+                                                focus:bg-white/[0.08]
+                                                transition-all
                                     "
                                 />
 
@@ -301,8 +333,9 @@ export default function AvailabilityPage() {
                                 px-8
                                 py-4
                                 rounded-2xl
-                                bg-[#895CE7]
-                                text-white
+                                bg-white
+                                text-black
+                                
                                 font-semibold
                                 shadow-[0_10px_30px_rgba(137,92,231,0.35)]
                                 transition-all
