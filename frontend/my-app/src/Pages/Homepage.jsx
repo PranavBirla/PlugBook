@@ -76,6 +76,10 @@ const Homepage = () => {
           <OurFeatures/>
           
         </div>
+
+        <div className="w-full">
+          <img src="/vector2.svg" alt="" className='w-full' />
+        </div>
       </div>
       <Navbar />
 

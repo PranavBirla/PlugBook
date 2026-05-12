@@ -4,21 +4,21 @@ const CardDekstop = () => {
 
     const cards = [
         {
-            img: "/img2.png",
+            img: "/tesla-img.jpg",
             tag: "Eco Friendly",
             title: "Drive Clean Energy",
             desc: "Sustainable Future",
         },
 
         {
-            img: "/img1.png",
+            img: "/car-map.jpg",
             tag: "Find Chargers",
             title: "Nearby Instantly",
             desc: "Real-Time Locations",
         },
 
         {
-            img: "/img-car-home.png",
+            img: "/car-charger.jpg",
             tag: "Fast Charging",
             title: "Book Your Slot",
             desc: "No Waiting Time",
