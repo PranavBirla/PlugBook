@@ -135,8 +135,13 @@ async function getMyBookings(req, res) {
     try {
         const bookings = await bookingModel.find({
             user: req.user.id,
-            endTime: { $lt: new Date() }
-        }).populate("station");
+            $or: [
+                {endTime: { $lt: new Date() }},
+                {status: "cancelled"}
+            ]
+        
+        }).sort({ createdAt: -1 })
+        .populate("station");
 
         const format = d => new Date(d).toLocaleString("en-IN");
 

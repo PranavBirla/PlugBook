@@ -26,7 +26,7 @@ const TicketPage = () => {
             try {
         
                 await API.patch(
-                `/api/bookings/cancel/${booking._id}`,
+                `/api/bookings/cancel-booking/${booking._id}`,
                 {},
                 {
                     withCredentials: true
