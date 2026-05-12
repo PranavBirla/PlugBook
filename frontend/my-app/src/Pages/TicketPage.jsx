@@ -27,6 +27,12 @@ const TicketPage = () => {
     const booking =
         bookingFromCreate || bookingFromCard;
 
+        const isExpired =
+        ["expired", "completed", "cancelled"]
+            .includes(
+                booking?.status?.toLowerCase()
+            );
+
     const [showPopup, setShowPopup] =
         React.useState(false);
 
@@ -144,26 +150,44 @@ const TicketPage = () => {
 
                 {/* CANCEL BUTTON */}
 
-                <div className="mt-8 flex justify-center">
+                {
+                    !isExpired ? (
 
-                    <button
-                        onClick={() => setShowPopup(true)}
-                        className="group relative overflow-hidden px-7 py-4 rounded-[22px] border border-red-500/20 bg-red-500/10 backdrop-blur-2xl text-red-300 font-semibold transition-all duration-300 hover:bg-red-500/15 hover:scale-[1.02] active:scale-[0.98]"
-                    >
+                        <div className="mt-8 flex justify-center">
 
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-500/0 via-red-500/10 to-red-500/0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-1000" />
+                            <button
+                                onClick={() => setShowPopup(true)}
+                                className="group relative overflow-hidden px-7 py-4 rounded-[22px] border border-red-500/20 bg-red-500/10 backdrop-blur-2xl text-red-300 font-semibold transition-all duration-300 hover:bg-red-500/15 hover:scale-[1.02] active:scale-[0.98]"
+                            >
 
-                        <span className="relative z-10 flex items-center gap-3">
+                                <div className="absolute inset-0 bg-gradient-to-r from-red-500/0 via-red-500/10 to-red-500/0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-1000" />
 
-                            <TriangleAlert size={18} />
+                                <span className="relative z-10 flex items-center gap-3">
 
-                            Cancel Booking
+                                    <TriangleAlert size={18} />
 
-                        </span>
+                                    Cancel Booking
 
-                    </button>
+                                </span>
 
-                </div>
+                            </button>
+
+                        </div>
+
+                    ) : (
+
+                        <div className="mt-8 flex justify-center">
+
+                            <div className="px-6 py-3 rounded-full border border-zinc-700 bg-zinc-900/70 text-zinc-400 text-sm backdrop-blur-xl">
+
+                                Booking Expired
+
+                            </div>
+
+                        </div>
+
+                    )
+                }
 
                 {/* MESSAGE */}
 
