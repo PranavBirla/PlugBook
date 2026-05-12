@@ -12,7 +12,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import { CircleArrowLeft, ArrowRight, } from 'lucide-react';
 import {
-    
+
     MapPinned,
     Navigation,
     Zap,
@@ -36,7 +36,12 @@ import {
 } from "../utils/mapIcons";
 import SmartBackButton from "../Components/BackButton";
 
+
+
+
+
 export default function MapPage() {
+    const mapRef = useRef(null);
 
     const [position, setPosition] = useState(null);
     const [stations, setStations] = useState([]);
@@ -48,6 +53,7 @@ export default function MapPage() {
     const [mobileExpanded, setMobileExpanded] = useState(false);
 
     const selectedRef = useRef(null);
+
 
     useEffect(() => {
 
@@ -74,7 +80,7 @@ export default function MapPage() {
 
     useEffect(() => {
 
-        navigator.geolocation.getCurrentPosition(
+        const watchId = navigator.geolocation.watchPosition(
 
             async (pos) => {
 
@@ -83,19 +89,24 @@ export default function MapPage() {
 
                 setPosition([lat, lng]);
 
-                try {
+                // fetch stations only first time
+                if (stations.length === 0) {
 
-                    const data = await getNearbyStations(lat, lng);
+                    try {
 
-                    setStations(data.data);
+                        const data = await getNearbyStations(lat, lng);
 
-                } catch (err) {
+                        setStations(data.data);
 
-                    console.error(err);
+                    } catch (err) {
 
-                } finally {
+                        console.error(err);
 
-                    setLoading(false);
+                    } finally {
+
+                        setLoading(false);
+
+                    }
 
                 }
 
@@ -113,10 +124,15 @@ export default function MapPage() {
 
             {
                 enableHighAccuracy: true,
-                timeout: 5000,
+                maximumAge: 0,
+                timeout: 10000,
             }
 
         );
+
+        return () => {
+            navigator.geolocation.clearWatch(watchId);
+        };
 
     }, []);
 
@@ -125,21 +141,6 @@ export default function MapPage() {
 
     // RECENTER
 
-    function RecenterMap({ position }) {
-
-        const map = useMap();
-
-        useEffect(() => {
-
-            if (position) {
-                map.setView(position, 14);
-            }
-
-        }, [position]);
-
-        return null;
-
-    }
 
     return (
         <div>
@@ -147,7 +148,7 @@ export default function MapPage() {
                 onClick={() => window.history.back()}
                 className=" absolute top-5 left-5 z-[1200] text-purple-700 flex items-center justify-center   "
             >
-               <CircleArrowLeft /> 
+                <CircleArrowLeft />
             </button>
             <div className="fixed inset-0 overflow-hidden bg-black">
 
@@ -162,6 +163,11 @@ export default function MapPage() {
                         zoom={14}
                         zoomControl={false}
                         scrollWheelZoom={true}
+
+                        whenCreated={(map) => {
+                            mapRef.current = map;
+                        }}
+
                         style={{
                             height: "100%",
                             width: "100%"
@@ -227,7 +233,6 @@ export default function MapPage() {
 
                         )}
 
-                        <RecenterMap position={position} />
 
                     </MapContainer>
 
@@ -261,7 +266,24 @@ export default function MapPage() {
                     </button>
 
                     <button
-                        className="w-14 h-14 rounded-2xl border border-white/10 bg-black/30 backdrop-blur-2xl text-white flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.25)] hover:bg-white/10 transition-all"
+
+                        onClick={() => {
+
+                            if (mapRef.current && position) {
+
+                                mapRef.current.flyTo(
+                                    position,
+                                    14,
+                                    {
+                                        duration: 1.5
+                                    }
+                                );
+
+                            }
+
+                        }}
+
+                        className=" w-14 h-14 rounded-2xl border border-white/10 bg-black/30 backdrop-blur-2xl text-white flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.25)] hover:bg-white/10 transition-all "
                     >
 
                         <Navigation size={20} />
