@@ -202,31 +202,29 @@ const HistoryBookingCard = ({ booking }) => {
 
                     {/* STATUS */}
 
-                    <div className="
-                        px-4
-                        py-2
+                    <div
+                        className={` px-4 py-2 rounded-full text-xs md:text-sm font-medium border backdrop-blur-xl shadow-lg whitespace-nowrap
 
-                        rounded-full
+                ${booking.status === "cancelled"
+                                ? `
+                border-red-500/60
+                bg-red-500/40
+                text-red-700
+                `
+                                : `
+                border-gray-500/20
+                bg-gray-500/10
+                text-gray-300
+                `
+                            }
+                `}
+                    >
 
-                        text-xs
-                        md:text-sm
+                        {booking.status === "cancelled"
+                            ? "Cancelled"
+                            : "Expired"
+                        }
 
-                        font-medium
-
-                        border
-                        border-zinc-500/20
-
-                        bg-zinc-500/10
-
-                        text-zinc-300
-
-                        backdrop-blur-xl
-
-                        shadow-lg
-
-                        whitespace-nowrap
-                    ">
-                        Expired
                     </div>
 
                 </div>

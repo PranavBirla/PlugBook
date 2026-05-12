@@ -14,6 +14,7 @@ import BgIcons from "../Components/BgIcons"
 import ActiveSlotBookings from '../Pages/ActiveSlotBookingsPage'
 import HistorySlotBookings from '../Pages/HistorySlotBookings'
 import UserProfilePage from "../Pages/UserProfilePage"
+import StationUploadPage from '../Pages/StationUploadPage'
 
 const AppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
         <Route path="/activebooking" element={<ActiveSlotBookings/>} /> 
         <Route path="/historybooking" element={<HistorySlotBookings/>} /> 
         <Route path="/user" element={<UserProfilePage/>} /> 
+        <Route path="/station-upload" element={<StationUploadPage/>} /> 
 
         <Route path="/loader" element={<Loader />} />
       </Routes>

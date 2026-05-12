@@ -45,7 +45,7 @@ async function createBooking(req, res) {
         const overlappingBookings = await bookingModel.find({
             station: stationId,
             chargerType,
-            status: "booked",
+            status: "active",
 
             startTime: { $lt: new Date(endTime) },
             endTime: { $gt: new Date(startTime) },
@@ -87,13 +87,61 @@ async function createBooking(req, res) {
 
 };
 
+async function cancelBooking(req, res) {
+    try{
+
+        const { bookingId } = req.params
+
+        const booking = await bookingModel.findById(bookingId);
+
+        if(!booking) {
+            return res.status(404).json({
+                message: "Booking not found!"
+            });
+        }
+
+        if(
+            booking.user.toString() !== req.user.id
+        ) {
+            return res.status(403).json({
+                message: "Unauthorized"
+            });
+        }
+
+        if(booking.status === "cancelled") {
+            return res.status(400).json({
+                message: "Booking already cancelled!"
+            });
+        }
+
+        booking.status = "cancelled"
+
+        await booking.save();
+
+        res.status(200).json({
+            message: "Booking cancelled successfully.",
+            booking
+        });
+    } catch(err) {
+        console.log(err)
+        res.status(500).json({
+            message: err.message
+        });
+    }
+}
+
 async function getMyBookings(req, res) {
 
     try {
         const bookings = await bookingModel.find({
             user: req.user.id,
-            endTime: { $lt: new Date() }
-        }).populate("station");
+            $or: [
+                {endTime: { $lt: new Date() }},
+                {status: "cancelled"}
+            ]
+        
+        }).sort({ createdAt: -1 })
+        .populate("station");
 
         const format = d => new Date(d).toLocaleString("en-IN");
 
@@ -136,6 +184,7 @@ async function getActiveBookings(req, res) {
 
 module.exports = {
     createBooking,
+    cancelBooking,
     getMyBookings,
     getActiveBookings
 }
