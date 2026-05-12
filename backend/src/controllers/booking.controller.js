@@ -114,6 +114,12 @@ async function cancelBooking(req, res) {
             });
         }
 
+        if(booking.status === "expired") {
+            return res.status(400).json({
+                message: "Booking is expired!"
+            });
+        }
+
         booking.status = "cancelled"
 
         await booking.save();

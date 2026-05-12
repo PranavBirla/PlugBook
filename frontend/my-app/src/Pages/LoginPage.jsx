@@ -171,6 +171,25 @@ export default function LoginPage() {
 
                     </div>
 
+
+                    {/* HUD CIRCLE */}
+
+                    <div className=" absolute top-1/2 right-[-230px] -translate-y-1/2 w-[460px] h-[460px] opacity-[0.9] pointer-events-none select-none -z-20">
+
+                        {/* GLOW */}
+
+                        <div className=" bsolute inset-0 rounded-full bg-[#895CE7]/20  blur-[100px] " />
+
+                        {/* IMAGE */}
+
+                        <img
+                            src="/arc-reactor.png"
+                            alt=""
+                            className=" relative z-10 w-full h-full object-contain animate-[spin_30s_linear_infinite] opacity-[0.95] drop-shadow-[0_0_60px_rgba(137,92,231,0.45)] "
+                        />
+
+                    </div>
+
                     {/* TILTED CARDS */}
 
                     <div className="flex items-center gap-5">
