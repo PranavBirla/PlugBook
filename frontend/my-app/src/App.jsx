@@ -38,7 +38,7 @@ function App() {
     <>
       <PremiumCursor />
       
-      <AppRoutes />;
+      <AppRoutes />
     </>
   );
 }

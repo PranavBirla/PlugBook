@@ -71,7 +71,7 @@ export default function SignUpPage() {
 
     return (
 
-        <div className="relative h-screen overflow-hidden bg-black flex items-center justify-center px-0 lg:px-4">
+        <div className="relative  min-h-screen overflow-hidden bg-black flex items-center justify-center px-0 lg:px-4">
 
             {/* BG */}
 
@@ -97,7 +97,7 @@ export default function SignUpPage() {
 
             {/* MAIN */}
 
-            <div className="w-full max-w-[1450px] h-screen lg:h-[90vh] overflow-hidden lg:rounded-[36px] lg:border lg:border-white/10 lg:bg-white/[0.04] lg:backdrop-blur-3xl lg:shadow-[0_20px_120px_rgba(0,0,0,0.45)] flex">
+            <div className="w-full max-w-[1450px]  min-h-screen lg:h-[90vh] overflow-hidden lg:rounded-[36px] lg:border lg:border-white/10 lg:bg-white/[0.04] lg:backdrop-blur-3xl lg:shadow-[0_20px_120px_rgba(0,0,0,0.45)] flex">
 
                 {/* LEFT */}
 
@@ -252,7 +252,7 @@ export default function SignUpPage() {
 
                 {/* RIGHT */}
 
-                <div className="relative w-full lg:w-[45%] flex items-center justify-center px-6 py-10 lg:p-10 bg-black/20 lg:border-l lg:border-white/10 overflow-hidden">
+                <div className="relative w-full lg:w-[45%] flex items-center justify-center px-6 py-2 lg:p-10 bg-black/20 lg:border-l lg:border-white/10 overflow-hidden">
 
                     {/* GLOW */}
 
@@ -264,7 +264,7 @@ export default function SignUpPage() {
 
                         {/* MOBILE LOGO */}
 
-                        <div className="flex lg:hidden items-center gap-3 mb-10">
+                        <div className="flex lg:hidden items-center gap-3 mb-6">
 
                             <div className="w-10 h-10 rounded-2xl border border-white/10 bg-white/[0.08] flex items-center justify-center">
 
@@ -280,7 +280,7 @@ export default function SignUpPage() {
 
                         {/* TOP */}
 
-                        <h1 className="text-[2.6rem] lg:text-4xl font-black tracking-tight text-white">
+                        <h1 className="text-[1.8rem] md:text-3xl lg:text-4xl font-black tracking-tight text-white">
 
                             Create
                             <br />
@@ -300,7 +300,7 @@ export default function SignUpPage() {
 
                         <form
                             onSubmit={handleSubmit}
-                            className="mt-8 flex flex-col gap-4"
+                            className="mt-6 flex flex-col gap-3 md:gap-4"
                         >
 
                             {/* FULL NAME */}
@@ -310,7 +310,7 @@ export default function SignUpPage() {
                                 name="fullName"
                                 placeholder="Full Name"
                                 onChange={() => setError("")}
-                                className="w-full h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 text-white placeholder:text-zinc-500 outline-none focus:border-[#895CE7]/40 transition-all duration-300"
+                                className="w-full h-[50px] md:h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 text-white placeholder:text-zinc-500 outline-none focus:border-[#895CE7]/40 transition-all duration-300"
                             />
 
                             {/* EMAIL */}
@@ -320,7 +320,7 @@ export default function SignUpPage() {
                                 name="email"
                                 placeholder="Email Address"
                                 onChange={() => setError("")}
-                                className="w-full h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 text-white placeholder:text-zinc-500 outline-none focus:border-[#895CE7]/40 transition-all duration-300"
+                                className="w-full h-[50px] md:h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 text-white placeholder:text-zinc-500 outline-none focus:border-[#895CE7]/40 transition-all duration-300"
                             />
 
                             {/* PASSWORD */}
@@ -330,7 +330,7 @@ export default function SignUpPage() {
                                 name="password"
                                 placeholder="Create Password"
                                 onChange={() => setError("")}
-                                className="w-full h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 text-white placeholder:text-zinc-500 outline-none focus:border-[#895CE7]/40 transition-all duration-300"
+                                className="w-full h-[50px] md:h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 text-white placeholder:text-zinc-500 outline-none focus:border-[#895CE7]/40 transition-all duration-300"
                             />
 
                             {/* ERROR */}
@@ -362,7 +362,7 @@ export default function SignUpPage() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className={`mt-2 w-full h-[60px] rounded-[22px] flex items-center justify-center gap-3 text-[16px] font-semibold transition-all duration-300 ${
+                                className={`mt-2 w-full h-[50px] md:h-[60px] rounded-[22px] flex items-center justify-center gap-3 text-[16px] font-semibold transition-all duration-300 ${
                                     loading
                                         ? "bg-zinc-700 text-zinc-300 cursor-not-allowed"
                                         : "bg-white text-black hover:scale-[1.01]"
@@ -392,7 +392,7 @@ export default function SignUpPage() {
 
                         {/* DIVIDER */}
 
-                        <div className="relative flex items-center justify-center my-7">
+                        <div className="relative flex items-center justify-center my-4 md:my-7">
 
                             <div className="absolute w-full h-[1px] bg-white/10" />
 
@@ -406,7 +406,7 @@ export default function SignUpPage() {
 
                         {/* GOOGLE */}
 
-                        <button className="w-full h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl flex items-center justify-center gap-4 text-white hover:bg-white/[0.08] transition-all duration-300">
+                        <button className="w-full h-[50px] md:h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl flex items-center justify-center gap-4 text-white hover:bg-white/[0.08] transition-all duration-300">
 
                             <svg width="22" height="22" viewBox="0 0 48 48">
 
@@ -428,7 +428,7 @@ export default function SignUpPage() {
 
                         {/* FOOTER */}
 
-                        <p className="mt-7 text-center text-zinc-400 text-sm">
+                        <p className="mt-3 md:mt-7 text-center text-zinc-400 text-sm">
 
                             Already have an account?{" "}
 

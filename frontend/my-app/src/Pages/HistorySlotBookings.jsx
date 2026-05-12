@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HistoryBookingCard from '../Components/HistoryBookingCard';
+import Loader from "../Components/Loader"
 
 import Top from '../Components/Top';
 import Navbar from '../Components/Navbar';
@@ -12,6 +13,7 @@ import API from "../api/axios";
 const HistorySlotBookings = () => {
 
     const [bookings, setBookings] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
@@ -35,6 +37,8 @@ const HistorySlotBookings = () => {
                     err
                 );
 
+            } finally {
+                setLoading(false);
             }
 
         };
@@ -42,6 +46,10 @@ const HistorySlotBookings = () => {
         fetchBookings();
 
     }, []);
+    
+    if (loading) {
+        return <Loader />;
+    }
 
     return (
 

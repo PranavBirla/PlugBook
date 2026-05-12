@@ -2,6 +2,7 @@ import React from 'react';
 import ActiveBookingCard from '../Components/ActiveBookingCard';
 import Top from '../Components/Top';
 import Navbar from '../Components/Navbar';
+import Loader from "../Components/Loader"
 import { CircleArrowLeft } from 'lucide-react';
 
 import { useEffect, useState } from "react";
@@ -10,6 +11,7 @@ import API from "../api/axios";
 const ActiveSlotBookings = () => {
 
     const [bookings, setBookings] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
@@ -32,6 +34,9 @@ const ActiveSlotBookings = () => {
                     err
                 );
             }
+            finally{
+                setLoading(false);
+            }
 
         };
 
@@ -48,6 +53,10 @@ const ActiveSlotBookings = () => {
         return now >= start && now <= end;
 
     }).length;
+
+    if(loading){
+        return <Loader/>;
+    }
 
     return (
 

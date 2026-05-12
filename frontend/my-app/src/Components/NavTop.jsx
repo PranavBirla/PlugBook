@@ -13,7 +13,7 @@ const Nav = () => {
     ];
 
     return (
-        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-full flex justify-center px-4 z-[1000]">
+        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-fit flex justify-center px-4 z-[1000]">
 
             {/* OUTER GLOW */}
             <div className="absolute inset-0 flex justify-center pointer-events-none">

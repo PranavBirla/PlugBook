@@ -93,7 +93,7 @@ export default function LoginPage() {
 
             {/* MAIN */}
 
-            <div className="w-full max-w-[1450px] h-[90vh] rounded-[36px] overflow-hidden border border-white/10 bg-white/[0.04] backdrop-blur-3xl shadow-[0_20px_120px_rgba(0,0,0,0.45)] flex">
+            <div className="w-full max-w-[1450px] h-[90vh] rounded-[36px] overflow-hidden border border-white/10 bg-white/[0.04] backdrop-blur-3xl shadow-[0_20px_120px_rgba(0,0,0,0.45)] flex ">
 
                 {/* LEFT */}
 
@@ -247,7 +247,7 @@ export default function LoginPage() {
 
                     <div className="relative z-10 w-full max-w-[420px]">
 
-                        <h1 className="text-4xl font-black tracking-tight text-white">
+                        <h1 className="text-[1.8rem] md:text-3xl text-4xl font-black tracking-tight text-white">
 
                             Welcome
                             <br />
@@ -276,7 +276,7 @@ export default function LoginPage() {
                                 name="email"
                                 placeholder="Email Address"
                                 onChange={() => setError("")}
-                                className="w-full h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 text-white placeholder:text-zinc-500 outline-none focus:border-[#895CE7]/40 transition-all duration-300"
+                                className="w-full h-[50px] md:h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 text-white placeholder:text-zinc-500 outline-none focus:border-[#895CE7]/40 transition-all duration-300"
                             />
 
                             {/* PASSWORD */}
@@ -286,7 +286,7 @@ export default function LoginPage() {
                                 name="password"
                                 placeholder="Password"
                                 onChange={() => setError("")}
-                                className="w-full h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 text-white placeholder:text-zinc-500 outline-none focus:border-[#895CE7]/40 transition-all duration-300"
+                                className="w-full h-[50px] md:h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 text-white placeholder:text-zinc-500 outline-none focus:border-[#895CE7]/40 transition-all duration-300"
                             />
 
                             {/* ERROR */}
@@ -318,7 +318,7 @@ export default function LoginPage() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className={`mt-2 w-full h-[60px] rounded-[22px] flex items-center justify-center gap-3 text-[16px] font-semibold transition-all duration-300 ${loading
+                                className={`mt-2 w-full h-[50px] md:h-[60px] rounded-[22px] flex items-center justify-center gap-3 text-[16px] font-semibold transition-all duration-300 ${loading
                                         ? "bg-zinc-700 text-zinc-300 cursor-not-allowed"
                                         : "bg-white text-black hover:scale-[1.01]"
                                     }`}
@@ -361,7 +361,7 @@ export default function LoginPage() {
 
                         {/* GOOGLE */}
 
-                        <button className="w-full h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl flex items-center justify-center gap-4 text-white hover:bg-white/[0.08] transition-all duration-300">
+                        <button className="w-full  h-[50px] md:h-[58px] rounded-[20px] border border-white/10 bg-white/[0.05] backdrop-blur-xl flex items-center justify-center gap-4 text-white hover:bg-white/[0.08] transition-all duration-300">
 
                             <svg width="22" height="24" viewBox="0 0 48 48">
 

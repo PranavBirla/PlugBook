@@ -56,7 +56,7 @@ const Navbar = () => {
                                         <Icon
                                             strokeWidth={1.7}
                                             size={20}
-                                            className={`relative z-10 transition-all duration-300 ${isActive ? "text-white" : "text-zinc-400"
+                                            className={`relative z-10 transition-all duration-300 ${isActive ? "text-white" : "text-zinc-200"
                                                 }`}
                                         />
 
