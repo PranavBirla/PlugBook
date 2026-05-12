@@ -4,6 +4,7 @@ const router = express.Router();
 const {authMiddleware} = require("../middlewares/auth.middleware");
 
 router.post("/create", authMiddleware, bookingController.createBooking);
+router.patch("/cancel-booking/:bookingId", authMiddleware, bookingController.cancelBooking);
 router.get("/my-bookings", authMiddleware, bookingController.getMyBookings);
 router.get("/active-bookings", authMiddleware, bookingController.getActiveBookings);
 

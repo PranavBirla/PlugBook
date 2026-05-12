@@ -20,6 +20,28 @@ const TicketPage = () => {
     const booking =
         bookingFromCreate || bookingFromCard;
 
+        const handleCancel = async () => {
+
+            try {
+        
+                await API.patch(
+                `/api/bookings/cancel/${booking._id}`,
+                {},
+                {
+                    withCredentials: true
+                }
+            );
+        
+            alert("Booking cancelled");
+        
+            } catch (err) {
+        
+            console.error(err);
+        
+            }
+        
+        };
+
     return (
 
         <div className="
@@ -110,6 +132,10 @@ const TicketPage = () => {
                     <Ticket booking={booking} />
 
                 </div>
+
+                <button onClick={handleCancel}>
+                    Cancel Booking
+                </button>
 
             </div>
 
