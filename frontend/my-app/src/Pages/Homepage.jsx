@@ -66,7 +66,7 @@ const Homepage = () => {
         </div>
 
 
-        <div className='my-15'>
+        <div className='my-10'>
 
 
           <OurResearch />

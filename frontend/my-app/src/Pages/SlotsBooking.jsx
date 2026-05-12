@@ -14,6 +14,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 
 import API from "../api/axios";
+import Top from "../Components/Top";
 
 const SlotsBooking = () => {
 
@@ -249,6 +250,9 @@ const SlotsBooking = () => {
             " />
 
             {/* CONTENT */}
+            <div>
+                <Top/>
+            </div>
 
             <div className="
                 relative z-10

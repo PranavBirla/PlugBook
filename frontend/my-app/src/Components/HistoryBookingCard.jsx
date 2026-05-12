@@ -159,9 +159,9 @@ const HistoryBookingCard = ({ booking }) => {
                             </h1>
 
                             <MoveRight
-                                strokeWidth={1.5}
+                                strokeWidth={2}
                                 className="
-                                    text-zinc-500
+                                    text-zinc-300
                                 "
                             />
 
@@ -343,14 +343,14 @@ const HistoryBookingCard = ({ booking }) => {
                         <CalendarDays
                             strokeWidth={1.5}
                             size={17}
-                            className="text-zinc-400"
+                            className="text-zinc-900"
                         />
 
                         <p className="
                             text-[11px]
                             md:text-xs
 
-                            text-zinc-300
+                            text-zinc-800
 
                             font-medium
 
@@ -380,14 +380,14 @@ const HistoryBookingCard = ({ booking }) => {
                         <Clock3
                             strokeWidth={1.5}
                             size={17}
-                            className="text-zinc-400"
+                            className="text-zinc-900"
                         />
 
                         <p className="
                             text-[11px]
                             md:text-xs
 
-                            text-zinc-300
+                            text-zinc-800
 
                             font-medium
                         ">
@@ -415,14 +415,14 @@ const HistoryBookingCard = ({ booking }) => {
                         <Plug
                             strokeWidth={1.5}
                             size={17}
-                            className="text-zinc-400"
+                            className="text-zinc-900"
                         />
 
                         <p className="
                             text-[11px]
                             md:text-xs
 
-                            text-zinc-300
+                            text-zinc-800
 
                             font-medium
                         ">

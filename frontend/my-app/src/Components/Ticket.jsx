@@ -1,5 +1,6 @@
-import React from "react";
 
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import {
     Clock3,
     Plug,
@@ -10,6 +11,8 @@ import {
 } from "lucide-react";
 
 const Ticket = ({ booking }) => {
+    const [showBarcode, setShowBarcode] = useState(false);
+    const navigate = useNavigate();
 
     if (!booking) {
         return null;
@@ -99,17 +102,6 @@ const Ticket = ({ booking }) => {
 
             {/* TICKET CUTS */}
 
-            <div className="
-                absolute top-1/2 -translate-y-1/2 -left-5
-                w-10 h-10 rounded-full
-                bg-[#050505]
-            " />
-
-            <div className="
-                absolute top-1/2 -translate-y-1/2 -right-5
-                w-10 h-10 rounded-full
-                bg-[#050505]
-            " />
 
             {/* CONTENT */}
 
@@ -201,7 +193,7 @@ const Ticket = ({ booking }) => {
                 ">
 
                     <div className="
-                        flex items-center justify-between
+                        flex  justify-between
                     ">
 
                         {/* FROM */}
@@ -242,33 +234,15 @@ const Ticket = ({ booking }) => {
                             relative
                         ">
 
-                            <div className="
-                                relative w-full h-[1px]
-                                bg-white/10
-                            ">
 
-                                <div className="
-                                    absolute left-0 top-1/2
-                                    -translate-y-1/2
-                                    w-3 h-3 rounded-full
-                                    bg-white
-                                " />
-
-                                <div className="
-                                    absolute right-0 top-1/2
-                                    -translate-y-1/2
-                                    w-3 h-3 rounded-full
-                                    bg-[#895CE7]
-                                " />
-
-                            </div>
 
                             <MoveRight
-                                size={18}
+                                size={20}
                                 className="
                                     absolute left-1/2
                                     -translate-x-1/2
                                     text-[#d9c3ff]
+                                    mt-6
                                 "
                             />
 
@@ -360,7 +334,12 @@ const Ticket = ({ booking }) => {
                             border border-white/10
                             bg-white/[0.05]
                             backdrop-blur-2xl
-                            p-4
+                            flex flex-col
+                            justify-center
+                            items-center
+                            py-2
+                            px-1
+                            sm:p-4
                         ">
 
                             <div className="
@@ -368,9 +347,9 @@ const Ticket = ({ booking }) => {
                                 text-zinc-300
                             ">
 
-                                <CalendarDays size={16} />
+                                <CalendarDays size={20} />
 
-                                <p className="text-xs">
+                                <p className=" hidden sm:block sm:text-xs">
                                     Reservation Date
                                 </p>
 
@@ -378,7 +357,8 @@ const Ticket = ({ booking }) => {
 
                             <h3 className="
                                 mt-3
-                                text-sm font-semibold
+                                text-sm 
+                                sm:font-semibold
                                 text-white
                             ">
 
@@ -396,7 +376,12 @@ const Ticket = ({ booking }) => {
                             border border-white/10
                             bg-white/[0.05]
                             backdrop-blur-2xl
-                            p-4
+                            flex flex-col
+                            justify-center
+                            items-center
+                            py-2
+                            px-1
+                            sm:p-4
                         ">
 
                             <div className="
@@ -404,9 +389,9 @@ const Ticket = ({ booking }) => {
                                 text-zinc-300
                             ">
 
-                                <Plug size={16} />
+                                <Plug size={20} />
 
-                                <p className="text-xs">
+                                <p className=" hidden sm:block sm:text-xs">
                                     Charger Type
                                 </p>
 
@@ -414,7 +399,8 @@ const Ticket = ({ booking }) => {
 
                             <h3 className="
                                 mt-3
-                                text-sm font-semibold
+                                text-sm 
+                                sm:font-semibold
                                 text-white
                             ">
 
@@ -431,15 +417,20 @@ const Ticket = ({ booking }) => {
                             border border-white/10
                             bg-white/[0.05]
                             backdrop-blur-2xl
-                            p-4
+                            flex flex-col
+                            justify-center
+                            items-center
+                            py-2
+                            px-2
+                            sm:p-4
                         ">
 
                             <div className="
-                                flex items-center gap-2
+                                flex flex-col sm:flex-row items-center gap-2
                                 text-zinc-300
                             ">
 
-                                <Clock3 size={16} />
+                                <Clock3 size={20} />
 
                                 <p className="text-xs">
                                     Reservation Status
@@ -474,7 +465,7 @@ const Ticket = ({ booking }) => {
                                 text-zinc-300
                             ">
 
-                                <TicketCheck size={16} />
+                                <TicketCheck size={20} />
 
                                 <p className="text-xs">
                                     Booking ID
@@ -500,7 +491,9 @@ const Ticket = ({ booking }) => {
 
                     {/* QR */}
 
-                    <div className="
+                    <div
+                        onClick={() => setShowBarcode(true)}
+                        className="
                         shrink-0
                         w-[110px]
                         rounded-[24px]
@@ -509,9 +502,9 @@ const Ticket = ({ booking }) => {
                         backdrop-blur-2xl
                         p-3
                         flex flex-col
-                        items-center justify-center
+                        items-center justify-around
                     ">
-
+<div className="text-sm text-zinc-400">click to zoom</div>
                         <img
                             src='/dummy-barcode.png'
                             alt=''
@@ -538,6 +531,83 @@ const Ticket = ({ booking }) => {
                 </div>
 
             </div>
+
+            {
+                showBarcode && (
+
+                    <div
+                        onClick={() => setShowBarcode(false)}
+                        className="
+            fixed inset-0
+            z-[999]
+            bg-black/[0.5]
+            backdrop-blur-md
+
+            flex items-center justify-center
+            p-6
+         "
+                    >
+
+                        {/* POPUP CARD */}
+
+                        <div
+                            onClick={(e) => e.stopPropagation()}
+                            className="
+               relative
+               w-[320px] sm:w-[420px]
+               rounded-[36px]
+               border border-white/10
+               bg-black/[0.05]
+               backdrop-blur-2xl
+               p-6
+
+               shadow-[0_20px_80px_rgba(0,0,0,0.45)]
+            "
+                        >
+
+                            {/* GLOW */}
+
+                            <div className="
+               absolute inset-0
+               bg-[#895CE7]/10
+               blur-[100px]
+            " />
+
+                            {/* CONTENT */}
+
+                            <div className="relative z-10">
+
+                                <img
+                                    src="/dummy-barcode.png"
+                                    alt=""
+                                    className="
+                     w-full
+                     aspect-square
+                     object-contain
+                     invert
+                  "
+                                />
+
+                                <p className="
+                  mt-5
+                  text-center
+                  text-zinc-300
+                  text-md
+               ">
+
+                                  Booking id : <span className="text-sm text-zinc"> {booking?._id}</span> 
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                )
+            }
+
 
         </div>
 

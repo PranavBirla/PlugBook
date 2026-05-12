@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import API from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import Top from "../Components/Top";
 
 
 export default function AvailabilityPage() {
@@ -115,6 +116,9 @@ export default function AvailabilityPage() {
             {/* ================= BACKGROUND ================= */}
 
             <div className="fixed inset-0 -z-10">
+                <div className="absolute inset-0 bg-black/70" />
+
+                
 
                 {/* GRADIENT TOP */}
                 <div
@@ -141,8 +145,9 @@ export default function AvailabilityPage() {
             <div className="absolute top-0 left-0 w-full h-[500px] bg-[#895CE7]/10 blur-[140px] -z-10" />
 
             {/* ================= PAGE ================= */}
-
+<div><Top/></div>
             <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-14">
+                
 
                 {/* ================= HEADING ================= */}
 
@@ -153,7 +158,7 @@ export default function AvailabilityPage() {
                         md:text-6xl
                         font-black
                         tracking-tight
-                        text-zinc-900
+                        text-white
                     ">
                         Find Available
                     </h1>
@@ -170,7 +175,7 @@ export default function AvailabilityPage() {
 
                     <p className="
                         mt-4
-                        text-zinc-600
+                        text-zinc-200
                         max-w-xl
                         text-sm
                         md:text-base
