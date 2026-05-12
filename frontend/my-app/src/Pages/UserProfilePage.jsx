@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import {
     CalendarDays,
     Clock3,
@@ -11,13 +10,11 @@ import {
     LogOut,
     X,
 } from "lucide-react";
-
 import Navbar from "../Components/Navbar";
 import Top from "../Components/Top";
-
 import API from "../api/axios";
-
 import { useNavigate } from "react-router-dom";
+import Loader from "../Components/Loader"
 
 const UserPage = () => {
 
@@ -25,17 +22,47 @@ const UserPage = () => {
 
     const [showLogoutPopup, setShowLogoutPopup] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState(null);
+    const [userLoading, setUserLoading] = useState(true);
 
-    const user = {
-        fullName: "Pranav Birla",
-        email: "pranav@gmail.com",
-        createdAt: "2025-01-14T10:00:00Z",
-    };
+    //Fetch User
+    useEffect(() => {
 
-    const initials = user.fullName
-        .split(" ")
-        .map((word) => word[0])
-        .join("");
+        const fetchUser = async () => {
+
+            try {
+
+                const response = await API.get(
+                    "/api/auth/user/me",
+                    {
+                        withCredentials: true
+                    }
+                );
+
+                setUser(response.data);
+
+            } catch (err) {
+
+                console.error(err);
+
+            } finally {
+
+                setUserLoading(false);
+
+            }
+
+        };
+
+        fetchUser();
+
+    }, []);
+
+
+    const initials = user?.fullName
+        ?.split(" ")
+        ?.map((word) => word[0])
+        ?.join("") || "U";
+
 
     const handleLogout = async () => {
 
@@ -65,6 +92,10 @@ const UserPage = () => {
         }
 
     };
+
+    if (userLoading) {
+        return <Loader />;
+    }
 
     return (
 
@@ -107,7 +138,7 @@ const UserPage = () => {
                         </h2>
 
                         <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white mt-2">
-                            {user.fullName}
+                            {user?.fullName || "User"}
                         </h1>
 
                         <p className="mt-4 text-zinc-400 text-sm md:text-base max-w-xl">
@@ -172,7 +203,7 @@ const UserPage = () => {
                                             </p>
 
                                             <h3 className="text-white text-lg font-semibold mt-1">
-                                                {user.fullName}
+                                                {user?.fullName || "User"}
                                             </h3>
                                         </div>
 
@@ -186,7 +217,7 @@ const UserPage = () => {
                                             </p>
 
                                             <h3 className="text-white text-lg font-semibold mt-1 break-all">
-                                                {user.email}
+                                                {user?.email || "No email"}
                                             </h3>
                                         </div>
 
@@ -202,7 +233,11 @@ const UserPage = () => {
                                             </p>
 
                                             <h3 className="text-white text-lg font-semibold mt-1">
-                                                {new Date(user.createdAt).toLocaleDateString()}
+                                                {
+                                                    user?.createdAt
+                                                        ? new Date(user.createdAt).toLocaleDateString()
+                                                        : "N/A"
+                                                }
                                             </h3>
                                         </div>
 

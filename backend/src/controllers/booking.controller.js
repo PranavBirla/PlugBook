@@ -21,7 +21,7 @@ async function createBooking(req, res) {
 
         //Basic Validation
         if (!stationId || !chargerType || !startTime || !endTime) {
-            return res.status(400).json({ message: "Invalid input" });
+            return res.status(400).json({ message: "All fields are required!" });
         }
 
         if (new Date(startTime) >= new Date(endTime)) {
@@ -62,7 +62,7 @@ async function createBooking(req, res) {
         //check selected time overlap 
         if (overlappingBookings.length >= totalSlots) {
             return res.status(400).json({
-                message: "No slots available for this time"
+                message: "No slots available for this time range"
             });
         }
 

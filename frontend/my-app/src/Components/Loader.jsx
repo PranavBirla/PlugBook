@@ -1,32 +1,56 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import BgIcons from "../Components/BgIcons";
-
 
 export default function PremiumLoader() {
+
     const orbRef = useRef();
     const eyesRef = useRef([]);
+    const statusRef = useRef();
+
     const [particles, setParticles] = useState([]);
 
     useEffect(() => {
-        // Text pop
+
+        // MAIN ENTRANCE
+
         gsap.fromTo(
-            ".loader-text",
-            { opacity: 0, y: 10 },
-            { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+            ".loader-content",
+            {
+                opacity: 0,
+                y: 30,
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out",
+            }
         );
 
-        // Floating animation
+        // ORB FLOAT
+
         gsap.to(orbRef.current, {
-            y: 12,
-            duration: 2,
+            y: 16,
+            duration: 2.4,
             repeat: -1,
             yoyo: true,
             ease: "power1.inOut",
         });
 
-        // Particle system
+        // STATUS PULSE
+
+        gsap.to(statusRef.current, {
+            opacity: 0.5,
+            duration: 1,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+        });
+
+        // PARTICLES
+
         const interval = setInterval(() => {
+
             const id = Date.now();
 
             setParticles((prev) => [
@@ -34,100 +58,206 @@ export default function PremiumLoader() {
                 {
                     id,
                     angle: Math.random() * Math.PI * 2,
-                    distance: 100 + Math.random() * 300,
+                    distance: 120 + Math.random() * 240,
                 },
             ]);
 
-            // remove particle after animation
             setTimeout(() => {
-                setParticles((prev) => prev.filter((p) => p.id !== id));
-            }, 1500);
-        }, 60);
+                setParticles((prev) =>
+                    prev.filter((p) => p.id !== id)
+                );
+            }, 2200);
 
-        // Mouse tracking (eyes)
+        }, 90);
+
+        // EYES FOLLOW
+
         const handleMove = (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 20;
-            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+            const x =
+                (e.clientX / window.innerWidth - 0.5) * 18;
+
+            const y =
+                (e.clientY / window.innerHeight - 0.5) * 18;
 
             eyesRef.current.forEach((eye) => {
+
                 gsap.to(eye, {
                     x,
                     y,
-                    duration: 0.1,
+                    duration: 0.10,
                     ease: "power2.out",
                 });
+
             });
+
         };
 
         window.addEventListener("mousemove", handleMove);
 
-
         return () => {
-            window.removeEventListener("mousemove", handleMove);
+
+            clearInterval(interval);
+
+            window.removeEventListener(
+                "mousemove",
+                handleMove
+            );
+
         };
+
     }, []);
 
     return (
-        <div style={styles.container}>
 
-            {/* <BgIcons />   */}
+        <div className="relative h-screen overflow-hidden flex items-center justify-center bg-black px-6">
 
-            <div className="fixed inset-0 -z-10">
+            {/* BG */}
 
-                {/* GRADIENT TOP */}
-                <div
-                    className="
-        h-screen
-        bg-cover
-        bg-center
-        bg-no-repeat
-        opacity-90
-    "
+            <div className="absolute inset-0 -z-10 overflow-hidden">
 
-                    style={{
-                        backgroundImage:
-                            "url('/background2.jpg')"
-                    }}  
+                <img
+                    src="/full-bg2.jpg"
+                    alt=""
+                    className="w-full h-full object-cover"
                 />
 
+                <div className="absolute inset-0 bg-black/60" />
 
-                {/* BLACK OVERLAY */}
-        <div className="
-            absolute
-            inset-0
-            bg-black/35
-        " />
+                <div className="absolute inset-0 bg-[#895CE7]/10" />
+
+                {/* GLOWS */}
+
+                <div className="absolute top-[5%] left-[5%] w-[420px] h-[420px] rounded-full bg-[#895CE7]/20 blur-[120px]" />
+
+                <div className="absolute bottom-[0%] right-[0%] w-[320px] h-[320px] rounded-full bg-fuchsia-500/10 blur-[100px]" />
 
             </div>
 
-            <div ref={orbRef} style={styles.orb} >
-                {particles.map((p) => (
-                    <Particle key={p.id} angle={p.angle} distance={p.distance} />
-                ))}
-                <div style={styles.glow}></div>
+            {/* CONTENT */}
 
-                <div style={styles.core}></div>
+            <div className="loader-content relative z-10 flex flex-col items-center">
 
-                <div style={styles.eyes}>
-                    <div ref={(el) => (eyesRef.current[0] = el)} style={styles.eye}></div>
-                    <div ref={(el) => (eyesRef.current[1] = el)} style={styles.eye}></div>
+                {/* ORB */}
+
+                <div
+                    ref={orbRef}
+                    className="relative flex items-center justify-center"
+                    style={{
+                        width: "clamp(170px, 24vw, 240px)",
+                        height: "clamp(170px, 24vw, 240px)",
+                    }}
+                >
+
+                    {/* PARTICLES */}
+
+                    {particles.map((p) => (
+                        <Particle
+                            key={p.id}
+                            angle={p.angle}
+                            distance={p.distance}
+                        />
+                    ))}
+
+                    {/* OUTER GLOW */}
+
+                    <div className="absolute w-[145%] h-[145%] rounded-full bg-[radial-gradient(circle,rgba(137,92,231,0.22),transparent)] animate-pulse" />
+
+                    {/* ORB */}
+
+                    <div className="relative w-full h-full rounded-full border border-white/10 bg-white/[0.08] backdrop-blur-3xl shadow-[0_0_80px_rgba(137,92,231,0.35)] flex items-center justify-center overflow-hidden">
+
+                        {/* INNER GLOW */}
+
+                        <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.35),transparent)]" />
+
+                        {/* CORE */}
+
+                        <div className="w-[42%] h-[42%] rounded-full bg-[#895CE7] shadow-[0_0_40px_#895CE7,0_0_80px_#895CE7]" />
+
+                        {/* EYES */}
+
+                        <div className="absolute flex gap-4">
+
+                            <div
+                                ref={(el) => (eyesRef.current[0] = el)}
+                                className="w-[11px] h-[11px] rounded-full bg-white shadow-[0_0_10px_#fff]"
+                            />
+
+                            <div
+                                ref={(el) => (eyesRef.current[1] = el)}
+                                className="w-[11px] h-[11px] rounded-full bg-white shadow-[0_0_10px_#fff]"
+                            />
+
+                        </div>
+
+                    </div>
+
                 </div>
+
+                {/* TEXT */}
+
+                <div className="mt-14 text-center">
+
+                    <h1 className="text-[clamp(2rem,4vw,3.6rem)] font-black tracking-[-0.05em] text-white leading-[1]">
+
+                        Synchronizing
+                        <br />
+
+                        PlugBook Network
+
+                    </h1>
+
+                    <p className="mt-5 text-zinc-400 text-[15px] sm:text-[17px] max-w-[520px] leading-relaxed">
+
+                        Preparing intelligent charging infrastructure
+                        and optimizing your EV experience.
+
+                    </p>
+
+                </div>
+
+                {/* STATUS */}
+
+                <div className="mt-10 flex flex-col items-center">
+
+                    {/* BAR */}
+
+                    <div className="w-[220px] h-[5px] rounded-full bg-white/10 overflow-hidden">
+
+                        <div className="h-full w-[45%] rounded-full bg-gradient-to-r from-[#895CE7] to-white animate-pulse" />
+
+                    </div>
+
+                    {/* STATUS TEXT */}
+
+                    <div
+                        ref={statusRef}
+                        className="mt-4 text-sm tracking-[0.25em] uppercase text-zinc-500"
+                    >
+
+                        Initializing System
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <p className="loader-text" style={styles.text}>
-                <span style={styles.highlight}>Loading</span> your charging experience!
-            </p>
         </div>
 
     );
+
 }
 
 
 
 function Particle({ angle, distance }) {
+
     const ref = useRef();
 
     useEffect(() => {
+
         gsap.fromTo(
             ref.current,
             {
@@ -141,102 +271,20 @@ function Particle({ angle, distance }) {
                 y: Math.sin(angle) * distance,
                 opacity: 0,
                 scale: 0,
-                duration: 2,
+                duration: 2.2,
                 ease: "power2.out",
             }
         );
+
     }, []);
 
-    return <div ref={ref} style={particleStyle} />;
+    return (
+
+        <div
+            ref={ref}
+            className="absolute w-[12px] h-[12px] rounded-full bg-white shadow-[0_0_20px_#fff,0_0_40px_#895CE7] pointer-events-none"
+        />
+
+    );
+
 }
-
-
-const styles =
-{
-    container: {
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    highlight: {
-        color: "rgba(203, 195, 244, 1)",
-        fontWeight: 700,
-        fontSize: "45px"
-    },
-
-    orb: {
-        width: "30vw",
-        height: "30vw",
-        maxWidth: "200px",
-        maxHeight: "200px",
-        borderRadius: "50%",
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "rgba(244 ,244 ,244 , 0.5)",
-        boxShadow: "0 0 80px rgba(244 ,244 ,244 , 0.3)",
-        overflow: "visible",
-        zIndex: 5,
-    },
-
-    glow: {
-        position: "absolute",
-        width: "140%",
-        height: "140%",
-        borderRadius: "50%",
-        background:
-            "radial-gradient(circle, rgba(244 ,244 ,244 , 0.2), transparent)",
-        animation: "pulse 2s infinite",
-    },
-
-    core: {
-        width: "45%",
-        height: "45%",
-        borderRadius: "50%",
-        background: "#ffffff",
-        boxShadow: "0 0 40px #895CE7, 0 0 80px #895CE7",
-        zIndex: 2,
-    },
-
-    eyes: {
-        position: "absolute",
-        display: "flex",
-        gap: "12px",
-        zIndex: 3,
-    },
-
-    eye: {
-        width: "10px",
-        height: "10px",
-        background: "#000000",
-        borderRadius: "50%",
-        boxShadow: "0 0 10px #895CE7",
-    },
-
-    text: {
-        marginTop: "30px",
-        fontSize: "35px",
-        fontWeight: 600,
-        color: "rgba(210, 210, 210, 0.9)",
-        letterSpacing: "0.3px",
-        textAlign: "center",
-        maxWidth: "460px",
-        lineHeight: "1.5",
-        zIndex: 5,
-    },
-
-
-};
-
-const particleStyle = {
-    position: "absolute",
-    width: "15px",
-    height: "15px",
-    background: "#ffffff",
-    borderRadius: "50%",
-    boxShadow: "0 0 20px #fff, 0 0 40px #6C5CE7",
-    pointerEvents: "none",
-};
