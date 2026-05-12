@@ -29,7 +29,7 @@ const CardHome = () => {
         {/* IMAGE */}
 
         <img
-          src="/charging-station.png"
+          src="/bmw-img.jpg"
           alt=""
           className="
             absolute inset-0
