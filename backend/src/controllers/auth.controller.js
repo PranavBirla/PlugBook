@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 async function registerUser(req, res) {
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password, role } = req.body;
 
     const isUserAlreadyExists = await userModel.findOne({ email });
 
@@ -23,7 +23,8 @@ async function registerUser(req, res) {
     const user = await userModel.create({
         fullName,
         email,
-        password: hashPassword
+        password: hashPassword,
+        role
     });
 
     const token = jwt.sign({
@@ -37,7 +38,8 @@ async function registerUser(req, res) {
         user: {
             fullName,
             email,
-            _id: user._id
+            _id: user._id,
+            role
         }
     });
 };

@@ -3,6 +3,7 @@ const express = require("express");
 const authRoutes = require("./routes/auth.routes");
 const bookingRoutes = require("./routes/booking.routes");
 const stationRoutes = require("./routes/station.routes");
+const adminRoutes = require ("./routes/admin.routes")
 const cors = require("cors");
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use("/api/station", stationRoutes);
+app.use("/api/admin", adminRoutes)
 
 app.get("/", (req, res) => {
     res.send("Backend Running");
