@@ -81,7 +81,7 @@ const AdminDashboard = () => {
 
     return (
 
-        <div className="relative min-h-screen overflow-hidden bg-black">
+        <div className="relative min-h-screen overflow-hidden bg-black/[0.05]">
 
             {/* BACKGROUND */}
 

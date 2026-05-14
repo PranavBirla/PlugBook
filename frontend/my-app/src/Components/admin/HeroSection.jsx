@@ -111,9 +111,9 @@ const HeroSection = ({ dashboard }) => {
 
                 </div>
 
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center  ">
 
-                    <div className="w-[260px] h-[260px] rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-8">
+                    <div className="w-[250px] h-[265px] rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-8">
 
                         <CircularProgressbar
                             value={dashboard.gridHealth}
