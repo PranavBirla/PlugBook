@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import API from "../api/axios";
 
-import Sidebar from "../components/admin/Sidebar";
-import Topbar from "../components/admin/Topbar";
-import HeroSection from "../components/admin/HeroSection";
-import StatsGrid from "../components/admin/StatsGrid";
-import AnalyticsSection from "../components/admin/AnalyticsSection";
-import LiveFeed from "../components/admin/LiveFeed";
-import StationGrid from "../components/admin/StationGrid";
+import Sidebar from "../Components/admin/Sidebar";
+import Topbar from "../Components/admin/Topbar";
+import HeroSection from "../Components/admin/HeroSection";
+import StatsGrid from "../Components/admin/StatsGrid";
+import AnalyticsSection from "../Components/admin/AnalyticsSection";
+import LiveFeed from "../Components/admin/LiveFeed";
+import StationGrid from "../Components/admin/StationGrid";
 
 const AdminDashboard = () => {
 
